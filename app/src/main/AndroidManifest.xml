@@ -10,16 +10,20 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
-            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name=".MainActivity" />
         <activity android:name=".DashboardActivity">
+
+        </activity>
+        <activity android:name=".infant.activities.StepsActivity">
+
+        </activity>
+        <activity android:name=".infant.activities.PensionersListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".infant.StepsActivity"></activity>
     </application>
 
 </manifest>

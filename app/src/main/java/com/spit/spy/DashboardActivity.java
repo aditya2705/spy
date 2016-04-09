@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 
-import com.spit.spy.infant.StepsActivity;
+import com.spit.spy.infant.activities.StepsActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

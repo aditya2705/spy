@@ -1,4 +1,4 @@
-package com.spit.spy.infant;
+package com.spit.spy.infant.activities;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
