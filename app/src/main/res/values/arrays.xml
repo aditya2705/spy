@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="janpad">
+        <item>Area 1</item>
+        <item>Area 2</item>
+        <item>Area 3</item>
+        <item>Area 4</item>
+        <item>Area 5</item>
+        <item>Area 6</item>
+    </string-array>
+</resources>
