@@ -21,6 +21,7 @@ android {
 
 repositories {
     jcenter()
+    maven { url "https://jitpack.io" }
 }
 
 dependencies {
@@ -37,5 +38,8 @@ dependencies {
     compile 'com.android.support:support-v4:23.2.1'
     compile 'com.ogaclejapan.smarttablayout:library:1.6.0@aar'
     compile 'com.ogaclejapan.smarttablayout:utils-v4:1.6.0@aar'
+    compile('com.github.afollestad.material-dialogs:core:0.8.5.7@aar') {
+        transitive = true
+    }
     compile 'com.jakewharton:butterknife:7.0.1'
 }

@@ -17,7 +17,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
         <activity android:name=".DashboardActivity">
         </activity>
         <activity android:name=".infant.activities.StepsActivity">
@@ -27,6 +26,9 @@
         <activity android:name=".pregnant_women.activities.PensionersListWomenActivity">
         </activity>
         <activity android:name=".pregnant_women.activities.WomanDetailsUpdateActivity">
+        </activity>
+        <activity android:name=".health_records.activities.HealthRecordsListActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
     </application>
 

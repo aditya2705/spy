@@ -1,4 +1,4 @@
-package com.spit.spy.health_records;
+package com.spit.spy.health_records.custom;
 
 /**
  * Created by Aditya Rathi on 10-Apr-16.

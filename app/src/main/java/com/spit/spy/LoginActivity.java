@@ -22,6 +22,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
+        getSupportActionBar().setTitle("Login");
+
         final ProgressDialog progressDialog = new ProgressDialog(this,
                 R.style.AppTheme_Dark_Dialog);
         progressDialog.setIndeterminate(true);

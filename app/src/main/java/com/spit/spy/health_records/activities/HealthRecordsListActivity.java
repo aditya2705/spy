@@ -1,11 +1,13 @@
-package com.spit.spy.pregnant_women.activities;
+package com.spit.spy.health_records.activities;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,15 +20,15 @@ import com.afollestad.materialdialogs.Theme;
 import com.inqbarna.tablefixheaders.TableFixHeaders;
 import com.inqbarna.tablefixheaders.adapters.BaseTableAdapter;
 import com.spit.spy.R;
-import com.spit.spy.infant.activities.StepsActivity;
 import com.spit.spy.objects.PensionerObject;
+import com.spit.spy.pregnant_women.activities.WomanDetailsUpdateActivity;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class PensionersListWomenActivity extends AppCompatActivity {
+public class HealthRecordsListActivity extends AppCompatActivity {
 
 	@Bind(R.id.table) TableFixHeaders tableFixHeaders;
 
@@ -35,14 +37,14 @@ public class PensionersListWomenActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_pensioners_list);
+		setContentView(R.layout.activity_health_records_list);
 		ButterKnife.bind(this);
 
-		getSupportActionBar().setTitle("Pregnant Women Records");
+		getSupportActionBar().setTitle("Health Records - Rural");
 
 		searchDialog = new MaterialDialog.Builder(this)
 				.theme(Theme.LIGHT)
-				.customView(R.layout.panchayat_dialog,true)
+				.customView(R.layout.health_records_list_dialog,true)
 				.title("Samajwadi Pensioner's List")
 				.positiveText("SEARCH")
 				.negativeText("CANCEL")
@@ -59,7 +61,7 @@ public class PensionersListWomenActivity extends AppCompatActivity {
 					@Override
 					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
 						dialog.dismiss();
-						PensionersListWomenActivity.this.finish();
+						HealthRecordsListActivity.this.finish();
 					}
 				})
 				.canceledOnTouchOutside(false)
@@ -67,11 +69,14 @@ public class PensionersListWomenActivity extends AppCompatActivity {
 
 		searchDialog.show();
 
-		ArrayList<PensionerObject> pensionerObjectArrayList = new ArrayList<>();
-		for(int i = 1; i < 8 ; i++)
-			pensionerObjectArrayList.add(new PensionerObject(i,"152336"+i,"SUPERWOMAN", "CATWOMAN","F",25,"OBC"));
 
-		tableFixHeaders.setAdapter(new ContentTableAdapter(PensionersListWomenActivity.this, pensionerObjectArrayList));
+
+
+		ArrayList<PensionerObject> pensionerObjectArrayList = new ArrayList<>();
+		for(int i = 1; i < 13 ; i++)
+			pensionerObjectArrayList.add(new PensionerObject(i,"343427"+i,"CAPTAIN AMERICA", "IRONMAN","M",28,"GENERAL"));
+
+		tableFixHeaders.setAdapter(new ContentTableAdapter(HealthRecordsListActivity.this, pensionerObjectArrayList));
 
 	}
 

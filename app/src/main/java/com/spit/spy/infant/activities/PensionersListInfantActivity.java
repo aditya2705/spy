@@ -4,11 +4,17 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.Theme;
 import com.inqbarna.tablefixheaders.TableFixHeaders;
 
 import com.inqbarna.tablefixheaders.adapters.BaseTableAdapter;
@@ -23,7 +29,8 @@ import butterknife.ButterKnife;
 public class PensionersListInfantActivity extends AppCompatActivity {
 
 	@Bind(R.id.table) TableFixHeaders tableFixHeaders;
-	@Bind(R.id.title) TextView titleView;
+
+	private MaterialDialog searchDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +38,35 @@ public class PensionersListInfantActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_pensioners_list);
 		ButterKnife.bind(this);
 
-		titleView.setText("Pensioners List");
+		getSupportActionBar().setTitle("Infant < 5 Years Records");
+
+		searchDialog = new MaterialDialog.Builder(this)
+				.theme(Theme.LIGHT)
+				.customView(R.layout.panchayat_dialog,true)
+				.title("Samajwadi Pensioner's List")
+				.positiveText("SEARCH")
+				.negativeText("CANCEL")
+				.negativeColor(getResources().getColor(R.color.appThemeColorDark))
+				.positiveColor(getResources().getColor(R.color.appThemeColorDark))
+				.titleColor(getResources().getColor(R.color.appThemeColorDark))
+				.onPositive(new MaterialDialog.SingleButtonCallback() {
+					@Override
+					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+						dialog.dismiss();
+					}
+				})
+				.onNegative(new MaterialDialog.SingleButtonCallback() {
+					@Override
+					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+						dialog.dismiss();
+						PensionersListInfantActivity.this.finish();
+					}
+				})
+				.canceledOnTouchOutside(false)
+				.build();
+
+		searchDialog.show();
+
 
 		ArrayList<PensionerObject> pensionerObjectArrayList = new ArrayList<>();
 		for(int i = 1; i < 8 ; i++)
@@ -39,6 +74,28 @@ public class PensionersListInfantActivity extends AppCompatActivity {
 
 		tableFixHeaders.setAdapter(new ContentTableAdapter(PensionersListInfantActivity.this, pensionerObjectArrayList));
 
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.menu_search, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		Intent intent;
+		//noinspection SimplifiableIfStatement
+		if(id == R.id.action_search){
+			searchDialog.show();
+		}
+
+		return super.onOptionsItemSelected(item);
 	}
 
 	public class ContentTableAdapter extends BaseTableAdapter {

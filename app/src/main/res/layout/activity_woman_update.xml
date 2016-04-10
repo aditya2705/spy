@@ -297,7 +297,7 @@
                             android:textColor="@color/appThemeColorDark"
                             android:textStyle="bold"
                             android:textSize="@dimen/_12sdp"
-                            android:text="मुख्या से सम्बन्ध :"/>
+                            android:text="मुखिया से सम्बन्ध :"/>
 
                         <LinearLayout
                             android:layout_width="0dp"

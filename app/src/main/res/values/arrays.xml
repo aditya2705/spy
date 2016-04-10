@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="area_type">
+        <item>Rural</item>
+        <item>Urban</item>
+    </string-array>
+
+
     <string-array name="janpad">
-        <item>Area 1</item>
-        <item>Area 2</item>
-        <item>Area 3</item>
-        <item>Area 4</item>
-        <item>Area 5</item>
-        <item>Area 6</item>
+        <item>Region 1</item>
+        <item>Region 2</item>
+        <item>Region 3</item>
+        <item>Region 4</item>
+        <item>Region 5</item>
+        <item>Region 6</item>
     </string-array>
 
     <string-array name="relations">

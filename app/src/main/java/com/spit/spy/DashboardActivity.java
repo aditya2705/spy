@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 
+import com.spit.spy.health_records.activities.HealthRecordsListActivity;
 import com.spit.spy.infant.activities.PensionersListInfantActivity;
 import com.spit.spy.pregnant_women.activities.PensionersListWomenActivity;
 
@@ -24,6 +25,8 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
         ButterKnife.bind(this);
 
+        getSupportActionBar().setTitle("Activity");
+
 
         infantRecordsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,6 +40,14 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DashboardActivity.this, PensionersListWomenActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        healthRecordsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashboardActivity.this, HealthRecordsListActivity.class);
                 startActivity(intent);
             }
         });
