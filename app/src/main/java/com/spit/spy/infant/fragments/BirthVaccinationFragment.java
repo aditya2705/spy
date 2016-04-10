@@ -9,10 +9,14 @@ import android.view.ViewGroup;
 
 import com.spit.spy.R;
 
+import butterknife.ButterKnife;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class BirthVaccinationFragment extends Fragment {
+
+    private View rootView;
 
 
     public BirthVaccinationFragment() {
@@ -24,7 +28,10 @@ public class BirthVaccinationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_birth_vaccination_infant, container, false);
+        rootView = inflater.inflate(R.layout.fragment_birth_vaccination_infant, container, false);
+        ButterKnife.bind(this,rootView);
+
+        return rootView;
     }
 
 }

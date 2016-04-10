@@ -1,4 +1,4 @@
-package com.spit.spy.infant.objects;
+package com.spit.spy.objects;
 
 /**
  * Created by Aditya Rathi on 10-Apr-16.

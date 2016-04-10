@@ -8,4 +8,29 @@
         <item>Area 5</item>
         <item>Area 6</item>
     </string-array>
+
+    <string-array name="relations">
+        <item>पिता</item>
+        <item>पुत्र</item>
+        <item>बहु</item>
+        <item>भाई</item>
+    </string-array>
+
+    <string-array name="choice">
+        <item>हा</item>
+        <item>नहीं</item>
+    </string-array>
+
+    <string-array name="prasav_sthan">
+        <item>घरेलु</item>
+        <item>संस्थागत</item>
+    </string-array>
+
+    <string-array name="sample_females">
+        <item>Suman</item>
+        <item>Woman 2</item>
+        <item>Woman 3</item>
+        <item>Woman 4</item>
+    </string-array>
+
 </resources>

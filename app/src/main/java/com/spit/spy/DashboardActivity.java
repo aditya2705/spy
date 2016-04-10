@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 
-import com.spit.spy.infant.activities.PensionersListActivity;
-import com.spit.spy.infant.activities.StepsActivity;
+import com.spit.spy.infant.activities.PensionersListInfantActivity;
+import com.spit.spy.pregnant_women.activities.PensionersListWomenActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -28,11 +28,18 @@ public class DashboardActivity extends AppCompatActivity {
         infantRecordsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DashboardActivity.this, PensionersListActivity.class);
+                Intent intent = new Intent(DashboardActivity.this, PensionersListInfantActivity.class);
                 startActivity(intent);
             }
         });
 
+        pregnantWomenRecordsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashboardActivity.this, PensionersListWomenActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }

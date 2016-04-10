@@ -1,31 +1,29 @@
 package com.spit.spy.infant.activities;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.inqbarna.tablefixheaders.TableFixHeaders;
 
 import com.inqbarna.tablefixheaders.adapters.BaseTableAdapter;
 import com.spit.spy.R;
-import com.spit.spy.infant.objects.PensionerObject;
+import com.spit.spy.objects.PensionerObject;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class PensionersListActivity extends AppCompatActivity {
+public class PensionersListInfantActivity extends AppCompatActivity {
 
 	@Bind(R.id.table) TableFixHeaders tableFixHeaders;
+	@Bind(R.id.title) TextView titleView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +31,13 @@ public class PensionersListActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_pensioners_list);
 		ButterKnife.bind(this);
 
+		titleView.setText("Pensioners List");
+
 		ArrayList<PensionerObject> pensionerObjectArrayList = new ArrayList<>();
 		for(int i = 1; i < 8 ; i++)
 			pensionerObjectArrayList.add(new PensionerObject(i,"152336"+i,"SUPERMAN", "BATMAN","M",25,"GENERAL"));
 
-		tableFixHeaders.setAdapter(new ContentTableAdapter(PensionersListActivity.this, pensionerObjectArrayList));
+		tableFixHeaders.setAdapter(new ContentTableAdapter(PensionersListInfantActivity.this, pensionerObjectArrayList));
 
 	}
 
@@ -128,7 +128,7 @@ public class PensionersListActivity extends AppCompatActivity {
 			if (convertView == null) {
 				convertView = getLayoutInflater().inflate(R.layout.item_table, parent, false);
 			}
-			convertView.setBackgroundResource(row % 2 == 0 ? R.color.md_grey_50 : R.color.md_grey_100);
+			convertView.setBackgroundResource(row % 2 == 0 ? R.color.md_grey_50 : R.color.md_grey_200);
 			TextView textView = ((TextView) convertView.findViewById(android.R.id.text1));
 			textView.setTypeface(Typeface.DEFAULT);
 			textView.setTextColor(context.getResources().getColor(R.color.md_grey_700));

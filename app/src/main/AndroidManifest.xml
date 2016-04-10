@@ -22,7 +22,11 @@
         </activity>
         <activity android:name=".infant.activities.StepsActivity">
         </activity>
-        <activity android:name=".infant.activities.PensionersListActivity">
+        <activity android:name=".infant.activities.PensionersListInfantActivity">
+        </activity>
+        <activity android:name=".pregnant_women.activities.PensionersListWomenActivity">
+        </activity>
+        <activity android:name=".pregnant_women.activities.WomanDetailsUpdateActivity">
         </activity>
     </application>
 
