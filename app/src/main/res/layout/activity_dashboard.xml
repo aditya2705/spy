@@ -70,6 +70,6 @@
         android:layout_margin="@dimen/_10sdp"
         android:textSize="@dimen/_14sdp"
         android:theme="@style/CustomButtonStyle"
-        android:text="View Health Records"/>
+        android:text="Health Records"/>
 
 </LinearLayout>

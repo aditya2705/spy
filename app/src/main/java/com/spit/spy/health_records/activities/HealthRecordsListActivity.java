@@ -41,6 +41,7 @@ public class HealthRecordsListActivity extends AppCompatActivity {
 		ButterKnife.bind(this);
 
 		getSupportActionBar().setTitle("Health Records - Rural");
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		searchDialog = new MaterialDialog.Builder(this)
 				.theme(Theme.LIGHT)
@@ -61,7 +62,6 @@ public class HealthRecordsListActivity extends AppCompatActivity {
 					@Override
 					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
 						dialog.dismiss();
-						HealthRecordsListActivity.this.finish();
 					}
 				})
 				.canceledOnTouchOutside(false)
@@ -93,10 +93,13 @@ public class HealthRecordsListActivity extends AppCompatActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		Intent intent;
-		//noinspection SimplifiableIfStatement
-		if(id == R.id.action_search){
-			searchDialog.show();
+
+		switch (id){
+			case R.id.action_search:
+				searchDialog.show();
+				break;
+			case android.R.id.home:
+				finish();
 		}
 
 		return super.onOptionsItemSelected(item);
@@ -169,7 +172,7 @@ public class HealthRecordsListActivity extends AppCompatActivity {
 			view.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(context,WomanDetailsUpdateActivity.class);
+					Intent intent = new Intent(context,HRStepsActivity.class);
 					startActivity(intent);
 				}
 			});

@@ -39,6 +39,7 @@ public class PensionersListWomenActivity extends AppCompatActivity {
 		ButterKnife.bind(this);
 
 		getSupportActionBar().setTitle("Pregnant Women Records");
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		searchDialog = new MaterialDialog.Builder(this)
 				.theme(Theme.LIGHT)
@@ -59,7 +60,6 @@ public class PensionersListWomenActivity extends AppCompatActivity {
 					@Override
 					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
 						dialog.dismiss();
-						PensionersListWomenActivity.this.finish();
 					}
 				})
 				.canceledOnTouchOutside(false)
@@ -88,10 +88,13 @@ public class PensionersListWomenActivity extends AppCompatActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		Intent intent;
-		//noinspection SimplifiableIfStatement
-		if(id == R.id.action_search){
-			searchDialog.show();
+
+		switch (id){
+			case R.id.action_search:
+				searchDialog.show();
+				break;
+			case android.R.id.home:
+				finish();
 		}
 
 		return super.onOptionsItemSelected(item);
