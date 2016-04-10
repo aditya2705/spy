@@ -2,14 +2,23 @@ package com.spit.spy.infant.activities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.inqbarna.tablefixheaders.TableFixHeaders;
 
+import com.inqbarna.tablefixheaders.adapters.BaseTableAdapter;
 import com.spit.spy.R;
-import com.spit.spy.infant.adapters.DefaultTableAdapter;
+import com.spit.spy.infant.objects.PensionerObject;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -24,27 +33,47 @@ public class PensionersListActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_pensioners_list);
 		ButterKnife.bind(this);
 
-		tableFixHeaders.setAdapter(new ContentTableAdapter(this));
+		ArrayList<PensionerObject> pensionerObjectArrayList = new ArrayList<>();
+		for(int i = 1; i < 8 ; i++)
+			pensionerObjectArrayList.add(new PensionerObject(i,"152336"+i,"SUPERMAN", "BATMAN","M",25,"GENERAL"));
+
+		tableFixHeaders.setAdapter(new ContentTableAdapter(PensionersListActivity.this, pensionerObjectArrayList));
 
 	}
 
-	public class ContentTableAdapter extends DefaultTableAdapter {
+	public class ContentTableAdapter extends BaseTableAdapter {
 
-		private final int width;
+		private Activity context;
+		private ArrayList<PensionerObject> pensionerObjectArrayList;
+
+		private final String[] headers = new String[]{"क्रम संख्या", "लाभार्थी आईडी","लाभार्थी का नाम","पिता का नाम", "लिंग","आयु","वर्ग"};
+
+		private int[] widths;
+
 		private final int height;
 
-		public ContentTableAdapter(Context context) {
-			super(context);
+		public ContentTableAdapter(Activity context, ArrayList<PensionerObject> pensionerObjectArrayList) {
 
-			Resources resources = context.getResources();
+			this.context = context;
+			this.pensionerObjectArrayList = pensionerObjectArrayList;
 
-			width = resources.getDimensionPixelSize(R.dimen._80sdp);
-			height = resources.getDimensionPixelSize(R.dimen._50sdp);
+			height = context.getResources().getDimensionPixelSize(R.dimen._50sdp);
+
+			widths  = new int[]{
+					context.getResources().getDimensionPixelSize(R.dimen._55sdp),
+					context.getResources().getDimensionPixelSize(R.dimen._100sdp),
+					context.getResources().getDimensionPixelSize(R.dimen._110sdp),
+					context.getResources().getDimensionPixelSize(R.dimen._110sdp),
+					context.getResources().getDimensionPixelSize(R.dimen._60sdp),
+					context.getResources().getDimensionPixelSize(R.dimen._65sdp),
+					context.getResources().getDimensionPixelSize(R.dimen._80sdp),
+			};
+
 		}
 
 		@Override
 		public int getRowCount() {
-			return 5;
+			return pensionerObjectArrayList.size();
 		}
 
 		@Override
@@ -54,7 +83,7 @@ public class PensionersListActivity extends AppCompatActivity {
 
 		@Override
 		public int getWidth(int column) {
-			return width;
+			return widths[column+1];
 		}
 
 		@Override
@@ -63,25 +92,79 @@ public class PensionersListActivity extends AppCompatActivity {
 		}
 
 		@Override
-		public String getCellString(int row, int column) {
-			return "Lorem (" + row + ", " + column + ")";
-		}
-
-		@Override
-		public int getLayoutResource(int row, int column) {
-			final int layoutResource;
+		public View getView(final int row, int column, View convertView, ViewGroup parent) {
+			final View view;
 			switch (getItemViewType(row, column)) {
 				case 0:
-					layoutResource = R.layout.item_table_header;
-				break;
+					view = getHeader(row, column, convertView, parent);
+					break;
 				case 1:
-					layoutResource = R.layout.item_table;
-				break;
+					view = getBody(row, column, convertView, parent);
+					break;
 				default:
-					throw new RuntimeException("wtf?");
+					throw new RuntimeException("View fetching exception");
 			}
-			return layoutResource;
+
+			view.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(context,StepsActivity.class);
+					startActivity(intent);
+				}
+			});
+
+			return view;
 		}
+
+		private View getHeader(int row, int column, View convertView, ViewGroup parent) {
+			if (convertView == null) {
+				convertView = getLayoutInflater().inflate(R.layout.item_table_header, parent, false);
+			}
+			((TextView) convertView.findViewById(android.R.id.text1)).setText(headers[column + 1]);
+			return convertView;
+		}
+
+		private View getBody(int row, int column, View convertView, ViewGroup parent) {
+			if (convertView == null) {
+				convertView = getLayoutInflater().inflate(R.layout.item_table, parent, false);
+			}
+			convertView.setBackgroundResource(row % 2 == 0 ? R.color.md_grey_50 : R.color.md_grey_100);
+			TextView textView = ((TextView) convertView.findViewById(android.R.id.text1));
+			textView.setTypeface(Typeface.DEFAULT);
+			textView.setTextColor(context.getResources().getColor(R.color.md_grey_700));
+			String s = "";
+			PensionerObject p = pensionerObjectArrayList.get(row);
+			switch (column){
+				case -1:
+					s = p.getId()+"";
+					break;
+				case 0:
+					textView.setTypeface(Typeface.DEFAULT_BOLD);
+					textView.setTextColor(context.getResources().getColor(R.color.appThemeColorDark));
+					s= p.getLabharti_id();
+					break;
+				case 1:
+					s = p.getLabharti_name();
+					break;
+				case 2:
+					s=p.getFather_name();
+					break;
+				case 3:
+					s=p.getGender();
+					break;
+				case 4:
+					s=p.getAge()+"";
+					break;
+				case 5:
+					s=p.getCategory();
+					break;
+			}
+
+			textView.setText(s);
+
+			return convertView;
+		}
+
 
 		@Override
 		public int getItemViewType(int row, int column) {

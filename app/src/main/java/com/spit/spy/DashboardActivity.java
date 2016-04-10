@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 
+import com.spit.spy.infant.activities.PensionersListActivity;
 import com.spit.spy.infant.activities.StepsActivity;
 
 import butterknife.Bind;
@@ -27,7 +28,7 @@ public class DashboardActivity extends AppCompatActivity {
         infantRecordsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DashboardActivity.this, StepsActivity.class);
+                Intent intent = new Intent(DashboardActivity.this, PensionersListActivity.class);
                 startActivity(intent);
             }
         });

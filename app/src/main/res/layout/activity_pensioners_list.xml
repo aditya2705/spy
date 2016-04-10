@@ -73,7 +73,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp"
-        android:background="@color/md_grey_500"
-        android:layout_marginBottom="@dimen/_10sdp"/>
+        android:background="@color/md_grey_500" />
 
 </LinearLayout>
