@@ -17,20 +17,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DashboardActivity">
+        <activity android:name=".DashboardActivity"></activity>
+        <activity android:name=".infant.activities.StepsActivity"></activity>
+        <activity android:name=".health_records.activities.HRStepsActivity"></activity>
+        <activity android:name=".infant.activities.PensionersListInfantActivity"></activity>
+        <activity android:name=".pregnant_women.activities.PensionersListWomenActivity"></activity>
+        <activity android:name=".pregnant_women.activities.WomanDetailsUpdateActivity"></activity>
+        <activity
+            android:name=".health_records.activities.HealthRecordsListActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+        <activity android:name=".health_records.activities.MembersListStep1Activity"
+            android:theme="@style/MyCustomDialog">
+
         </activity>
-        <activity android:name=".infant.activities.StepsActivity">
-        </activity>
-        <activity android:name=".health_records.activities.HRStepsActivity">
-        </activity>
-        <activity android:name=".infant.activities.PensionersListInfantActivity">
-        </activity>
-        <activity android:name=".pregnant_women.activities.PensionersListWomenActivity">
-        </activity>
-        <activity android:name=".pregnant_women.activities.WomanDetailsUpdateActivity">
-        </activity>
-        <activity android:name=".health_records.activities.HealthRecordsListActivity"
-            android:windowSoftInputMode="stateHidden|adjustResize">
+        <activity android:name=".health_records.activities.MembersListStep2Activity"
+            android:theme="@style/MyCustomDialog">
+
         </activity>
     </application>
 

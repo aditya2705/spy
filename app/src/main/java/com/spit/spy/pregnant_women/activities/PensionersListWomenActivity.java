@@ -18,6 +18,7 @@ import com.afollestad.materialdialogs.Theme;
 import com.inqbarna.tablefixheaders.TableFixHeaders;
 import com.inqbarna.tablefixheaders.adapters.BaseTableAdapter;
 import com.spit.spy.R;
+import com.spit.spy.health_records.activities.HRStepsActivity;
 import com.spit.spy.infant.activities.StepsActivity;
 import com.spit.spy.objects.PensionerObject;
 
@@ -164,13 +165,16 @@ public class PensionersListWomenActivity extends AppCompatActivity {
 					throw new RuntimeException("View fetching exception");
 			}
 
-			view.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Intent intent = new Intent(context,WomanDetailsUpdateActivity.class);
-					startActivity(intent);
-				}
-			});
+			if(getItemViewType(row,column)!=0) {
+
+				view.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Intent intent = new Intent(context, WomanDetailsUpdateActivity.class);
+						startActivity(intent);
+					}
+				});
+			}
 
 			return view;
 		}

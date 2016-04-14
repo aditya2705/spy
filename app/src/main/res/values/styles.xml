@@ -76,4 +76,10 @@
         <item name="android:background">@color/appThemeColorDark</item>
     </style>
 
+    <style name="MyCustomDialog" parent="Base.Theme.AppCompat.Light.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
 </resources>

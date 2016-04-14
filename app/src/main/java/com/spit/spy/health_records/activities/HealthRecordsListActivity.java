@@ -169,13 +169,16 @@ public class HealthRecordsListActivity extends AppCompatActivity {
 					throw new RuntimeException("View fetching exception");
 			}
 
-			view.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Intent intent = new Intent(context,HRStepsActivity.class);
-					startActivity(intent);
-				}
-			});
+			if(getItemViewType(row,column)!=0) {
+
+					view.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							Intent intent = new Intent(context, HRStepsActivity.class);
+							startActivity(intent);
+						}
+					});
+			}
 
 			return view;
 		}

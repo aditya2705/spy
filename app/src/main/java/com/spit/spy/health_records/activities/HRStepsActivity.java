@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.spit.spy.R;
 import com.spit.spy.health_records.fragments.Step1Fragment;
+import com.spit.spy.health_records.fragments.Step2Fragment;
 import com.spit.spy.infant.fragments.BirthVaccinationFragment;
 
 import butterknife.Bind;
@@ -76,6 +77,8 @@ public class HRStepsActivity extends AppCompatActivity {
             switch (position) {
                 case 0:
                     return new Step1Fragment();
+                case 1:
+                    return new Step2Fragment();
                 default:
                     return new BirthVaccinationFragment();
             }
