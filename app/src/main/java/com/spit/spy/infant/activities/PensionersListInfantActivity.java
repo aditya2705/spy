@@ -37,7 +37,7 @@ public class PensionersListInfantActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_pensioners_list);
 		ButterKnife.bind(this);
 
-		getSupportActionBar().setTitle("Infant < 5 Years Records");
+		getSupportActionBar().setTitle("Infant Household Records");
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		searchDialog = new MaterialDialog.Builder(this)

@@ -19,7 +19,8 @@
         </activity>
         <activity android:name=".DashboardActivity"></activity>
         <activity android:name=".infant.activities.StepsActivity"></activity>
-        <activity android:name=".health_records.activities.HRStepsActivity"></activity>
+        <activity android:name=".health_records.activities.HRStepsRuralActivity"></activity>
+        <activity android:name=".health_records.activities.HRStepsUrbanActivity"></activity>
         <activity android:name=".infant.activities.PensionersListInfantActivity"></activity>
         <activity android:name=".pregnant_women.activities.PensionersListWomenActivity"></activity>
         <activity android:name=".pregnant_women.activities.WomanDetailsUpdateActivity"></activity>

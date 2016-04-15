@@ -30,6 +30,7 @@ public class HealthRecordsListActivity extends AppCompatActivity {
 	@Bind(R.id.table) TableFixHeaders tableFixHeaders;
 
 	private MaterialDialog searchDialog;
+	int records_type;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,9 @@ public class HealthRecordsListActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_health_records_list);
 		ButterKnife.bind(this);
 
-		getSupportActionBar().setTitle("Health Records - Rural");
+		records_type = getIntent().getIntExtra("records_type",0);
+
+		getSupportActionBar().setTitle("Health Records - " + ((records_type==0)?"Rural":"Urban"));
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		searchDialog = new MaterialDialog.Builder(this)
@@ -171,7 +174,12 @@ public class HealthRecordsListActivity extends AppCompatActivity {
 					view.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							Intent intent = new Intent(context, HRStepsActivity.class);
+							Intent intent;
+							if(records_type == 0)
+								intent = new Intent(context, HRStepsRuralActivity.class);
+							else
+								intent = new Intent(context, HRStepsUrbanActivity.class);
+
 							startActivity(intent);
 						}
 					});

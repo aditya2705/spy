@@ -19,13 +19,17 @@ public class DashboardActivity extends AppCompatActivity {
     @Bind(R.id.btn_vac_women) AppCompatButton pregnantWomenRecordsButton;
     @Bind(R.id.btn_health_records) AppCompatButton healthRecordsButton;
 
+    int records_type = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         ButterKnife.bind(this);
 
-        getSupportActionBar().setTitle("Activity");
+        records_type = getIntent().getIntExtra("records_type",0);
+
+        getSupportActionBar().setTitle("Dashboard - " + ((records_type==0)?"Rural":"Urban"));
 
 
         infantRecordsButton.setOnClickListener(new View.OnClickListener() {
@@ -48,6 +52,7 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DashboardActivity.this, HealthRecordsListActivity.class);
+                intent.putExtra("records_type",records_type);
                 startActivity(intent);
             }
         });

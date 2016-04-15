@@ -1,4 +1,4 @@
-package com.spit.spy.infant.activities;
+package com.spit.spy.health_records.activities;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,17 +6,23 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.spit.spy.R;
-import com.spit.spy.infant.fragments.BirthVaccinationFragment;
+import com.spit.spy.health_records.fragments.Step1Fragment;
+import com.spit.spy.health_records.fragments.Step2Fragment;
+import com.spit.spy.health_records.fragments.Step3Fragment;
+import com.spit.spy.health_records.fragments.Step4Fragment;
+import com.spit.spy.health_records.fragments.Step5Fragment;
+import com.spit.spy.health_records.fragments.Step6Fragment;
+import com.spit.spy.health_records.fragments.Step7Fragment;
+import com.spit.spy.health_records.fragments.UrbanStep7Fragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class StepsActivity extends AppCompatActivity {
+public class HRStepsUrbanActivity extends AppCompatActivity {
 
     @Bind(R.id.step_tabs) SmartTabLayout tabLayout;
     @Bind(R.id.viewpager) ViewPager pager;
@@ -26,25 +32,17 @@ public class StepsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_steps_infant);
+        setContentView(R.layout.activity_steps_health_records);
         ButterKnife.bind(this);
 
-        getSupportActionBar().setTitle("Infant(s) Details Update");
+        getSupportActionBar().setTitle("Health Record Update");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
         pager.setOffscreenPageLimit(20);
         adapter = new TabsPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(adapter);
         tabLayout.setViewPager(pager);
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_search, menu);
-        return true;
     }
 
     @Override
@@ -62,11 +60,8 @@ public class StepsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-
     public class TabsPagerAdapter extends FragmentPagerAdapter {
-        private final String[] tab_names = {"Birth Vaccination", "First Dose\n(1.5 Months)", "Second Dose 10 Weeks\n(2.5 Months)"
-                , "Third Dose 14 Weeks\n(3.5 Months)", "9 to 12 Months", "Booster Second Dose\n16 to 24 Months"};
+        private final String[] tab_names = {"Step 1","Step 2","Step 3","Step 4", "Step 5", "Step 6", "Step 7", "Step 8"};
 
         private TabsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -85,8 +80,24 @@ public class StepsActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             switch (position) {
+                case 0:
+                    return new Step1Fragment();
+                case 1:
+                    return new Step2Fragment();
+                case 2:
+                    return new Step3Fragment();
+                case 3:
+                    return new Step4Fragment();
+                case 4:
+                    return new Step5Fragment();
+                case 5:
+                    return new Step6Fragment();
+                case 6:
+                    return new UrbanStep7Fragment();
+                case 7:
+                    return new Step7Fragment();
                 default:
-                    return new BirthVaccinationFragment();
+                    return null;
             }
         }
     }

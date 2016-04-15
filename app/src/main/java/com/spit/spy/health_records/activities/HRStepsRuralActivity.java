@@ -21,7 +21,7 @@ import com.spit.spy.health_records.fragments.Step7Fragment;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class HRStepsActivity extends AppCompatActivity {
+public class HRStepsRuralActivity extends AppCompatActivity {
 
     @Bind(R.id.step_tabs) SmartTabLayout tabLayout;
     @Bind(R.id.viewpager) ViewPager pager;

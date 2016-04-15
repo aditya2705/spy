@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string-array name="sample_towns">
+        <item>Town 1</item>
+        <item>Town 2</item>
+        <item>Town 3</item>
+        <item>Town 4</item>
+        <item>Town 5</item>
+    </string-array>
+
     <string-array name="area_type">
         <item>Rural</item>
         <item>Urban</item>
@@ -37,6 +46,12 @@
         <item>Woman 2</item>
         <item>Woman 3</item>
         <item>Woman 4</item>
+    </string-array>
+
+    <string-array name="sample_children">
+        <item>Child 1</item>
+        <item>Child 2</item>
+        <item>Child 3</item>
     </string-array>
 
 </resources>

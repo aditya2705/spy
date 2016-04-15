@@ -26,15 +26,19 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="@dimen/_135sdp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
                     android:text="परिवार के मुख्या का नाम :"
                     android:textSize="@dimen/_12sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:textColor="@color/md_grey_600"
                     android:textStyle="bold"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:textSize="@dimen/_12sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:text="DHEERAJ SINGH"
@@ -53,15 +57,19 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="@dimen/_135sdp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
                     android:text="BENEFICIARY I.D. :"
                     android:textSize="@dimen/_12sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:textColor="@color/md_grey_600"
                     android:textStyle="bold"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:textSize="@dimen/_12sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:text="3124142501519"
@@ -71,10 +79,51 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:textSize="@dimen/_12sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:textStyle="bold"
+                    android:textColor="@color/md_grey_600"
+                    android:text="Child :"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/md_grey_100">
+
+                    <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_35sdp"
+                        android:entries="@array/sample_children"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:layout_gravity="center_horizontal"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_15sdp">
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_7sdp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -96,6 +145,7 @@
                             android:layout_height="wrap_content"
                             android:text="Name of child :"
                             android:textSize="@dimen/_11sdp"
+                            android:textColor="@color/md_grey_600"
                             android:textStyle="bold"/>
 
                         <TextView
@@ -124,6 +174,7 @@
                             android:layout_height="wrap_content"
                             android:text="Date of Birth :"
                             android:textSize="@dimen/_11sdp"
+                            android:textColor="@color/md_grey_600"
                             android:textStyle="bold"/>
 
                         <TextView
@@ -155,7 +206,7 @@
                 android:textAllCaps="true"
                 android:textSize="@dimen/_13sdp"
                 android:layout_marginLeft="@dimen/_15sdp"
-                android:layout_marginBottom="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_12sdp"
                 android:layout_marginRight="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:textColor="@color/md_grey_700"
