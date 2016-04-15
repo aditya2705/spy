@@ -101,7 +101,6 @@ public class MembersListStep2Activity extends AppCompatActivity {
             widths  = new int[]{
                     context.getResources().getDimensionPixelSize(R.dimen._55sdp),
                     context.getResources().getDimensionPixelSize(R.dimen._100sdp),
-                    context.getResources().getDimensionPixelSize(R.dimen._110sdp),
                     context.getResources().getDimensionPixelSize(R.dimen._110sdp)
             };
 

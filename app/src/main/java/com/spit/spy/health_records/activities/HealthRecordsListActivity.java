@@ -5,9 +5,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +19,6 @@ import com.inqbarna.tablefixheaders.TableFixHeaders;
 import com.inqbarna.tablefixheaders.adapters.BaseTableAdapter;
 import com.spit.spy.R;
 import com.spit.spy.objects.PensionerObject;
-import com.spit.spy.pregnant_women.activities.WomanDetailsUpdateActivity;
 
 import java.util.ArrayList;
 
@@ -142,7 +139,7 @@ public class HealthRecordsListActivity extends AppCompatActivity {
 
 		@Override
 		public int getColumnCount() {
-			return 6;
+			return headers.length-1;
 		}
 
 		@Override

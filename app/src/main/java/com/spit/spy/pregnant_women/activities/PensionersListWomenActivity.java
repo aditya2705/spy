@@ -18,8 +18,6 @@ import com.afollestad.materialdialogs.Theme;
 import com.inqbarna.tablefixheaders.TableFixHeaders;
 import com.inqbarna.tablefixheaders.adapters.BaseTableAdapter;
 import com.spit.spy.R;
-import com.spit.spy.health_records.activities.HRStepsActivity;
-import com.spit.spy.infant.activities.StepsActivity;
 import com.spit.spy.objects.PensionerObject;
 
 import java.util.ArrayList;

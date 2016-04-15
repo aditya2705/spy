@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MembersListStep1Activity extends AppCompatActivity {
+public class MembersListStep3Activity extends AppCompatActivity {
 
     @Bind(R.id.table) TableFixHeaders tableFixHeaders;
     @Bind(R.id.close_list_view) ImageView closeViewIcon;
@@ -41,15 +41,15 @@ public class MembersListStep1Activity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         ArrayList<PensionerObject> pensionerObjectArrayList = new ArrayList<>();
-        for(int i = 1; i < 4 ; i++)
-            pensionerObjectArrayList.add(new PensionerObject(i,"152336"+i,"SUPERWOMAN", "CATWOMAN","F",25,"OBC"));
+        for(int i = 1; i < 5 ; i++)
+            pensionerObjectArrayList.add(new PensionerObject(i,"152336"+i,"SUPERMAN", "BATMAN","Dummy data",25,"General"));
 
-        tableFixHeaders.setAdapter(new ContentTableAdapter(MembersListStep1Activity.this, pensionerObjectArrayList));
+        tableFixHeaders.setAdapter(new ContentTableAdapter(MembersListStep3Activity.this, pensionerObjectArrayList));
 
         closeViewIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MembersListStep1Activity.this.finish();
+                MembersListStep3Activity.this.finish();
             }
         });
 
@@ -85,8 +85,8 @@ public class MembersListStep1Activity extends AppCompatActivity {
         private Activity context;
         private ArrayList<PensionerObject> pensionerObjectArrayList;
 
-        private final String[] headers = new String[]{"क्रम संख्या", "परिवार के सदस्य का नाम","मुखिया से सम्भन्ध","आयु","लिंग","शैक्षिक स्तर"
-                ,"व्ययिवहिक स्थिति"};
+        private final String[] headers = new String[]{"क्रम संख्या", "बच्चों का नाम","Health Card हैं/नहीं",
+                "यदि हैं तो Health Card नंबर", "नियमित टीकाकरण हुआ हैं / \nमात्र बी. सी. जी. का टिका लगा हैं /\nटिका लगनेके जानकारी नहीं हैं / \nजानकारी हैं पर अनियमित / \nकोई टिका नै लगा हैं "};
 
         private int[] widths;
 
@@ -97,16 +97,14 @@ public class MembersListStep1Activity extends AppCompatActivity {
             this.context = context;
             this.pensionerObjectArrayList = pensionerObjectArrayList;
 
-            height = context.getResources().getDimensionPixelSize(R.dimen._50sdp);
+            height = context.getResources().getDimensionPixelSize(R.dimen._70sdp);
 
             widths  = new int[]{
                     context.getResources().getDimensionPixelSize(R.dimen._55sdp),
                     context.getResources().getDimensionPixelSize(R.dimen._110sdp),
-                    context.getResources().getDimensionPixelSize(R.dimen._90sdp),
-                    context.getResources().getDimensionPixelSize(R.dimen._60sdp),
                     context.getResources().getDimensionPixelSize(R.dimen._70sdp),
-                    context.getResources().getDimensionPixelSize(R.dimen._85sdp),
-                    context.getResources().getDimensionPixelSize(R.dimen._90sdp)
+                    context.getResources().getDimensionPixelSize(R.dimen._110sdp),
+                    context.getResources().getDimensionPixelSize(R.dimen._150sdp)
             };
 
         }

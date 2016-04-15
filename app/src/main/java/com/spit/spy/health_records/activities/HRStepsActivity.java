@@ -12,7 +12,11 @@ import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.spit.spy.R;
 import com.spit.spy.health_records.fragments.Step1Fragment;
 import com.spit.spy.health_records.fragments.Step2Fragment;
-import com.spit.spy.infant.fragments.BirthVaccinationFragment;
+import com.spit.spy.health_records.fragments.Step3Fragment;
+import com.spit.spy.health_records.fragments.Step4Fragment;
+import com.spit.spy.health_records.fragments.Step5Fragment;
+import com.spit.spy.health_records.fragments.Step6Fragment;
+import com.spit.spy.health_records.fragments.Step7Fragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -79,8 +83,18 @@ public class HRStepsActivity extends AppCompatActivity {
                     return new Step1Fragment();
                 case 1:
                     return new Step2Fragment();
+                case 2:
+                    return new Step3Fragment();
+                case 3:
+                    return new Step4Fragment();
+                case 4:
+                    return new Step5Fragment();
+                case 5:
+                    return new Step6Fragment();
+                case 6:
+                    return new Step7Fragment();
                 default:
-                    return new BirthVaccinationFragment();
+                    return null;
             }
         }
     }

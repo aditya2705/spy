@@ -145,7 +145,7 @@
             android:textSize="@dimen/_12sdp"
             android:layout_marginLeft="@dimen/_15sdp"
             android:layout_marginRight="@dimen/_10sdp"
-            android:text="क्या परिवार मैं कोई महिला  गर्भवती हैं :"/>
+            android:text="क्या आपके परिवार मई 5 वर्ष से काम आयु के बच्चे हैं :"/>
 
         <LinearLayout
             android:layout_width="0dp"
