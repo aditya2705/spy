@@ -22,6 +22,7 @@
 
 
         <ToggleButton
+            android:id="@+id/toggleButton1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -60,6 +61,7 @@
 
 
         <ToggleButton
+            android:id="@+id/toggleButton2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -98,6 +100,7 @@
 
 
         <ToggleButton
+            android:id="@+id/toggleButton3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

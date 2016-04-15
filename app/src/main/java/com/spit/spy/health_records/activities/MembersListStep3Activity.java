@@ -41,7 +41,7 @@ public class MembersListStep3Activity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         ArrayList<PensionerObject> pensionerObjectArrayList = new ArrayList<>();
-        for(int i = 1; i < 5 ; i++)
+        for(int i = 1; i < 11 ; i++)
             pensionerObjectArrayList.add(new PensionerObject(i,"152336"+i,"SUPERMAN", "BATMAN","Dummy data",25,"General"));
 
         tableFixHeaders.setAdapter(new ContentTableAdapter(MembersListStep3Activity.this, pensionerObjectArrayList));
@@ -90,14 +90,15 @@ public class MembersListStep3Activity extends AppCompatActivity {
 
         private int[] widths;
 
-        private final int height;
+        private final int height, headerHeight;
 
         public ContentTableAdapter(Activity context, ArrayList<PensionerObject> pensionerObjectArrayList) {
 
             this.context = context;
             this.pensionerObjectArrayList = pensionerObjectArrayList;
 
-            height = context.getResources().getDimensionPixelSize(R.dimen._70sdp);
+            height = context.getResources().getDimensionPixelSize(R.dimen._50sdp);
+            headerHeight = context.getResources().getDimensionPixelSize(R.dimen._70sdp);
 
             widths  = new int[]{
                     context.getResources().getDimensionPixelSize(R.dimen._55sdp),
@@ -126,7 +127,7 @@ public class MembersListStep3Activity extends AppCompatActivity {
 
         @Override
         public int getHeight(int row) {
-            return height;
+            return (row!=-1) ? height : headerHeight;
         }
 
         @Override

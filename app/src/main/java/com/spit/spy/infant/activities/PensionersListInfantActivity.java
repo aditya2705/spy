@@ -68,7 +68,7 @@ public class PensionersListInfantActivity extends AppCompatActivity {
 
 
 		ArrayList<PensionerObject> pensionerObjectArrayList = new ArrayList<>();
-		for(int i = 1; i < 8 ; i++)
+		for(int i = 1; i < 14 ; i++)
 			pensionerObjectArrayList.add(new PensionerObject(i,"152336"+i,"SUPERMAN", "BATMAN","M",25,"GENERAL"));
 
 		tableFixHeaders.setAdapter(new ContentTableAdapter(PensionersListInfantActivity.this, pensionerObjectArrayList));

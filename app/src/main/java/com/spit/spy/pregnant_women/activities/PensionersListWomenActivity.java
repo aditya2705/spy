@@ -67,7 +67,7 @@ public class PensionersListWomenActivity extends AppCompatActivity {
 		searchDialog.show();
 
 		ArrayList<PensionerObject> pensionerObjectArrayList = new ArrayList<>();
-		for(int i = 1; i < 8 ; i++)
+		for(int i = 1; i < 12 ; i++)
 			pensionerObjectArrayList.add(new PensionerObject(i,"152336"+i,"SUPERWOMAN", "CATWOMAN","F",25,"OBC"));
 
 		tableFixHeaders.setAdapter(new ContentTableAdapter(PensionersListWomenActivity.this, pensionerObjectArrayList));
