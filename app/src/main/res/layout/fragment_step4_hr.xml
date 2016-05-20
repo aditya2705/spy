@@ -25,7 +25,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5"
-                    android:text="लभरती परिवार के मुखिया का नाम :"
+                    android:text="लाभार्थी परिवार के मुखिया का नाम :"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold"/>
 
@@ -52,7 +52,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5"
-                    android:text="लभरती आईडी :"
+                    android:text="लाभार्थी आईडी :"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold"/>
 
@@ -81,7 +81,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5"
-                    android:text="लभरती का आधार नंबर :"
+                    android:text="लाभार्थी का आधार नंबर :"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold"/>
 
@@ -109,7 +109,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5"
-                    android:text="लभरती परिवार का मोबाइल नंबर :"
+                    android:text="लाभार्थी परिवार का मोबाईल नंबर :"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold"/>
 
@@ -129,7 +129,10 @@
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
-
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -145,8 +148,7 @@
             android:textSize="@dimen/_12sdp"
             android:layout_marginLeft="@dimen/_15sdp"
             android:layout_marginRight="@dimen/_10sdp"
-            android:text="क्या परिवार मई 6-14 वर्ष का बच्चा हैं  :"/>
-
+            android:text="क्या परिवार में ६-१४ वर्ष का बच्चा जैन:"/>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="@dimen/_35sdp"
@@ -155,21 +157,56 @@
             android:background="@color/md_grey_100">
 
             <android.support.v7.widget.AppCompatSpinner
-                android:id="@+id/choice1_spinner"
+                android:id="@+id/choice_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:entries="@array/choice"
                 android:layout_gravity="center_horizontal"/>
 
         </LinearLayout>
+        </LinearLayout>
+    <LinearLayout
+        android:id="@+id/step4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:textColor="@color/md_grey_700"
+                android:textStyle="bold"
+                android:textSize="@dimen/_12sdp"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:text="यदि हाँ तोह क्या सभी बच्चे स्कूल जाते हैं:"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_weight="1"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:background="@color/md_grey_100">
 
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/choice_spinner2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:entries="@array/choice"
+                    android:layout_gravity="center_horizontal"/>
+
+            </LinearLayout>
+        </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:layout_marginTop="@dimen/_10sdp"
         android:orientation="horizontal">
 
         <TextView
@@ -181,32 +218,33 @@
             android:textSize="@dimen/_12sdp"
             android:layout_marginLeft="@dimen/_15sdp"
             android:layout_marginRight="@dimen/_10sdp"
-            android:text="यदि हैं तो क्या सब बच्चे स्कूल जाते हैं  :"/>
-
+            android:text="बच्चों की संख्या:"/>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="@dimen/_35sdp"
             android:layout_weight="1"
             android:layout_marginRight="@dimen/_15sdp"
-            android:background="@color/md_grey_100">
+            android:background="@color/md_grey_100"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:textColor="@color/md_grey_900">
 
-            <android.support.v7.widget.AppCompatSpinner
-                android:id="@+id/choice2_spinner"
+            <EditText
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:entries="@array/choice"
-                android:layout_gravity="center_horizontal"/>
-
+                android:layout_height="wrap_content"
+                android:id="@+id/child_count"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textColor="@color/md_grey_900"
+                android:inputType="number"/>
         </LinearLayout>
-
     </LinearLayout>
+    </LinearLayout>
+        </LinearLayout>
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_view_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
-        android:layout_gravity="center_horizontal"
         android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginRight="@dimen/_10sdp"
         android:textSize="@dimen/_11sdp"

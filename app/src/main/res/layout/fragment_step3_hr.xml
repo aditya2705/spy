@@ -146,7 +146,6 @@
             android:layout_marginLeft="@dimen/_15sdp"
             android:layout_marginRight="@dimen/_10sdp"
             android:text="क्या आपके परिवार मई 5 वर्ष से काम आयु के बच्चे हैं :"/>
-
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="@dimen/_35sdp"
@@ -163,22 +162,43 @@
 
         </LinearLayout>
 
+
     </LinearLayout>
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_view_list"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_marginRight="@dimen/_10sdp"
-        android:textSize="@dimen/_11sdp"
-        android:padding="@dimen/_10sdp"
-        android:text="View/Update List"/>
+        android:orientation="horizontal"
+        android:id="@+id/step3">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:textColor="@color/md_grey_700"
+            android:textStyle="bold"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:text="बच्चों की संख्या :"/>
+        <EditText
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:textColor="@color/md_grey_900"
+            android:id="@+id/Child_count"
+            android:inputType="number"/>
 
-
-
-
-</LinearLayout>
+    </LinearLayout>
+<android.support.v7.widget.AppCompatButton
+android:id="@+id/btn_view_list"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_marginTop="@dimen/_10sdp"
+android:layout_gravity="center_horizontal"
+android:layout_marginLeft="@dimen/_10sdp"
+android:layout_marginRight="@dimen/_10sdp"
+android:textSize="@dimen/_11sdp"
+android:padding="@dimen/_10sdp"
+android:text="View/Update List"/>
+ </LinearLayout>

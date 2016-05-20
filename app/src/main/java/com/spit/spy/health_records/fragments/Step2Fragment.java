@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatSpinner;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.LinearLayout;
 
 import com.spit.spy.R;
 import com.spit.spy.health_records.activities.MembersListStep2Activity;
@@ -18,9 +21,13 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Step2Fragment extends Fragment {
+public class Step2Fragment extends Fragment{
 
     @Bind(R.id.btn_view_list) AppCompatButton viewListButton;
+    @Bind(R.id.step2)
+    LinearLayout step2_linear;
+    @Bind(R.id.choice_spinner)
+    AppCompatSpinner step2_spinner;
 
 
     private View rootView;
@@ -36,7 +43,28 @@ public class Step2Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_step2_hr, container, false);
-        ButterKnife.bind(this,rootView);
+        ButterKnife.bind(this, rootView);
+        step2_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if(step2_spinner.getSelectedItem().toString().equals("नहीं")){
+                    step2_linear.setVisibility(View.GONE);
+                }
+                else {
+                    step2_linear.setVisibility(View.VISIBLE);
+                }
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
 
         viewListButton.setOnClickListener(new View.OnClickListener() {
             @Override

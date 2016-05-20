@@ -1,7 +1,7 @@
 package com.spit.spy.objects;
 
 /**
- * Created by Aditya Rathi on 10-Apr-16.
+ * Created by  on 10-Apr-16.
  */
 public class PensionerObject {
 

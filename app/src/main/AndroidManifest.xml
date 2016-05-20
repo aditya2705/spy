@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.spit.spy">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,31 +21,66 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DashboardActivity"></activity>
-        <activity android:name=".infant.activities.StepsActivity"></activity>
-        <activity android:name=".health_records.activities.HRStepsRuralActivity"></activity>
-        <activity android:name=".health_records.activities.HRStepsUrbanActivity"></activity>
-        <activity android:name=".infant.activities.PensionersListInfantActivity"></activity>
-        <activity android:name=".pregnant_women.activities.PensionersListWomenActivity"></activity>
-        <activity android:name=".pregnant_women.activities.WomanDetailsUpdateActivity"></activity>
+
+        <activity android:name=".DashboardActivity" />
+        <activity android:name=".infant.activities.StepsActivity" />
+        <activity android:name=".health_records.activities.HRStepsRuralActivity" />
+        <activity android:name=".health_records.activities.HRStepsUrbanActivity" />
+        <activity android:name=".infant.activities.PensionersListInfantActivity" />
+        <activity android:name=".pregnant_women.activities.PensionersListWomenActivity" />
+        <activity android:name=".pregnant_women.activities.WomanDetailsUpdateActivity" />
         <activity
             android:name=".health_records.activities.HealthRecordsListActivity"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
-        <activity android:name=".health_records.activities.MembersListStep1Activity"
-            android:theme="@style/MyCustomDialog"/>
-        <activity android:name=".health_records.activities.MembersListStep2Activity"
-            android:theme="@style/MyCustomDialog"/>
-        <activity android:name=".health_records.activities.MembersListStep3Activity"
-            android:theme="@style/MyCustomDialog"/>
-        <activity android:name=".health_records.activities.MembersListStep4Activity"
-            android:theme="@style/MyCustomDialog"/>
-        <activity android:name=".health_records.activities.MembersListStep5Activity"
-            android:theme="@style/MyCustomDialog"/>
-        <activity android:name=".health_records.activities.MembersListStep6Activity"
-            android:theme="@style/MyCustomDialog"/>
-        <activity android:name=".health_records.activities.MembersListStep7Activity"
-            android:theme="@style/MyCustomDialog"/>
-
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".health_records.activities.MembersListStep1Activity"
+            android:theme="@style/MyCustomDialog" />
+        <activity
+            android:name=".health_records.activities.MembersListStep2Activity"
+            android:theme="@style/MyCustomDialog" />
+        <activity
+            android:name=".health_records.activities.MembersListStep3Activity"
+            android:theme="@style/MyCustomDialog" />
+        <activity
+            android:name=".health_records.activities.MembersListStep4Activity"
+            android:theme="@style/MyCustomDialog" />
+        <activity
+            android:name=".health_records.activities.MembersListStep5Activity"
+            android:theme="@style/MyCustomDialog" />
+        <activity
+            android:name=".health_records.activities.MembersListStep6Activity"
+            android:theme="@style/MyCustomDialog" />
+        <activity
+            android:name=".health_records.activities.MembersListStep7Activity"
+            android:theme="@style/MyCustomDialog" />
+        <activity
+            android:name=".health_records.activities.AddMember1"
+            android:label="@string/title_activity_add_member"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".health_records.activities.AddMember3"
+            android:label="@string/title_activity_add_member3"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".health_records.activities.AddMember4"
+            android:label="@string/title_activity_add_member4"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".health_records.activities.Update"
+            android:label="UPDATE AADHAR/MOBILE"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".pregnant_women.activities.Add_women"
+            android:label="ADD MEMBER"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".health_records.activities.AddMember5"
+            android:label="@string/title_activity_add_member5"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".health_records.activities.AddMember2"
+            android:label="@string/title_activity_add_member2"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/InfantSPY.iml" filepath="$PROJECT_DIR$/InfantSPY.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spy.iml" filepath="$PROJECT_DIR$/spy.iml" />
       <module fileurl="file://$PROJECT_DIR$/tablefixheaders/tablefixheaders.iml" filepath="$PROJECT_DIR$/tablefixheaders/tablefixheaders.iml" />
     </modules>
   </component>

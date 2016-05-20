@@ -32,12 +32,13 @@
 
 
         <TextView
+            android:id="@+id/OPV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:textSize="@dimen/_12sdp"
             android:textStyle="bold"
-            android:text="16 Jul 2015"
+            android:text=" "
             android:gravity="right"/>
 
 
@@ -51,6 +52,7 @@
         android:orientation="horizontal">
 
         <TextView
+
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -71,12 +73,14 @@
 
 
         <TextView
+            android:id="@+id/HB"
+
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:textSize="@dimen/_12sdp"
             android:textStyle="bold"
-            android:text="16 Jul 2015"
+            android:text=""
             android:gravity="right"/>
 
 
@@ -110,12 +114,14 @@
 
 
         <TextView
+            android:id="@+id/BCG"
+
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:textSize="@dimen/_12sdp"
             android:textStyle="bold"
-            android:text="16 Jul 2015"
+            android:text=""
             android:gravity="right"/>
 
 

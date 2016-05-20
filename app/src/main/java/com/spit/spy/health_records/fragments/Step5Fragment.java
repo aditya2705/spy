@@ -8,6 +8,7 @@ import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.spit.spy.R;
 import com.spit.spy.health_records.activities.MembersListStep5Activity;
@@ -21,7 +22,7 @@ import butterknife.ButterKnife;
 public class Step5Fragment extends Fragment {
 
     @Bind(R.id.btn_view_list) AppCompatButton viewListButton;
-
+    
 
     private View rootView;
 

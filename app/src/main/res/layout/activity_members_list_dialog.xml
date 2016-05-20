@@ -22,7 +22,7 @@
             android:layout_marginBottom="@dimen/_8sdp"
             android:theme="@style/CustomButtonStyle"
             android:textColor="@color/md_white_1000"
-            android:text="Add"/>
+            android:text="Add" />
 
         <TextView
             android:layout_width="match_parent"

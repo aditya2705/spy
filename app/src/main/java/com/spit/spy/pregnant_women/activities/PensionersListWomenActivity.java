@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -40,21 +41,25 @@ public class PensionersListWomenActivity extends AppCompatActivity {
 		getSupportActionBar().setTitle("Pregnant Women Records");
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
 		searchDialog = new MaterialDialog.Builder(this)
 				.theme(Theme.LIGHT)
 				.customView(R.layout.panchayat_dialog,true)
 				.title("Samajwadi Pensioner's List")
-				.positiveText("SEARCH")
-				.negativeText("CANCEL")
+				.positiveText("CANCEL")
+				.negativeText("SEARCH")
 				.negativeColor(getResources().getColor(R.color.appThemeColorDark))
 				.positiveColor(getResources().getColor(R.color.appThemeColorDark))
 				.titleColor(getResources().getColor(R.color.appThemeColorDark))
 				.onPositive(new MaterialDialog.SingleButtonCallback() {
 					@Override
 					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+
 						dialog.dismiss();
 					}
 				})
+
+
 				.onNegative(new MaterialDialog.SingleButtonCallback() {
 					@Override
 					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -66,9 +71,16 @@ public class PensionersListWomenActivity extends AppCompatActivity {
 
 		searchDialog.show();
 
+		/*add_member.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(PensionersListWomenActivity.this, Add_women.class);
+				startActivity(intent);
+			}
+		});*/
 		ArrayList<PensionerObject> pensionerObjectArrayList = new ArrayList<>();
 		for(int i = 1; i < 12 ; i++)
-			pensionerObjectArrayList.add(new PensionerObject(i,"152336"+i,"SUPERWOMAN", "CATWOMAN","F",25,"OBC"));
+			pensionerObjectArrayList.add(new PensionerObject(i,"152336"+i,"MEMBER"+i, "MEMBER"+i,"F",25,"OBC"));
 
 		tableFixHeaders.setAdapter(new ContentTableAdapter(PensionersListWomenActivity.this, pensionerObjectArrayList));
 

@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -74,7 +75,7 @@ public class HealthRecordsListActivity extends AppCompatActivity {
 
 		ArrayList<PensionerObject> pensionerObjectArrayList = new ArrayList<>();
 		for(int i = 1; i < 13 ; i++)
-			pensionerObjectArrayList.add(new PensionerObject(i,"343427"+i,"CAPTAIN AMERICA", "IRONMAN","M",28,"GENERAL"));
+			pensionerObjectArrayList.add(new PensionerObject(i,"343427"+i,"MEMBER"+i, "MEMBER"+i,"M",28,"GENERAL"));
 
 		tableFixHeaders.setAdapter(new ContentTableAdapter(HealthRecordsListActivity.this, pensionerObjectArrayList));
 
@@ -117,7 +118,6 @@ public class HealthRecordsListActivity extends AppCompatActivity {
 		private final int height;
 
 		public ContentTableAdapter(Activity context, ArrayList<PensionerObject> pensionerObjectArrayList) {
-
 			this.context = context;
 			this.pensionerObjectArrayList = pensionerObjectArrayList;
 
@@ -170,13 +170,13 @@ public class HealthRecordsListActivity extends AppCompatActivity {
 			}
 
 			if(getItemViewType(row,column)!=0) {
-
-					view.setOnClickListener(new View.OnClickListener() {
+				view.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
 							Intent intent;
-							if(records_type == 0)
+							if(records_type == 0) {
 								intent = new Intent(context, HRStepsRuralActivity.class);
+							}
 							else
 								intent = new Intent(context, HRStepsUrbanActivity.class);
 

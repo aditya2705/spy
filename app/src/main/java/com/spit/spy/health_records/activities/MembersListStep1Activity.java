@@ -1,6 +1,7 @@
 package com.spit.spy.health_records.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +20,7 @@ import com.inqbarna.tablefixheaders.TableFixHeaders;
 import com.inqbarna.tablefixheaders.adapters.BaseTableAdapter;
 import com.spit.spy.R;
 import com.spit.spy.objects.PensionerObject;
+import com.spit.spy.pregnant_women.activities.Add_women;
 
 import java.util.ArrayList;
 
@@ -25,9 +28,10 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MembersListStep1Activity extends AppCompatActivity {
-
+Intent intent;
     @Bind(R.id.table) TableFixHeaders tableFixHeaders;
     @Bind(R.id.close_list_view) ImageView closeViewIcon;
+    @Bind(R.id.btn_add_member) Button btn_add_member;
 
     private MaterialDialog updateDialog;
 
@@ -42,10 +46,17 @@ public class MembersListStep1Activity extends AppCompatActivity {
 
         ArrayList<PensionerObject> pensionerObjectArrayList = new ArrayList<>();
         for(int i = 1; i < 4 ; i++)
-            pensionerObjectArrayList.add(new PensionerObject(i,"152336"+i,"SUPERWOMAN", "CATWOMAN","F",25,"OBC"));
+            pensionerObjectArrayList.add(new PensionerObject(i,"152336"+i,"MEMBER"+i, "MEMBER"+i,"F",25,"OBC"));
 
         tableFixHeaders.setAdapter(new ContentTableAdapter(MembersListStep1Activity.this, pensionerObjectArrayList));
+        btn_add_member.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                intent = new Intent(MembersListStep1Activity.this , Add_women.class);
+                startActivityForResult(intent,1);
+            }
+        });
         closeViewIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

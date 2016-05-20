@@ -1,6 +1,7 @@
 package com.spit.spy.health_records.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,6 +31,9 @@ public class MembersListStep4Activity extends AppCompatActivity {
     @Bind(R.id.table) TableFixHeaders tableFixHeaders;
     @Bind(R.id.close_list_view) ImageView closeViewIcon;
 
+    @Bind(R.id.btn_add_member)
+    Button AddMember;
+    Intent intent;
     private MaterialDialog updateDialog;
 
     @Override
@@ -42,10 +47,16 @@ public class MembersListStep4Activity extends AppCompatActivity {
 
         ArrayList<PensionerObject> pensionerObjectArrayList = new ArrayList<>();
         for(int i = 1; i < 5 ; i++)
-            pensionerObjectArrayList.add(new PensionerObject(i,"152336"+i,"SUPERMAN", "BATMAN","Dummy data",25,"General"));
+            pensionerObjectArrayList.add(new PensionerObject(i,"152336"+i,"MEMBER"+i, "MEMBER"+i,"Dummy data",25,"General"));
 
         tableFixHeaders.setAdapter(new ContentTableAdapter(MembersListStep4Activity.this, pensionerObjectArrayList));
-
+        AddMember.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(MembersListStep4Activity.this,AddMember4.class);
+                startActivityForResult(intent,1);
+            }
+        });
         closeViewIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

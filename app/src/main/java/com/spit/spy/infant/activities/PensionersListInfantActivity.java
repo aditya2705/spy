@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -17,8 +18,11 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
 import com.inqbarna.tablefixheaders.TableFixHeaders;
 import com.inqbarna.tablefixheaders.adapters.BaseTableAdapter;
+import com.spit.spy.DashboardActivity;
+import com.spit.spy.LoginActivity;
 import com.spit.spy.R;
 import com.spit.spy.objects.PensionerObject;
+import com.spit.spy.pregnant_women.activities.Add_women;
 
 import java.util.ArrayList;
 
@@ -28,6 +32,8 @@ import butterknife.ButterKnife;
 public class PensionersListInfantActivity extends AppCompatActivity {
 
 	@Bind(R.id.table) TableFixHeaders tableFixHeaders;
+
+
 
 	private MaterialDialog searchDialog;
 
@@ -40,9 +46,11 @@ public class PensionersListInfantActivity extends AppCompatActivity {
 		getSupportActionBar().setTitle("Infant Household Records");
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
+
 		searchDialog = new MaterialDialog.Builder(this)
 				.theme(Theme.LIGHT)
-				.customView(R.layout.panchayat_dialog,true)
+				.customView(R.layout.panchayat_dialog, true)
 				.title("Samajwadi Pensioner's List")
 				.positiveText("SEARCH")
 				.negativeText("CANCEL")
@@ -62,14 +70,21 @@ public class PensionersListInfantActivity extends AppCompatActivity {
 					}
 				})
 				.canceledOnTouchOutside(false)
+
 				.build();
 
 		searchDialog.show();
-
-
+/*records= LoginActivity.position;
+		//records_type = getIntent().getIntExtra("records_type",0);
+		if(records==1)
+		{
+			town.setText("Town :");
+		}
+		else
+		town.setText("Select Gram\\nPanchayat:");*/
 		ArrayList<PensionerObject> pensionerObjectArrayList = new ArrayList<>();
 		for(int i = 1; i < 14 ; i++)
-			pensionerObjectArrayList.add(new PensionerObject(i,"152336"+i,"SUPERMAN", "BATMAN","M",25,"GENERAL"));
+			pensionerObjectArrayList.add(new PensionerObject(i,"152336"+i,"MEMBER"+i, "MEMBER"+i,"M",25,"GENERAL"));
 
 		tableFixHeaders.setAdapter(new ContentTableAdapter(PensionersListInfantActivity.this, pensionerObjectArrayList));
 

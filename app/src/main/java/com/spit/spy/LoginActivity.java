@@ -21,6 +21,7 @@ public class LoginActivity extends AppCompatActivity {
     @Bind(R.id.area_type_spinner) AppCompatSpinner areaTypeSpinner;
     @Bind(R.id.area_layout) LinearLayout areaLayout;
     @Bind(R.id.town_spinner_layout) LinearLayout townSpinnerLayout;
+    @Bind(R.id.rural_spinner_layout) LinearLayout ruralSpinnerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-        getSupportActionBar().setTitle("Health Department - Login");
+        getSupportActionBar().setTitle("UPSPS :Health Department - Login");
 
         final ProgressDialog progressDialog = new ProgressDialog(this,
                 R.style.AppTheme_Dark_Dialog);
@@ -46,12 +47,14 @@ public class LoginActivity extends AppCompatActivity {
                         new Runnable() {
                             public void run() {
                                 // On complete call either onLoginSuccess or onLoginFailed
-                                Intent intent = new Intent(LoginActivity.this,DashboardActivity.class);
-                                if(areaTypeSpinner.getSelectedItemPosition()==0)
-                                    intent.putExtra("records_type",0);
-                                else
-                                    intent.putExtra("records_type",1);
+                                Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                                if (areaTypeSpinner.getSelectedItemPosition() == 0) {
 
+                                    intent.putExtra("records_type", 0);
+                                } else {
+
+                                    intent.putExtra("records_type", 1);
+                                }
                                 startActivity(intent);
                                 // onLoginFailed();
                                 progressDialog.dismiss();
@@ -64,12 +67,15 @@ public class LoginActivity extends AppCompatActivity {
         areaTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
+                switch (position) {
                     case 0:
                         townSpinnerLayout.setVisibility(View.GONE);
+                        ruralSpinnerLayout.setVisibility(View.VISIBLE);
+
                         break;
                     case 1:
                         townSpinnerLayout.setVisibility(View.VISIBLE);
+                        ruralSpinnerLayout.setVisibility(View.GONE);
                         break;
                 }
             }
