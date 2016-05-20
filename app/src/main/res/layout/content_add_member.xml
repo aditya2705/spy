@@ -10,6 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".health_records.activities.AddMember1"
-    tools:showIn="@layout/activity_add_member">
+    tools:showIn="@layout/activity_add_member1">
 
 </RelativeLayout>

@@ -53,7 +53,7 @@ Intent intent;
             @Override
             public void onClick(View v) {
 
-                intent = new Intent(MembersListStep1Activity.this , Add_women.class);
+                intent = new Intent(MembersListStep1Activity.this , AddMember1.class);
                 startActivityForResult(intent,1);
             }
         });

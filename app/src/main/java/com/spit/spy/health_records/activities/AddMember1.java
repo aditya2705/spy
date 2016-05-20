@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.spit.spy.R;
 
@@ -27,7 +28,7 @@ public class AddMember1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_member);
+        setContentView(R.layout.activity_add_member1);
         ButterKnife.bind(this);
 
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -36,13 +37,21 @@ public class AddMember1 extends AppCompatActivity {
 
                 head_name_string = headNameEditText.getText().toString();
 
-                new Thread(new Runnable() {
+                //currently commented as database connect code is incomplete (not all attributes put up)
+                /*new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        ConnectToDatabase(head_name_string);
-                    }
-                }).start();
 
+
+
+
+                        //ConnectToDatabase(head_name_string);
+
+                    }
+                }).start();*/
+
+                Toast.makeText(AddMember1.this, "Added", Toast.LENGTH_SHORT).show();
+                AddMember1.this.finish();
 
             }
         });

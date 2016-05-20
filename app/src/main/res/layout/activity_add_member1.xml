@@ -6,30 +6,29 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/_15sdp"
-            android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_15sdp"
+        android:orientation="vertical"
         android:background="@drawable/border"
-        android:layout_margin="@dimen/_14sdp"
-        >
+        android:layout_margin="@dimen/_14sdp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="4"
-                android:paddingTop="@dimen/_25sdp">
+                android:gravity="center_vertical">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:text="परिवार के सदस्य का नाम :"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold"/>
                 <EditText
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/head_name"
                     android:layout_weight="2"
@@ -45,24 +44,26 @@
                 android:layout_marginTop="@dimen/_8sdp"
                 android:orientation="horizontal"
                 android:weightSum="4"
+                android:gravity="center_vertical"
                 android:paddingTop="@dimen/_10sdp">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:text="मुखिया से सम्भन्ध :"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold"/>
+
                 <LinearLayout
-                    android:layout_width="@dimen/_260sdp"
+                    android:layout_width="0dp"
                     android:layout_height="@dimen/_35sdp"
-                    android:paddingLeft="@dimen/_60sdp"
+                    android:layout_weight="2"
                     android:background="@color/md_grey_100">
 
                     <android.support.v7.widget.AppCompatSpinner
                         android:id="@+id/choice_spinner2"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:entries="@array/relation_type" />
 
@@ -82,14 +83,14 @@
                 android:paddingTop="@dimen/_10sdp">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:text="आयु :"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold"/>
                 <EditText
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/head_age"
                     android:inputType="number"
@@ -110,21 +111,22 @@
                 android:paddingTop="@dimen/_10sdp">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:text="लिंग  :"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold"/>
+
                 <LinearLayout
-                    android:layout_width="@dimen/_280sdp"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
                     android:layout_height="@dimen/_35sdp"
-                    android:paddingLeft="@dimen/_60sdp"
                     android:background="@color/md_grey_100">
 
                     <android.support.v7.widget.AppCompatSpinner
                         android:id="@+id/choice_spinner3"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:entries="@array/gender_type" />
 
@@ -142,21 +144,21 @@
                 android:paddingTop="@dimen/_10sdp">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:text="शैक्षिक स्तर :"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold"/>
                 <LinearLayout
-                    android:layout_width="@dimen/_285sdp"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
                     android:layout_height="@dimen/_35sdp"
-                    android:paddingLeft="@dimen/_40sdp"
                     android:background="@color/md_grey_100">
 
                     <android.support.v7.widget.AppCompatSpinner
                         android:id="@+id/choice_spinner4"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:entries="@array/saikshik_type" />
 
@@ -173,21 +175,21 @@
                 android:paddingTop="@dimen/_10sdp">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:text="व्ययिवहिक स्थिति:"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold"/>
                 <LinearLayout
-                    android:layout_width="@dimen/_280sdp"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
                     android:layout_height="@dimen/_35sdp"
-                    android:paddingLeft="@dimen/_71sdp"
                     android:background="@color/md_grey_100">
 
                     <android.support.v7.widget.AppCompatSpinner
                         android:id="@+id/choice_spinner5"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:entries="@array/married_type" />
 

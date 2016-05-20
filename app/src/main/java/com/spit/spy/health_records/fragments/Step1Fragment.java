@@ -58,6 +58,7 @@ public class Step1Fragment extends Fragment implements AdapterView.OnItemSelecte
                 startActivityForResult(intent_1,0);
             }
         });*/
+        viewMembersButton.setText("VIEW MEMBERS LIST");
         viewMembersButton.setOnClickListener((View.OnClickListener) this);
         updateButton.setOnClickListener((View.OnClickListener) this);
 
