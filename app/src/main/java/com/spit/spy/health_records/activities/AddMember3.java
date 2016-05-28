@@ -1,17 +1,16 @@
 package com.spit.spy.health_records.activities;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatSpinner;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import com.inqbarna.tablefixheaders.TableFixHeaders;
+import com.rey.material.widget.Button;
 import com.spit.spy.R;
+import com.spit.spy.Validation;
 
 import butterknife.Bind;
 
@@ -21,6 +20,8 @@ AppCompatSpinner spinner;
 
    /* @Bind(R.id.choice_spinner) AppCompatSpinner spinner;
     @Bind(R.id.step3_add) LinearLayout add;*/
+   @Bind(R.id.child_name) EditText child_name;
+    @Bind(R.id.save_button) Button save_button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +45,30 @@ spinner=(AppCompatSpinner)findViewById(R.id.choice_spinner);
 
             }
         });
+        save_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (checkValidation()) {
+
+                    // intent of save button
+                }
+
+
+            }
+        });
 
     }
 
+    private boolean checkValidation() {
+        boolean ret = true;
+
+        if (!Validation.isText(child_name)) {
+            ret = false;
+            child_name.requestFocus();
+        }
+
+
+        return ret;
+    }
 }

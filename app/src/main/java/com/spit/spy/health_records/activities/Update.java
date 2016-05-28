@@ -9,11 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.inqbarna.tablefixheaders.TableFixHeaders;
 import com.spit.spy.R;
+import com.spit.spy.Validation;
 
 import java.util.Calendar;
 
@@ -24,15 +22,22 @@ import butterknife.ButterKnife;
 /**
  * Created by Twinklee on 29-04-2016.
  */
-public class Update  extends AppCompatActivity {
+public class Update  extends AppCompatActivity implements View.OnClickListener {
 
 
     private DatePicker datePicker;
      Calendar calendar;
-
-
+    @Bind(R.id.save_button) Button update;
     @Bind(R.id.textView3) EditText dateView;
-    int year, month, day;
+    @Bind(R.id.person_name) EditText name;
+
+    @Bind(R.id.mobile) EditText mobile_no;
+    @Bind(R.id.person_sankhya) EditText adhaar_no;
+
+
+
+
+   int year, month, day;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -45,7 +50,7 @@ public class Update  extends AppCompatActivity {
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         showDate(year, month + 1, day);
-
+update.setOnClickListener(this);
     }
     @SuppressWarnings("deprecation")
     public void setDate(View view) {
@@ -82,6 +87,43 @@ public class Update  extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present
         return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        if (checkValidation())
+        {
+            // intent of update
+        }
+
+
+
+    }
+
+
+    private boolean checkValidation() {
+        boolean ret = true;
+
+        if (!Validation.isText(name)) {
+            ret = false;
+            name.requestFocus();
+        }
+        if (!Validation.isPhoneNumber(mobile_no)) {
+            ret = false;
+            mobile_no.requestFocus();
+        }
+        if (!Validation.isAdhaarNumber(adhaar_no)) {
+            ret = false;
+            adhaar_no.requestFocus();
+        }
+        if (!Validation.isDate(dateView)) {
+            ret = false;
+            dateView.requestFocus();
+        }
+
+
+        return ret;
     }
 }
 

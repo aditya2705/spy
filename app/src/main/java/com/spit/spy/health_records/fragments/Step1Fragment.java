@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.EditText;
 
 import com.spit.spy.R;
 import com.spit.spy.health_records.activities.MembersListStep1Activity;
@@ -29,6 +29,9 @@ public class Step1Fragment extends Fragment implements AdapterView.OnItemSelecte
 
     @Bind(R.id.update)
     Button updateButton;
+    @Bind(R.id.adhaar_no)
+    EditText adhaar;
+
     private View rootView;
 
 
@@ -43,7 +46,6 @@ public class Step1Fragment extends Fragment implements AdapterView.OnItemSelecte
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_step1_hr, container, false);
         ButterKnife.bind(this, rootView);
-
         /*viewMembersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +77,7 @@ public class Step1Fragment extends Fragment implements AdapterView.OnItemSelecte
 
                 break;
             case R.id.update:
+
                 Intent intent1 = new Intent(getActivity(), Update.class);
                 startActivity(intent1);
 

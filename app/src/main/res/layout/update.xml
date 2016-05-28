@@ -59,6 +59,7 @@
                 android:textStyle="bold"
                 />
             <EditText
+                android:id="@+id/address"
             android:inputType="textMultiLine"
             android:lines="5"
             android:minLines="4"

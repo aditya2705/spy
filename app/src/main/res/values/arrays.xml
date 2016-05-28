@@ -8,7 +8,13 @@
         <item>Town 4</item>
         <item>Town 5</item>
     </string-array>
-
+    <string-array name="category">
+        <item>General</item>
+        <item>SC</item>
+        <item>ST</item>
+        <item>OBC</item>
+        <item>Minority</item>
+    </string-array>
     <string-array name="area_type">
         <item>Rural</item>
         <item>Urban</item>

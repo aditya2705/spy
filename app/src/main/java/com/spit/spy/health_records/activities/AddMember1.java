@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.spit.spy.R;
+import com.spit.spy.Validation;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -22,6 +23,8 @@ public class AddMember1 extends AppCompatActivity {
 
     @Bind(R.id.head_name) EditText headNameEditText;
     @Bind(R.id.add_button) Button addButton;
+    @Bind(R.id.head_age) EditText headAge;
+
 
     private String head_name_string;
 
@@ -35,9 +38,17 @@ public class AddMember1 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                head_name_string = headNameEditText.getText().toString();
 
-                //currently commented as database connect code is incomplete (not all attributes put up)
+                if (checkValidation())
+                {
+
+
+
+                    head_name_string = headNameEditText.getText().toString();
+
+
+
+                    //currently commented as database connect code is incomplete (not all attributes put up)
                 /*new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -50,13 +61,36 @@ public class AddMember1 extends AppCompatActivity {
                     }
                 }).start();*/
 
-                Toast.makeText(AddMember1.this, "Added", Toast.LENGTH_SHORT).show();
-                AddMember1.this.finish();
+                    Toast.makeText(AddMember1.this, "Added", Toast.LENGTH_SHORT).show();
+                    AddMember1.this.finish();
+
+
+
+                }
+
 
             }
         });
 
 
+    }
+
+    private boolean checkValidation() {
+        boolean ret = true;
+
+        if (!Validation.isText(headNameEditText)) {
+            ret = false;
+            headNameEditText.requestFocus();
+        }
+
+        if(!Validation.isAge(headAge))
+        {
+            ret = false;
+            headAge.requestFocus();
+
+        }
+
+        return ret;
     }
 
     public void ConnectToDatabase(String head_name_string){

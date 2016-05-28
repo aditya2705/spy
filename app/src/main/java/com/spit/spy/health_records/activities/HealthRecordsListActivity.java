@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -98,6 +97,10 @@ public class HealthRecordsListActivity extends AppCompatActivity {
 		switch (id){
 			case R.id.action_search:
 				searchDialog.show();
+				break;
+			case R.id.action_add:
+				Intent intent1 = new Intent(HealthRecordsListActivity.this, Pensioner_Add.class);
+				startActivity(intent1);
 				break;
 			case android.R.id.home:
 				finish();
