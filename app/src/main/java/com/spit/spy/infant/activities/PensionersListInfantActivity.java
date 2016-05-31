@@ -10,19 +10,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
 import com.inqbarna.tablefixheaders.TableFixHeaders;
 import com.inqbarna.tablefixheaders.adapters.BaseTableAdapter;
-import com.spit.spy.DashboardActivity;
-import com.spit.spy.LoginActivity;
 import com.spit.spy.R;
-import com.spit.spy.objects.PensionerObject;
-import com.spit.spy.pregnant_women.activities.Add_women;
+import com.spit.spy.objects.Infant;
+import com.spit.spy.objects.InfantObject;
+import com.spit.spy.objects.PensionObject;
+import com.spit.spy.objects.Pensioner;
 
 import java.util.ArrayList;
 
@@ -33,6 +33,7 @@ public class PensionersListInfantActivity extends AppCompatActivity {
 
 	@Bind(R.id.table) TableFixHeaders tableFixHeaders;
 
+	ArrayList<Infant> infants;
 
 
 	private MaterialDialog searchDialog;
@@ -73,7 +74,15 @@ public class PensionersListInfantActivity extends AppCompatActivity {
 
 				.build();
 
-		searchDialog.show();
+		//searchDialog.show();
+
+		InfantObject io = new InfantObject();	//infant object
+		infants = io.getInfantsDetails();
+
+
+
+		//ArrayList<PensionerObject> pensionerObjectArrayList = new ArrayList<>();
+		//	pensionerObjectArrayList.retainAll(io.getAll());
 /*records= LoginActivity.position;
 		//records_type = getIntent().getIntExtra("records_type",0);
 		if(records==1)
@@ -82,12 +91,16 @@ public class PensionersListInfantActivity extends AppCompatActivity {
 		}
 		else
 		town.setText("Select Gram\\nPanchayat:");*/
-		ArrayList<PensionerObject> pensionerObjectArrayList = new ArrayList<>();
+		/*ArrayList<PensionerObject> pensionerObjectArrayList = new ArrayList<>();
 		for(int i = 1; i < 14 ; i++)
 			pensionerObjectArrayList.add(new PensionerObject(i,"152336"+i,"MEMBER"+i, "MEMBER"+i,"M",25,"GENERAL"));
+*/
+		//int listSize = pensionerObjectArrayList.size();
 
-		tableFixHeaders.setAdapter(new ContentTableAdapter(PensionersListInfantActivity.this, pensionerObjectArrayList));
-
+		//for (int i = 0; i<listSize; i++){
+	//		Log.i("Member name: ", String.valueOf(pensionerObjectArrayList.get(i)));
+		//}
+		tableFixHeaders.setAdapter(new ContentTableAdapter(PensionersListInfantActivity.this, infants));
 	}
 
 	@Override
@@ -96,7 +109,12 @@ public class PensionersListInfantActivity extends AppCompatActivity {
 		getMenuInflater().inflate(R.menu.menu_search, menu);
 		return true;
 	}
-
+	public boolean onPrepareOptionsMenu(Menu menu)
+	{
+		MenuItem register = menu.findItem(R.id.action_add);
+		register.setVisible(false);
+		return true;
+	}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
@@ -118,7 +136,7 @@ public class PensionersListInfantActivity extends AppCompatActivity {
 	public class ContentTableAdapter extends BaseTableAdapter {
 
 		private Activity context;
-		private ArrayList<PensionerObject> pensionerObjectArrayList;
+		private ArrayList<Infant> infantArrayList;
 
 		private final String[] headers = new String[]{"क्रम संख्या", "लाभार्थी आईडी","लाभार्थी का नाम","पिता का नाम", "लिंग","आयु","वर्ग"};
 
@@ -126,10 +144,10 @@ public class PensionersListInfantActivity extends AppCompatActivity {
 
 		private final int height;
 
-		public ContentTableAdapter(Activity context, ArrayList<PensionerObject> pensionerObjectArrayList) {
+		public ContentTableAdapter(Activity context, ArrayList<Infant> infantArrayList) {
 
 			this.context = context;
-			this.pensionerObjectArrayList = pensionerObjectArrayList;
+			this.infantArrayList = infantArrayList;
 
 			height = context.getResources().getDimensionPixelSize(R.dimen._50sdp);
 
@@ -147,7 +165,7 @@ public class PensionersListInfantActivity extends AppCompatActivity {
 
 		@Override
 		public int getRowCount() {
-			return pensionerObjectArrayList.size();
+			return infantArrayList.size();
 		}
 
 		@Override
@@ -210,7 +228,7 @@ public class PensionersListInfantActivity extends AppCompatActivity {
 			textView.setTypeface(Typeface.DEFAULT);
 			textView.setTextColor(context.getResources().getColor(R.color.md_grey_700));
 			String s = "";
-			PensionerObject p = pensionerObjectArrayList.get(row);
+			Infant p = infantArrayList.get(row);
 			switch (column){
 				case -1:
 					s = p.getId()+"";
@@ -218,22 +236,22 @@ public class PensionersListInfantActivity extends AppCompatActivity {
 				case 0:
 					textView.setTypeface(Typeface.DEFAULT_BOLD);
 					textView.setTextColor(context.getResources().getColor(R.color.appThemeColorDark));
-					s= p.getLabharti_id();
+					s= p.getLabhartiId();
 					break;
 				case 1:
-					s = p.getLabharti_name();
+					s = p.getApplicantName();
 					break;
 				case 2:
-					s=p.getFather_name();
+					s=p.getFatherName();
 					break;
 				case 3:
 					s=p.getGender();
 					break;
 				case 4:
-					s=p.getAge()+"";
+					s=p.getDateOfBirth()+"";
 					break;
 				case 5:
-					s=p.getCategory();
+					s=p.getCaste();
 					break;
 			}
 

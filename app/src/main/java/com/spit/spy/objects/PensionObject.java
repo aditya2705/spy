@@ -21,7 +21,7 @@ import java.util.List;
  + * Created by  on 10-Apr-16.
  */
 
-public class InfantObject {
+public class PensionObject {
 
     public static final String TABLE_NAME = "childrenlessthan5_rural";
     public static final String PRIMARY_KEY = "id";
@@ -37,57 +37,58 @@ public class InfantObject {
     private String district_code;
     private Date birth_opv_date;
 
-       ArrayList<Infant> getInfants = new ArrayList<Infant>();
+    ArrayList<Pensioner> getPensioners = new ArrayList<Pensioner>();
 
-       public ArrayList<Infant> getInfantsDetails () {
-           new RetrieveFromBackground().execute();
-           return getInfants;
-       }
+    public ArrayList<Pensioner> getPensionersDetails () {
+        new RetrieveFromBackground().execute();
+        return getPensioners;
+    }
 
-       public class RetrieveFromBackground extends AsyncTask<Void, Void, Void> {
+    public class RetrieveFromBackground extends AsyncTask<Void, Void, Void> {
 
-           @Override
-           protected Void doInBackground(Void... params) {
-               try {
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
 
-                   // SET CONNECTIONSTRING
-                   String dateOfBirth = "DateOfBirth";
-                   String applicantName = "Applicant_Name";
-                   String applicantId = "Applicant_ID";
-                   String fatherName;
-                   String gender;
-                   String caste;
-                   Class.forName("net.sourceforge.jtds.jdbc.Driver").newInstance();
-                   String database = "tabfromtemp20_new";
-                   String username = "d1810";
-                   String password = "12345";
-                   String server = "172.16.30.122";
-                   String connectionString = "jdbc:jtds:sqlserver://" + server + ":1433/" + database;
-                   Log.i("d1810", "Conn: " + connectionString);
+                // SET CONNECTIONSTRING
+                String dateOfBirth = "pregnentwomen_dob";
+                String applicantName = "pregnentwomen_name";
+                String applicantId = "Applicant_ID";
+                String fatherName;
+                String gender;
+                String caste;
+                Class.forName("net.sourceforge.jtds.jdbc.Driver").newInstance();
+                String database = "tabfromtemp20_new";
+                String username = "d1810";
+                String password = "12345";
+                String server = "172.16.30.122";
+                String connectionString = "jdbc:jtds:sqlserver://" + server + ":1433/" + database;
+                Log.i("d1810", "Conn: " + connectionString);
 //            Connection DbConn = DriverManager.getConnection("jdbc:jtds:sqlserver://" + server + ":1433/tabfromtemp20_new;user=" + username + ";password=" + password);
-                   Connection DbConn = DriverManager.getConnection(connectionString, username, password);
+                Connection DbConn = DriverManager.getConnection(connectionString, username, password);
 
-                   Log.w("Connection", "open");
-                   Statement stmt = DbConn.createStatement();
-                   String query = " select " + applicantId + "," + applicantName + "," + dateOfBirth + " from dbo.childrenlessthan5_rural ";
-                   ResultSet rs = stmt.executeQuery(query);
-                    int x=0;
-                   while (rs.next()) {
-                       System.out.println(rs.getString(applicantName));
-                       System.out.println(rs.getString(applicantId));
-                       System.out.println(rs.getDate(dateOfBirth));
-                       getInfants.add(new Infant(x++, rs.getString(applicantId), rs.getString(applicantName),
-                               "ABC", "MALE", rs.getDate(dateOfBirth), "GEN"));
-                   }
+                Log.w("Connection", "open");
+                Statement stmt = DbConn.createStatement();
+                String query = " select " + applicantId + "," + applicantName + "," + dateOfBirth + " from dbo.pregnent_women_details_rural ";
+                ResultSet rs = stmt.executeQuery(query);
+                int x=0;
+                while (rs.next()) {
+                    System.out.println(rs.getString(applicantName));
+                    System.out.println(rs.getString(applicantId));
+                    System.out.println(rs.getDate(dateOfBirth));
 
-               } catch (Exception e) {
+                    getPensioners.add(new Pensioner(x++, rs.getString(applicantId), rs.getString(applicantName),
+                            "ABC", "FEMALE", rs.getDate(dateOfBirth), "OBC"));
+                }
 
-                   e.printStackTrace();
-               }
+            } catch (Exception e) {
 
-               return null;
-           }
-       }
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+    }
 
 
 

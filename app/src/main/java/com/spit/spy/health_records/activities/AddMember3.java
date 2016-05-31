@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 
 import com.rey.material.widget.Button;
 import com.spit.spy.R;
-import com.spit.spy.Validation;
 
 import butterknife.Bind;
 
@@ -20,7 +19,8 @@ AppCompatSpinner spinner;
 
    /* @Bind(R.id.choice_spinner) AppCompatSpinner spinner;
     @Bind(R.id.step3_add) LinearLayout add;*/
-   @Bind(R.id.child_name) EditText child_name;
+   @Bind(R.id.child_firstname) EditText child_first_name;
+    @Bind(R.id.child_lastname) EditText child_last_name;
     @Bind(R.id.save_button) Button save_button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +63,14 @@ spinner=(AppCompatSpinner)findViewById(R.id.choice_spinner);
     private boolean checkValidation() {
         boolean ret = true;
 
-        if (!Validation.isText(child_name)) {
+        if (!Validation.isText(child_first_name)) {
             ret = false;
-            child_name.requestFocus();
+            child_first_name.requestFocus();
         }
-
+        if (!Validation.isText(child_last_name)) {
+            ret = false;
+            child_last_name.requestFocus();
+        }
 
         return ret;
     }

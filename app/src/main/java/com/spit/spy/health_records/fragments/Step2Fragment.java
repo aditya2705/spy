@@ -10,9 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.spit.spy.R;
+import com.spit.spy.Validation;
 import com.spit.spy.health_records.activities.MembersListStep2Activity;
 
 import butterknife.Bind;
@@ -28,8 +30,9 @@ public class Step2Fragment extends Fragment{
     LinearLayout step2_linear;
     @Bind(R.id.choice_spinner)
     AppCompatSpinner step2_spinner;
-
-
+    @Bind(R.id.Female_name)EditText female_name;
+    @Bind(R.id.Female_age) EditText female_age;
+    @Bind(R.id.save_button)AppCompatButton save;
     private View rootView;
 
 
@@ -45,13 +48,17 @@ public class Step2Fragment extends Fragment{
         rootView = inflater.inflate(R.layout.fragment_step2_hr, container, false);
         ButterKnife.bind(this, rootView);
         step2_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            Bundle bundle = new Bundle();
+            int flag[]=bundle.getIntArray("arr_flag");
+            //Toast.makeText(getAppl,"Text!",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(),flag[0],Toast.LENGTH_LONG).show();
+
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                if(step2_spinner.getSelectedItem().toString().equals("नहीं")){
+                if (step2_spinner.getSelectedItem().toString().equals("नहीं")) {
                     step2_linear.setVisibility(View.GONE);
-                }
-                else {
+                } else {
                     step2_linear.setVisibility(View.VISIBLE);
                 }
 
@@ -74,7 +81,37 @@ public class Step2Fragment extends Fragment{
             }
         });
 
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkValidation()) {
+
+                    // intent of save button
+                }
+
+            }
+        });
         return rootView;
+    }
+
+    private boolean checkValidation() {
+        boolean ret = true;
+
+        if(!Validation.isText(female_name))
+        {
+            ret = false;
+            female_name.requestFocus();
+
+        }
+
+        if (!Validation.isAge(female_age)) {
+            ret = false;
+            female_age.requestFocus();
+        }
+
+
+        return ret;
     }
 
 }

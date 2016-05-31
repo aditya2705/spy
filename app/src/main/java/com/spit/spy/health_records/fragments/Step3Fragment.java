@@ -10,9 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.spit.spy.R;
+import com.spit.spy.Validation;
 import com.spit.spy.health_records.activities.MembersListStep3Activity;
 
 import butterknife.Bind;
@@ -28,6 +30,10 @@ public class Step3Fragment extends Fragment {
     LinearLayout step3_linear;
     @Bind(R.id.choice_spinner)
     AppCompatSpinner step3_spinner;
+    @Bind(R.id.child_count)
+    EditText child_count;
+    @Bind(R.id.save_button)
+    AppCompatButton save;
 
 
     private View rootView;
@@ -70,8 +76,29 @@ public class Step3Fragment extends Fragment {
                 startActivity(intent);
             }
         });
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkValidation()) {
 
+                    // intent of save button
+                }
+
+            }
+        });
         return rootView;
+    }
+    private boolean checkValidation() {
+        boolean ret = true;
+
+        if(!Validation.isNo_of_Child(child_count))
+        {
+            ret = false;
+            child_count.requestFocus();
+
+        }
+
+        return ret;
     }
 
 }

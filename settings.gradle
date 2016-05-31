@@ -1,1 +1,1 @@
-include ':app', ':tablefixheaders'
+include ':app', ':tablefixheaders', ':jtds-1.3.1'

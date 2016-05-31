@@ -7,14 +7,14 @@ import android.widget.EditText;
 
 import com.rey.material.widget.Button;
 import com.spit.spy.R;
-import com.spit.spy.Validation;
 
 import butterknife.Bind;
 
 public class AddMember5 extends AppCompatActivity {
 
 
-    @Bind(R.id.person_name) EditText person_name;
+    @Bind(R.id.person_firstname) EditText person_first_name;
+    @Bind(R.id.person_lastname) EditText person_last_name;
     @Bind(R.id.person_kendra) EditText person_kendra;
     @Bind(R.id.person_sankhya) EditText person_sankhya;
     @Bind(R.id.save_button) Button save_button;
@@ -41,11 +41,14 @@ public class AddMember5 extends AppCompatActivity {
     private boolean checkValidation() {
         boolean ret = true;
 
-        if (!Validation.isText(person_name)) {
+        if (!Validation.isText(person_first_name)) {
             ret = false;
-            person_name.requestFocus();
+            person_first_name.requestFocus();
         }
-
+        if (!Validation.isText(person_last_name)) {
+            ret = false;
+            person_last_name.requestFocus();
+        }
         if(!Validation.isClass(person_kendra))
         {
             ret = false;

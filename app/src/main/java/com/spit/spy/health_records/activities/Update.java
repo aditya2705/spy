@@ -11,7 +11,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.spit.spy.R;
-import com.spit.spy.Validation;
 
 import java.util.Calendar;
 
@@ -26,7 +25,7 @@ public class Update  extends AppCompatActivity implements View.OnClickListener {
 
 
     private DatePicker datePicker;
-     Calendar calendar;
+    Calendar calendar;
     @Bind(R.id.save_button) Button update;
     @Bind(R.id.textView3) EditText dateView;
     @Bind(R.id.person_name) EditText name;
@@ -37,7 +36,7 @@ public class Update  extends AppCompatActivity implements View.OnClickListener {
 
 
 
-   int year, month, day;
+    int year, month, day;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -50,7 +49,7 @@ public class Update  extends AppCompatActivity implements View.OnClickListener {
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         showDate(year, month + 1, day);
-update.setOnClickListener(this);
+        update.setOnClickListener(this);
     }
     @SuppressWarnings("deprecation")
     public void setDate(View view) {

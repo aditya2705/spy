@@ -167,7 +167,17 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/save_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:textSize="@dimen/_11sdp"
+        android:padding="@dimen/_10sdp"
+        android:text="SAVE"/>
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_view_list"
         android:layout_width="match_parent"

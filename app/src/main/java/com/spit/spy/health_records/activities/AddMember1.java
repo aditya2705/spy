@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.spit.spy.R;
-import com.spit.spy.Validation;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,13 +20,14 @@ import butterknife.ButterKnife;
 
 public class AddMember1 extends AppCompatActivity {
 
-    @Bind(R.id.head_name) EditText headNameEditText;
+    @Bind(R.id.head_firstname) EditText headFirstNameEditText;
+    @Bind(R.id.head_lastname) EditText headLastNameEditText;
     @Bind(R.id.add_button) Button addButton;
     @Bind(R.id.head_age) EditText headAge;
 
 
-    private String head_name_string;
-
+    private String head_first_name_string;
+    private String head_last_name_string;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,23 +41,14 @@ public class AddMember1 extends AppCompatActivity {
 
                 if (checkValidation())
                 {
-
-
-
-                    head_name_string = headNameEditText.getText().toString();
-
-
+                    head_first_name_string = headFirstNameEditText.getText().toString();
+                    head_last_name_string = headLastNameEditText.getText().toString();
 
                     //currently commented as database connect code is incomplete (not all attributes put up)
                 /*new Thread(new Runnable() {
                     @Override
                     public void run() {
-
-
-
-
                         //ConnectToDatabase(head_name_string);
-
                     }
                 }).start();*/
 
@@ -78,11 +69,14 @@ public class AddMember1 extends AppCompatActivity {
     private boolean checkValidation() {
         boolean ret = true;
 
-        if (!Validation.isText(headNameEditText)) {
+        if (!Validation.isText(headFirstNameEditText)) {
             ret = false;
-            headNameEditText.requestFocus();
+            headFirstNameEditText.requestFocus();
         }
-
+        if (!Validation.isText(headLastNameEditText)) {
+            ret = false;
+            headLastNameEditText.requestFocus();
+        }
         if(!Validation.isAge(headAge))
         {
             ret = false;

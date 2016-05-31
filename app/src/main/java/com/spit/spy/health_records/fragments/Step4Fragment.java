@@ -10,10 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.spit.spy.R;
+import com.spit.spy.Validation;
 import com.spit.spy.health_records.activities.MembersListStep4Activity;
 
 import butterknife.Bind;
@@ -29,7 +30,9 @@ public class Step4Fragment extends Fragment {
     LinearLayout step4_linear;
     @Bind(R.id.choice_spinner)
     AppCompatSpinner step4_spinner;
-
+    @Bind(R.id.child_count)EditText child_count;
+    @Bind(R.id.save_button)
+    AppCompatButton save;
 
     private View rootView;
 
@@ -47,27 +50,25 @@ public class Step4Fragment extends Fragment {
         ButterKnife.bind(this,rootView);
 
 
-step4_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        step4_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
 
-
-        if (step4_spinner.getSelectedItem().toString().equals("नहीं")) {
-            step4_linear.setVisibility(View.GONE);
-        } else {
-            step4_linear.setVisibility(View.VISIBLE);
-        }
-
+                if (step4_spinner.getSelectedItem().toString().equals("नहीं")) {
+                    step4_linear.setVisibility(View.GONE);
+                } else {
+                    step4_linear.setVisibility(View.VISIBLE);
+                }
 
 
-    }
+            }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-    }
-});
+            }
+        });
 
 
 
@@ -80,7 +81,33 @@ step4_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
             }
         });
 
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkValidation()) {
+
+                    // intent of save button
+                }
+
+
+            }
+        });
+
+
         return rootView;
+    }
+    private boolean checkValidation() {
+        boolean ret = true;
+
+        if(!Validation.isNo_of_Child(child_count))
+        {
+            ret = false;
+            child_count.requestFocus();
+
+        }
+
+
+        return ret;
     }
 
 }
