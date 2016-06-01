@@ -23,6 +23,8 @@ public class LoginActivity extends AppCompatActivity {
     @Bind(R.id.town_spinner_layout) LinearLayout townSpinnerLayout;
     @Bind(R.id.rural_spinner_layout) LinearLayout ruralSpinnerLayout;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +87,7 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
 
 
 

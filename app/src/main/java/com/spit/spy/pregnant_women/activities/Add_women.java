@@ -83,7 +83,7 @@ public class Add_women extends AppCompatActivity {
             String database = "tabfromtemp20_new";
             String username = "d1810";
             String password = "12345";
-            String server = "192.168.0.107";
+            String server = "172.16.31.111";
             String connectionString = "jdbc:jtds:sqlserver://" + server + ":1433/"+database;
             Log.i("d1810", "Conn: "+ connectionString);
 //            Connection DbConn = DriverManager.getConnection("jdbc:jtds:sqlserver://" + server + ":1433/tabfromtemp20_new;user=" + username + ";password=" + password);

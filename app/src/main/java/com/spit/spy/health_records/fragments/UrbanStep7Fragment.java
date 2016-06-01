@@ -1,7 +1,6 @@
 package com.spit.spy.health_records.fragments;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
@@ -10,10 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.spit.spy.R;
-import com.spit.spy.health_records.activities.MembersListStep7Activity;
+import com.spit.spy.Validation;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -31,6 +31,8 @@ public class UrbanStep7Fragment extends Fragment {
     @Bind(R.id.step7_urban2)
     LinearLayout step7_linear2;
     private View rootView;
+    @Bind(R.id.masik_kiraya)EditText masik_kiraya;
+    @Bind(R.id.save_button)AppCompatButton save;
 
 
 
@@ -73,7 +75,7 @@ public class UrbanStep7Fragment extends Fragment {
                 if (step7_2.getSelectedItem().toString().equals("नहीं")) {
                     step7_linear2.setVisibility(View.GONE);
 
-                      } else {
+                } else {
                     step7_linear2.setVisibility(View.VISIBLE);
 
                 }
@@ -88,8 +90,33 @@ public class UrbanStep7Fragment extends Fragment {
         });
 
 
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkValidation()) {
+
+                    // intent of save button
+                }
+
+            }
+        });
+
+
 
         return rootView;
     }
 
+    private boolean checkValidation() {
+        boolean ret = true;
+
+        if(!Validation.isNo_of_Child(masik_kiraya))
+        {
+            ret = false;
+            masik_kiraya.requestFocus();
+
+        }
+
+
+        return ret;
+    }
 }

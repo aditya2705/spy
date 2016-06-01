@@ -9,4 +9,8 @@
     <string name="title_activity_add_member5">AddMember5</string>
     <string name="title_activity_add_member2">AddMember2</string>
     <string name="title_activity_pensioner__add">Pensioner_Add</string>
+    <string name="title_activity_page_adapter">PageAdapter</string>
+    <string name="title_activity_steps__rural">Steps_Rural</string>
+    <string name="title_activity_steps__urban">Steps_Urban</string>
+    <string name="title_activity_my_view_pager">MyViewPager</string>
 </resources>

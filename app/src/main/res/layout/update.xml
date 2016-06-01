@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:text="नाम  :"
+                android:text="à¤¨à¤¾à¤®  :"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold"/>
             <EditText
@@ -54,25 +54,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:text="पता :"
+                android:text="à¤ªà¤¤à¤¾ :"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold"
                 />
             <EditText
                 android:id="@+id/address"
-            android:inputType="textMultiLine"
-            android:lines="5"
-            android:minLines="4"
-            android:gravity="top|left"
-            android:maxLines="6"
-            android:hint="Type your address"
-            android:layout_weight="1"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:textColor="@color/md_grey_900"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:scrollbars="vertical"
-            />
+                android:inputType="textMultiLine"
+                android:lines="5"
+                android:minLines="4"
+                android:gravity="top|left"
+                android:maxLines="6"
+                android:hint="Type your address"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textColor="@color/md_grey_900"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:scrollbars="vertical"
+                />
 
 
 
@@ -90,7 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_12sdp"
-                android:text="जनम तरीक:"
+                android:text="à¤œà¤¨à¤® à¤¤à¤°à¥€à¤•:"
                 android:layout_weight="2"
                 />
             <EditText
@@ -107,7 +107,7 @@
                 android:id="@+id/button_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-               android:layout_weight="1"
+                android:layout_weight="1"
                 android:layout_alignLeft="@+id/textView3"
                 android:onClick="setDate"
                 android:text="SET DATE" />
@@ -128,7 +128,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:text="मोबाइल नंबर:"
+                android:text="à¤®à¥‹à¤¬à¤¾à¤‡à¤² à¤¨à¤‚à¤¬à¤°:"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold"
                 />
@@ -158,7 +158,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:text="आधार कार्ड नंबर:"
+                android:text="à¤†à¤§à¤¾à¤° à¤•à¤¾à¤°à¥à¤¡ à¤¨à¤‚à¤¬à¤°:"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold"
                 />

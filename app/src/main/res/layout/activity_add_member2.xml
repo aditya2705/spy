@@ -24,13 +24,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="गर्भवती महिला का नाम  :"
+                android:text="गर्भवती महिला का पहला नाम  :"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/Female_name"
+                android:id="@+id/Female_firstname"
                 android:layout_weight="2"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:textColor="@color/md_grey_900"
@@ -38,7 +38,31 @@
                 />
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            android:paddingTop="@dimen/_30sdp">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="गर्भवती महिला का अंतिम नाम  :"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/Female_lastname"
+                android:layout_weight="2"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textColor="@color/md_grey_900"
+                android:inputType="text"
+                />
+
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

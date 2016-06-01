@@ -53,7 +53,7 @@
 
 
 
-    <LinearLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -217,81 +217,92 @@
         </LinearLayout>
 
 
-<LinearLayout
-    android:id="@+id/step7_urban1"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    >
         <LinearLayout
+            android:id="@+id/step7_urban1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
->
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.5"
-                android:textColor="@color/md_grey_700"
-                android:textStyle="bold"
-                android:textSize="@dimen/_12sdp"
-                android:layout_marginLeft="@dimen/_15sdp"
-                android:layout_marginRight="@dimen/_10sdp"
-  android:text="क्या आवास किराये  पर है ? "/>
+            android:orientation="vertical"
+            >
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_35sdp"
-                android:layout_weight="0.6"
-                android:layout_marginRight="@dimen/_15sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                >
 
-                android:background="@color/md_grey_100">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:textColor="@color/md_grey_700"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_12sdp"
+                    android:layout_marginLeft="@dimen/_15sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:text="क्या आवास किराये  पर है ? "/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_weight="0.6"
+                    android:layout_marginRight="@dimen/_15sdp"
 
-                <android.support.v7.widget.AppCompatSpinner
-                    android:id="@+id/choice_spinner2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:entries="@array/choice"
-                    android:layout_gravity="center_horizontal"/>
+                    android:background="@color/md_grey_100">
+
+                    <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/choice_spinner2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:entries="@array/choice"
+                        android:layout_gravity="center_horizontal"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/step7_urban2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:textColor="@color/md_grey_700"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_12sdp"
+                    android:layout_marginLeft="@dimen/_15sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:text="मासिक किराया "/>
+                <EditText
+                    android:id="@+id/masik_kiraya"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.8"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:textColor="@color/md_grey_900"
+                    android:inputType="number"
+                    />
 
             </LinearLayout>
         </LinearLayout>
-
-
-
-        <LinearLayout
-            android:id="@+id/step7_urban2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.5"
-                android:textColor="@color/md_grey_700"
-                android:textStyle="bold"
-                android:textSize="@dimen/_12sdp"
-                android:layout_marginLeft="@dimen/_15sdp"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:text="मासिक किराया "/>
-<EditText
-    android:layout_width="0dp"
-    android:layout_weight="0.8"
-    android:layout_gravity="center_horizontal"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/_10sdp"
-    android:textColor="@color/md_grey_900"
-    android:inputType="number"
-    />
-
-            </LinearLayout>
-    </LinearLayout>
     </LinearLayout>
 
 
-
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/save_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:textSize="@dimen/_11sdp"
+        android:padding="@dimen/_10sdp"
+        android:text="SAVE"/>
 
 </LinearLayout>

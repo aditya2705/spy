@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/spy.iml" filepath="$PROJECT_DIR$/spy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jtds-1.3.1/jtds-1.3.1.iml" filepath="$PROJECT_DIR$/jtds-1.3.1/jtds-1.3.1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spy30.iml" filepath="$PROJECT_DIR$/spy30.iml" />
       <module fileurl="file://$PROJECT_DIR$/tablefixheaders/tablefixheaders.iml" filepath="$PROJECT_DIR$/tablefixheaders/tablefixheaders.iml" />
     </modules>
   </component>

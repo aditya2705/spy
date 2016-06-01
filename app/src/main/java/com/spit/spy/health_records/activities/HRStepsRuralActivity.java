@@ -1,15 +1,14 @@
 package com.spit.spy.health_records.activities;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.spit.spy.R;
 import com.spit.spy.health_records.fragments.Step1Fragment;
 import com.spit.spy.health_records.fragments.Step2Fragment;
@@ -24,7 +23,9 @@ import butterknife.ButterKnife;
 
 public class HRStepsRuralActivity extends AppCompatActivity {
 
-    @Bind(R.id.step_tabs) SmartTabLayout tabLayout;
+    //@Bind(R.id.step_tabs) SmartTabLayout tabLayout;
+    @Bind(R.id.step_tabs)
+    TabLayout tabLayout;
     @Bind(R.id.viewpager) ViewPager pager;
 
     private TabsPagerAdapter adapter;
@@ -44,7 +45,7 @@ public class HRStepsRuralActivity extends AppCompatActivity {
         pager.setOffscreenPageLimit(20);
         adapter = new TabsPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(adapter);
-        tabLayout.setViewPager(pager);
+        //tabLayout.setViewPager(pager);
 
     }
 

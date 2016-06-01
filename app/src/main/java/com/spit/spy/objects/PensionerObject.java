@@ -1,5 +1,7 @@
 package com.spit.spy.objects;
 
+import android.content.Context;
+
 import com.spit.spy.Database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,10 +12,11 @@ import java.util.List;
  - * Created by Aditya Rathi on 10-Apr-16.
  + * Created by  on 10-Apr-16.
  */
-public class PensionerObject {
+public class PensionerObject implements ResultSetConvertible {
 
     public static final String TABLE_NAME = "samajwadi_paid_lucknow";
     public static final String PRIMARY_KEY = "id";
+    private static int currentID = 0;
 
     private int id;
     String labharti_id;
@@ -47,6 +50,9 @@ public class PensionerObject {
         this.gender = gender;
         this.age = age;
         this.category = category;
+    }
+
+    public PensionerObject() {
     }
 
     public int getId() {
@@ -148,73 +154,103 @@ public class PensionerObject {
         return lbID;
     }
 
-    public static List<PensionerObject> getAll () {
+    public static List<PensionerObject> getAll (Context context) {
         int currentId = 1;
         ArrayList<PensionerObject> pensioners = new ArrayList();
 
         if (!Database.isConnected())
-            Database.connect();
+            Database.connect(context);
 
-        ResultSet resultSet = Database.execQuery(
+        pensioners = Database.execQueryWithDialog(
+                context,
+                new PensionerObject(),
                 "select category_name, Form_Sr, Block_Town_Code, District_Code, R_U, Gender, Age, Applicant_Fname, Applicant_Name from " + TABLE_NAME
         );
 
-        try {
-            while (resultSet.next()) {
-                PensionerObject pensioner = new PensionerObject(
-                        currentId++,
-                        makeLabarthiID(resultSet.getString("District_Code"),
-                                resultSet.getInt("R_U"),
-                                resultSet.getInt("Form_Sr")),
-                        resultSet.getString("Applicant_Name"),
-                        resultSet.getString("Applicant_Fname"),
-                        resultSet.getString("Gender"),
-                        resultSet.getInt("Age"),
-                        resultSet.getString("category"),
-                        resultSet.getString("Applicant_Name"),
-                        resultSet.getString("R_U"),
-                        resultSet.getString("Block_Town_Code"),
-                        resultSet.getString("District_Code")
-                );
-                pensioners.add(pensioner);
-            }
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
-        }
+//        try {
+//            while (resultSet.next()) {
+//                PensionerObject pensioner = new PensionerObject(
+//                        currentId++,
+//                        makeLabarthiID(resultSet.getString("District_Code"),
+//                                resultSet.getInt("R_U"),
+//                                resultSet.getInt("Form_Sr")),
+//                        resultSet.getString("Applicant_Name"),
+//                        resultSet.getString("Applicant_Fname"),
+//                        resultSet.getString("Gender"),
+//                        resultSet.getInt("Age"),
+//                        resultSet.getString("category"),
+//                        resultSet.getString("Applicant_Name"),
+//                        resultSet.getString("R_U"),
+//                        resultSet.getString("Block_Town_Code"),
+//                        resultSet.getString("District_Code")
+//                );
+//                pensioners.add(pensioner);
+//            }
+//        } catch (SQLException sqle) {
+//            sqle.printStackTrace();
+//        }
         return pensioners;
     }
 
-    public static void add (PensionerObject pensioner) {
+    public static void add (Context context, PensionerObject pensioner) {
         String valueString =
                 String.valueOf(pensioner.getId()) + ", " +
                 String.valueOf(pensioner.getLabharti_id()) + ", " +
                 String.valueOf(pensioner.getLabharti_id());
 
         if (!Database.isConnected())
-            Database.connect();
+            Database.connect(context);
 
-        Database.execQuery(
+        Database.execQueryWithDialog(
+                context,
+                new PensionerObject(),
                 "insert into " + TABLE_NAME + "(category_name, District_Code, R_U, Gender, Age, Applicant_Fname, Applicant_Name)" +
                         " values(" + pensioner.getCategory() + "," + pensioner.getDistrict_code() + "," + pensioner.getRural() + "," +
                         pensioner.getGender() + "," + pensioner.getAge() + "," + pensioner.getFather_name() +
-                        "," +pensioner.getApplicant_name() +")"
+                        "," + pensioner.getApplicant_name() + ")"
 
         );
     }
 
-    public static void update (String id, PensionerObject pensioner) {
+    public static void update (Context context, String id, PensionerObject pensioner) {
         if (!Database.isConnected())
-            Database.connect();
+            Database.connect(context);
 
-        Database.execQuery(
+        Database.execQueryWithDialog(
+                context,
+                new PensionerObject(),
                 "update " + TABLE_NAME + " set category_name = " + pensioner.getCategory() + "," +
-                " District_Code = " + pensioner.getDistrict_code() + "," +
+                        " District_Code = " + pensioner.getDistrict_code() + "," +
                         " R_U = " + pensioner.getRural() + "," +
                         " Gender = " + pensioner.getGender() + "," +
                         " Age = " + pensioner.getAge() + "," +
                         " Applicant_Fname = " + pensioner.getFather_name() + "," +
                         " Applicant_Name = " + pensioner.getApplicant_name() +
-                " where " + PRIMARY_KEY + " = " + id
+                        " where " + PRIMARY_KEY + " = " + id
         );
+    }
+
+    public PensionerObject convert (ResultSet resultSet) {
+        PensionerObject pensioner = null;
+        try {
+             pensioner = new PensionerObject(
+                    PensionerObject.currentID++,
+                    makeLabarthiID(resultSet.getString("District_Code"),
+                            resultSet.getInt("R_U"),
+                            resultSet.getInt("Form_Sr")),
+                    resultSet.getString("Applicant_Name"),
+                    resultSet.getString("Applicant_Fname"),
+                    resultSet.getString("Gender"),
+                    resultSet.getInt("Age"),
+                    resultSet.getString("category"),
+                    resultSet.getString("Applicant_Name"),
+                    resultSet.getString("R_U"),
+                    resultSet.getString("Block_Town_Code"),
+                    resultSet.getString("District_Code")
+            );
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+        return pensioner;
     }
 }

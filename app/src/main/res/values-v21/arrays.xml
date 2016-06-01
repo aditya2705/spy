@@ -2,11 +2,14 @@
 <resources>
 
     <string-array name="sample_towns">
-        <item>Town 1</item>
-        <item>Town 2</item>
-        <item>Town 3</item>
-        <item>Town 4</item>
-        <item>Town 5</item>
+        <item>BAKSHI-KA-TALAB</item>
+        <item>KAKORI</item>
+        <item>CHINHAT</item>
+        <item>SAROJANINAGAR</item>
+        <item>GOSAIGANJ</item>
+        <item>MOHANLALGANJ</item>
+        <item>MALIHABAD</item>
+        <item>Itaunja</item>
     </string-array>
     <string-array name="category">
         <item>General</item>
@@ -39,12 +42,12 @@
         <item>बाइक</item>
     </string-array>
     <string-array name="janpad">
-        <item>Region 1</item>
-        <item>Region 2</item>
-        <item>Region 3</item>
-        <item>Region 4</item>
-        <item>Region 5</item>
-        <item>Region 6</item>
+        <item>LUCKNOW</item>
+        <!--<item>Region 2</item>-->
+        <!--<item>Region 3</item>-->
+        <!--<item>Region 4</item>-->
+        <!--<item>Region 5</item>-->
+        <!--<item>Region 6</item>-->
     </string-array>
 
     <string-array name="relations">
@@ -55,21 +58,23 @@
     </string-array>
 
     <string-array name="ward">
-        <item>WARD NO-1</item>
-        <item>WARD NO-2</item>
-        <item>WARD NO-3</item>
-        <item>WARD NO-4</item>
+        <item>BARI GARHI</item>
+        <item>BHADWANA</item>
+        <item>KASMANDI KHURD</item>
+        <item>M.N. RAHMAT NAGAR</item>
         <item>WARD NO-5</item>
         <item>WARD NO-6</item>
 
     </string-array>
 
     <string-array name="blocks">
-        <item>Block 1</item>
-        <item>Block 2</item>
-        <item>Block 3</item>
-        <item>Block 4</item>
-        <item>Block 5</item>
+        <item>BAKSHI-KA-TALAB</item>
+        <item>KAKORI</item>
+        <item>CHINHAT</item>
+        <item>SAROJANINAGAR</item>
+        <item>GOSAIGANJ</item>
+        <item>MOHANLALGANJ</item>
+        <item>MALIHABAD</item>
     </string-array>
 
     <string-array name="Panchayats">
@@ -106,13 +111,13 @@
 
     <string-array name="gender_type">
         <item>पुरुष</item>
-        <item>अविवाहित</item>
+        <item>स्त्री</item>
     </string-array>
 
     <string-array name="married_type">
         <item>विवाहित</item>
-        <item>स्त्री</item>
-    </string-array>
+        <item>अविवाहित</item>
+            </string-array>
 
     <string-array name="saikshik_type">
         <item>साक्षर है</item>

@@ -24,20 +24,43 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:text="परिवार के सदस्य का नाम :"
+                    android:text="परिवार के सदस्य का पहला नाम :"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold"/>
                 <EditText
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/head_name"
+                    android:id="@+id/head_firstname"
                     android:layout_weight="2"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:textColor="@color/md_grey_900"
                     android:inputType="text"/>
 
             </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            android:gravity="center_vertical">
 
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="परिवार के सदस्य का अंतिम नाम :"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold"/>
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/head_lastname"
+                android:layout_weight="2"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textColor="@color/md_grey_900"
+                android:inputType="text"/>
+
+        </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

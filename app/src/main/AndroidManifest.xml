@@ -81,6 +81,24 @@
             android:name=".health_records.activities.AddMember2"
             android:label="@string/title_activity_add_member2"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <activity
+            android:name=".health_records.activities.Steps_Rural"
+            android:label="@string/title_activity_steps__rural"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".health_records.activities.Steps_Urban"
+            android:label="@string/title_activity_steps__urban"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".health_records.activities.Pensioner_Add"
+            android:label="@string/title_activity_steps__urban"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>
