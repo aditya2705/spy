@@ -1,5 +1,6 @@
 package com.spit.spy.health_records.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -16,12 +17,28 @@ import com.spit.spy.health_records.fragments.Step4Fragment;
 import com.spit.spy.health_records.fragments.Step5Fragment;
 import com.spit.spy.health_records.fragments.Step6Fragment;
 import com.spit.spy.health_records.fragments.Step7Fragment;
+import com.spit.spy.infant.fragments.BirthVaccinationFragment;
 
 public class Steps_Rural extends AppCompatActivity {
+
+    public String id,name,aadhar,mob;
+    int records_type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_steps__rural);
+
+        Intent intent=getIntent();
+        id=intent.getStringExtra("id");
+        name=intent.getStringExtra("name");
+        aadhar=intent.getStringExtra("aadhar");
+        mob=intent.getStringExtra("mob");
+        records_type=intent.getIntExtra("records_type", 0);
+
+
+
+
         ViewPager viewpager = (ViewPager)findViewById(R.id.viewpager);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Step 1"));
@@ -77,27 +94,42 @@ public class Steps_Rural extends AppCompatActivity {
         }
         @Override
         public Fragment getItem(int position) {
+            Bundle bundle = new Bundle();
+
+            bundle.putString("id",id);
+            bundle.putString("name",name);
+            bundle.putString("aadhar",aadhar);
+            bundle.putString("mob",mob);
+            bundle.putInt("records_type",records_type);
+
             switch (position) {
                 case 0:
                     Step1Fragment tab1 = new Step1Fragment();
+                    tab1.setArguments(bundle);
                     return tab1;
                 case 1:
                     Step2Fragment tab2 = new Step2Fragment();
+                    tab2.setArguments(bundle);
                     return tab2;
                 case 2:
                     Step3Fragment tab3 = new Step3Fragment();
+                    tab3.setArguments(bundle);
                     return tab3;
                 case 3:
                     Step4Fragment tab4 = new Step4Fragment();
+                    tab4.setArguments(bundle);
                     return tab4;
                 case 4:
                     Step5Fragment tab5 = new Step5Fragment();
+                    tab5.setArguments(bundle);
                     return tab5;
                 case 5:
                     Step6Fragment tab6 = new Step6Fragment();
+                    tab6.setArguments(bundle);
                     return tab6;
                 case 6:
                     Step7Fragment tab7 = new Step7Fragment();
+                    tab7.setArguments(bundle);
                     return tab7;
                 default:
                     return null;

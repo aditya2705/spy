@@ -47,7 +47,7 @@
                             android:layout_weight="1"
                             android:textSize="@dimen/_12sdp"
                             android:layout_marginLeft="@dimen/_10sdp"
-                            android:text="ANITA"
+                           android:id="@+id/mukhya_name"
                             android:textColor="@color/md_grey_900"
                             android:textStyle="bold"
                             android:textAllCaps="true"/>
@@ -74,7 +74,7 @@
                             android:layout_weight="1"
                             android:textSize="@dimen/_12sdp"
                             android:layout_marginLeft="@dimen/_10sdp"
-                            android:text="31241425015 S"
+                            android:id="@+id/Applicant_ID"
                             android:textColor="@color/md_grey_900"
                             android:textStyle="bold"
                             android:textAllCaps="true"/>
@@ -102,7 +102,7 @@
                             android:layout_weight="1"
                             android:textSize="@dimen/_12sdp"
                             android:layout_marginLeft="@dimen/_10sdp"
-                            android:text="37"
+                        android:id="@+id/age"
                             android:textColor="@color/md_grey_900"
                             android:textStyle="bold"
                             android:textAllCaps="true"/>
@@ -152,7 +152,7 @@
                             android:background="@color/md_grey_100">
 
                             <android.support.v7.widget.AppCompatSpinner
-                                android:id="@+id/spinner"
+                                android:id="@+id/spinner_women"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:entries="@array/sample_females"
@@ -216,6 +216,7 @@
                             android:text="क्रम संख्या :"/>
 
                         <TextView
+                            android:id="@+id/sr_no"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -223,7 +224,7 @@
                             android:textColor="@color/md_grey_900"
                             android:textStyle="bold"
                             android:layout_marginLeft="@dimen/_10sdp"
-                            android:text="1"/>
+                            />
 
                     </LinearLayout>
 
@@ -251,7 +252,7 @@
                             android:textSize="@dimen/_11sdp"
                             android:textColor="@color/md_grey_900"
                             android:textStyle="bold"
-                            android:text="SUMAN"/>
+                          android:id="@+id/women_name"/>
 
                     </LinearLayout>
 
@@ -263,13 +264,14 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/women_age"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1.5"
                             android:textColor="@color/appThemeColorDark"
                             android:textStyle="bold"
                             android:textSize="@dimen/_12sdp"
-                            android:text="आयु :"/>
+                            />
 
                         <TextView
                             android:layout_width="0dp"
@@ -333,15 +335,17 @@
                             android:textSize="@dimen/_12sdp"
                             android:text="प्रसव की संभावित माह ईव वर्ष :"/>
 
-                        <TextView
+                        <EditText
+                            android:id="@+id/expected_date"
                             android:layout_width="0dp"
+                            android:focusable="false"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:layout_marginLeft="@dimen/_10sdp"
                             android:textSize="@dimen/_11sdp"
                             android:textColor="@color/md_grey_900"
                             android:textStyle="bold"
-                            android:text="12 / 15 / 2015"/>
+                           />
 
                     </LinearLayout>
 
@@ -395,7 +399,9 @@
                             android:textSize="@dimen/_12sdp"
                             android:text="टिटनस दोसे १ तिथि :"/>
 
-                        <TextView
+                        <EditText
+                            android:id="@+id/tt1"
+                            android:focusable="false"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -403,7 +409,7 @@
                             android:textSize="@dimen/_11sdp"
                             android:textColor="@color/md_grey_900"
                             android:textStyle="bold"
-                            android:text="06 / 15 / 2015"/>
+                           />
 
                     </LinearLayout>
 
@@ -423,7 +429,9 @@
                             android:textSize="@dimen/_12sdp"
                             android:text="टिटनस दोसे २ तिथि :"/>
 
-                        <TextView
+                        <EditText
+                            android:id="@+id/tt2"
+                            android:focusable="false"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -431,7 +439,7 @@
                             android:textSize="@dimen/_11sdp"
                             android:textColor="@color/md_grey_900"
                             android:textStyle="bold"
-                            android:text="07 / 18 / 2015"/>
+                            />
 
                     </LinearLayout>
 
@@ -485,7 +493,9 @@
                             android:textSize="@dimen/_12sdp"
                             android:text="आयरन दोसे की तिथि :"/>
 
-                        <TextView
+                        <EditText
+                            android:id="@+id/iron_date"
+                            android:focusable="false"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -493,7 +503,7 @@
                             android:textSize="@dimen/_11sdp"
                             android:textColor="@color/md_grey_900"
                             android:textStyle="bold"
-                            android:text="07 / 18 / 2015"/>
+                          />
 
                     </LinearLayout>
 
@@ -521,7 +531,7 @@
                             android:background="@color/md_grey_100">
 
                             <android.support.v7.widget.AppCompatSpinner
-                                android:id="@+id/char_choice_spinner"
+                                android:id="@+id/four_choice_spinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:entries="@array/choice"
@@ -547,7 +557,9 @@
                             android:textSize="@dimen/_12sdp"
                             android:text="प्रथम जांच की तिथि :"/>
 
-                        <TextView
+                        <EditText
+                            android:id="@+id/checkup1"
+                            android:focusable="false"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -555,7 +567,7 @@
                             android:textSize="@dimen/_11sdp"
                             android:textColor="@color/md_grey_900"
                             android:textStyle="bold"
-                            android:text="06 / 10 / 2015"/>
+                           />
 
                     </LinearLayout>
 
@@ -575,7 +587,9 @@
                             android:textSize="@dimen/_12sdp"
                             android:text="द्वितीय जांच की तिथि :"/>
 
-                        <TextView
+                        <EditText
+                            android:id="@+id/checkup2"
+                            android:focusable="false"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -583,7 +597,7 @@
                             android:textSize="@dimen/_11sdp"
                             android:textColor="@color/md_grey_900"
                             android:textStyle="bold"
-                            android:text="07 / 18 / 2015"/>
+                          />
 
                     </LinearLayout>
 
@@ -603,7 +617,9 @@
                             android:textSize="@dimen/_12sdp"
                             android:text="तृतीय जांच की तिथि :"/>
 
-                        <TextView
+                        <EditText
+                            android:id="@+id/checkup3"
+                            android:focusable="false"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -611,7 +627,7 @@
                             android:textSize="@dimen/_11sdp"
                             android:textColor="@color/md_grey_900"
                             android:textStyle="bold"
-                            android:text="07 / 18 / 2015"/>
+                          />
 
                     </LinearLayout>
 
@@ -631,7 +647,9 @@
                             android:textSize="@dimen/_12sdp"
                             android:text="चतुर्थ जांच की तिथि :"/>
 
-                        <TextView
+                        <EditText
+                            android:id="@+id/checkup4"
+                            android:focusable="false"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -639,7 +657,7 @@
                             android:textSize="@dimen/_11sdp"
                             android:textColor="@color/md_grey_900"
                             android:textStyle="bold"
-                            android:text="07 / 18 / 2015"/>
+                           />
 
                     </LinearLayout>
 
@@ -659,7 +677,9 @@
                             android:textSize="@dimen/_12sdp"
                             android:text="प्रसव की तिथि :"/>
 
-                        <TextView
+                        <EditText
+                            android:id="@+id/delivery_date"
+                            android:focusable="false"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -667,7 +687,7 @@
                             android:textSize="@dimen/_11sdp"
                             android:textColor="@color/md_grey_900"
                             android:textStyle="bold"
-                            android:text="07 / 18 / 2015"/>
+                           />
 
                     </LinearLayout>
 
@@ -704,8 +724,44 @@
                         </LinearLayout>
 
                     </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/prasav_sthan_sansthagat"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:textColor="@color/appThemeColorDark"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/_12sdp"
+                            android:text="प्रसव स्थान\n  ( संस्थागत) :"/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_35sdp"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:background="@color/md_grey_100">
+
+                            <android.support.v7.widget.AppCompatSpinner
+                                android:id="@+id/prasav_sthan_sansthagat_spinner"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:entries="@array/prasav_sanstha"
+                                android:layout_gravity="center_horizontal"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/prasav_sthan_niji"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_15sdp"
@@ -729,10 +785,10 @@
                             android:background="@color/md_grey_100">
 
                             <android.support.v7.widget.AppCompatSpinner
-                                android:id="@+id/prasav_sthan_neeji_spinner"
+                                android:id="@+id/prasav_sthan_niji_spinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:entries="@array/prasav_sthan"
+                                android:entries="@array/prasav_niji"
                                 android:layout_gravity="center_horizontal"/>
 
                         </LinearLayout>
@@ -755,15 +811,15 @@
                             android:textSize="@dimen/_12sdp"
                             android:text="जच्चा-बचा कार्ड नंबर :"/>
 
-                        <TextView
+                        <EditText
+                            android:id="@+id/jb"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:layout_marginLeft="@dimen/_10sdp"
                             android:textSize="@dimen/_11sdp"
                             android:textColor="@color/md_grey_900"
-                            android:textStyle="bold"
-                            android:text="34613474"/>
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
@@ -791,7 +847,7 @@
                             android:background="@color/md_grey_100">
 
                             <android.support.v7.widget.AppCompatSpinner
-                                android:id="@+id/jsv_choice_spinner"
+                                android:id="@+id/jsy_choice_spinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:entries="@array/choice"

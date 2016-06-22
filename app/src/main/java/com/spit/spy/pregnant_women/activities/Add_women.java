@@ -10,11 +10,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.spit.spy.R;
+import com.spit.spy.objects.Infant;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -32,9 +34,11 @@ public class Add_women extends AppCompatActivity {
     @Bind(R.id.gender) EditText genderEditText;
     @Bind(R.id.age) EditText ageEditText;
     @Bind(R.id.class1) EditText classEditText;
+    ArrayList<Infant> getInfants = new ArrayList<Infant>();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         setContentView(R.layout.add_women);
         ButterKnife.bind(this);
@@ -65,7 +69,7 @@ public class Add_women extends AppCompatActivity {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            ConnectToDatabase(personName, personKendra, personGender, personAge, personClass);
+                            ConnectToDatabase();
                         }
                     }).start();
                     Toast.makeText(getApplicationContext(), "Values uploaded!", Toast.LENGTH_SHORT).show();
@@ -74,16 +78,17 @@ public class Add_women extends AppCompatActivity {
         });
     }
 
-    public void ConnectToDatabase(String personName, String personKendra, String personGender, String personAge, String personClass){
+    public void ConnectToDatabase(){
 
         try {
+
 
             // SET CONNECTIONSTRING
             Class.forName("net.sourceforge.jtds.jdbc.Driver").newInstance();
             String database = "tabfromtemp20_new";
             String username = "d1810";
             String password = "12345";
-            String server = "172.16.31.111";
+            String server = "172.16.31.123";
             String connectionString = "jdbc:jtds:sqlserver://" + server + ":1433/"+database;
             Log.i("d1810", "Conn: "+ connectionString);
 //            Connection DbConn = DriverManager.getConnection("jdbc:jtds:sqlserver://" + server + ":1433/tabfromtemp20_new;user=" + username + ";password=" + password);
@@ -91,6 +96,7 @@ public class Add_women extends AppCompatActivity {
 
             Log.w("Connection","open");
             Statement stmt = DbConn.createStatement();
+
             String query = " select * from dbo.childrenlessthan5_rural ";
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
@@ -103,5 +109,6 @@ public class Add_women extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
 }
 

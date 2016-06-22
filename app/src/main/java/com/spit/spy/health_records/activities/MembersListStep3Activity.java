@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -18,43 +19,70 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
 import com.inqbarna.tablefixheaders.TableFixHeaders;
 import com.inqbarna.tablefixheaders.adapters.BaseTableAdapter;
+import com.spit.spy.Database;
 import com.spit.spy.R;
+import com.spit.spy.objects.Infant;
+import com.spit.spy.objects.InfantObject;
 import com.spit.spy.objects.PensionerObject;
+import com.spit.spy.objects.PregnentWomenObject;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MembersListStep3Activity extends AppCompatActivity {
+public class MembersListStep3Activity extends AppCompatActivity implements
+        Database.DataReceiver <ArrayList<Infant>> {
 Intent intent;
     @Bind(R.id.table) TableFixHeaders tableFixHeaders;
     @Bind(R.id.close_list_view) ImageView closeViewIcon;
     @Bind(R.id.btn_add_member) Button AddMember;
-
+    String id,app_name;
+    public String name;
+    ContentTableAdapter mContentTableAdapter1;
     private MaterialDialog updateDialog;
+    Database.DataReceiver rec;
+ ;
+    ArrayList<Infant> infants;
+    Infant p;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_members_list_dialog);
+
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
+rec=this;
         ButterKnife.bind(this);
+        Intent intent1=getIntent();
+        id= intent1.getStringExtra("id");
+        app_name=intent1.getStringExtra("app_name");
 
-        ArrayList<PensionerObject> pensionerObjectArrayList = new ArrayList<>();
-        for(int i = 1; i < 11 ; i++)
-            pensionerObjectArrayList.add(new PensionerObject(i,"152336"+i,"MEMBER"+i, "MEMBER"+i,"Dummy data",25,"General"));
 
-        tableFixHeaders.setAdapter(new ContentTableAdapter(MembersListStep3Activity.this, pensionerObjectArrayList));
+        infants = new ArrayList<>();
+        Infant.get_infantDetail(MembersListStep3Activity.this,rec,id,app_name);
+
+
+        mContentTableAdapter1 = new ContentTableAdapter(MembersListStep3Activity.this,infants);
+        tableFixHeaders.setAdapter(mContentTableAdapter1);
+
+
+
         AddMember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(MembersListStep3Activity.this,AddMember3.class);
-                startActivityForResult(intent,1);
+                finish();
+                intent = new Intent(MembersListStep3Activity.this, AddMember3.class);
+                intent.putExtra("name", name);
+                intent.putExtra("id", id);
+
+                intent.putExtra("app_name",app_name);
+                intent.putExtra("upOrAdd", "add");
+                startActivityForResult(intent, 1);
             }
         });
+
         closeViewIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,12 +102,33 @@ Intent intent;
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+
+
+                        finish();
+                        Intent i=new Intent(MembersListStep3Activity.this,AddMember3.class);
+                        i.putExtra("name", name);
+                        i.putExtra("app_name",app_name);
+;                        i.putExtra("id", id);
+                        i.putExtra("upOrAdd","up");
+                        startActivity(i);
+
+
                         dialog.dismiss();
                     }
                 })
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        new Database.Delete_Step3().execute(id, name);
+                        finish();
+                        Intent i=new Intent(MembersListStep3Activity.this,MembersListStep3Activity.class);
+                        i.putExtra("id", id);
+                        i.putExtra("app_name",app_name);
+                        startActivity(i);
+
+
+
+
                         dialog.dismiss();
                     }
                 })
@@ -89,10 +138,20 @@ Intent intent;
 
     }
 
+    @Override
+    public void onDataReceived(ArrayList<Infant> data) {
+        int size=data.size();
+        Log.i("size is",size+"");
+        infants = data;
+//        Log.i("child is", data.get(0).getChild_name().toString());
+        mContentTableAdapter1 = new ContentTableAdapter(this,infants);
+        tableFixHeaders.setAdapter(mContentTableAdapter1);
+
+    }
     public class ContentTableAdapter extends BaseTableAdapter {
 
         private Activity context;
-        private ArrayList<PensionerObject> pensionerObjectArrayList;
+        private ArrayList<Infant> infantList;
 
         private final String[] headers = new String[]{"क्रम संख्या", "बच्चों का नाम","Health Card हैं/नहीं",
                 "यदि हैं तो Health Card नंबर", "नियमित टीकाकरण हुआ हैं / \nमात्र बी. सी. जी. का टिका लगा हैं /\nटिका लगनेके जानकारी नहीं हैं / \nजानकारी हैं पर अनियमित / \nकोई टिका नै लगा हैं "};
@@ -101,10 +160,10 @@ Intent intent;
 
         private final int height, headerHeight;
 
-        public ContentTableAdapter(Activity context, ArrayList<PensionerObject> pensionerObjectArrayList) {
+        public ContentTableAdapter(Activity context, ArrayList<Infant> data) {
 
             this.context = context;
-            this.pensionerObjectArrayList = pensionerObjectArrayList;
+            this.infantList= data;
 
             height = context.getResources().getDimensionPixelSize(R.dimen._50sdp);
             headerHeight = context.getResources().getDimensionPixelSize(R.dimen._70sdp);
@@ -121,7 +180,7 @@ Intent intent;
 
         @Override
         public int getRowCount() {
-            return pensionerObjectArrayList.size();
+            return infantList.size();
         }
 
         @Override
@@ -158,6 +217,13 @@ Intent intent;
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        p =infantList.get(row);
+                        name=p.getChild_name();
+                        updateDialog.show();
+
+
+
+
                         updateDialog.show();
                     }
                 });
@@ -183,7 +249,7 @@ Intent intent;
             textView.setTypeface(Typeface.DEFAULT);
             textView.setTextColor(context.getResources().getColor(R.color.md_grey_700));
             String s = "";
-            PensionerObject p = pensionerObjectArrayList.get(row);
+            Infant p = infantList.get(row);
             switch (column){
                 case -1:
                     s = p.getId()+"";
@@ -191,24 +257,18 @@ Intent intent;
                 case 0:
                     textView.setTypeface(Typeface.DEFAULT_BOLD);
                     textView.setTextColor(context.getResources().getColor(R.color.appThemeColorDark));
-                    s= p.getLabharti_id();
+                    s= p.getChild_name();
                     break;
                 case 1:
-                    s = p.getLabharti_name();
+                    s = p.getIshealth_card();
                     break;
                 case 2:
-                    s=p.getFather_name();
+                    s=p.getHealth_crd_no();
                     break;
                 case 3:
-                    s=p.getGender();
+                    s=p.getHealth_card_type();
                     break;
-                case 4:
-                    s=p.getAge()+"";
-                    break;
-                case 5:
-                    s=p.getCategory();
-                    break;
-            }
+                  }
 
             textView.setText(s);
 
@@ -230,5 +290,7 @@ Intent intent;
             return 2;
         }
     }
+
+
 
 }

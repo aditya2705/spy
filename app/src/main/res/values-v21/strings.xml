@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SPY</string>
+    <string name="app_name">UPSPS</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -13,4 +13,5 @@
     <string name="title_activity_steps__rural">Steps_Rural</string>
     <string name="title_activity_steps__urban">Steps_Urban</string>
     <string name="title_activity_my_view_pager">MyViewPager</string>
+
 </resources>

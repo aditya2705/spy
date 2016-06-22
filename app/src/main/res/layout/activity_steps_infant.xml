@@ -36,12 +36,13 @@
                     android:textStyle="bold"/>
 
                 <TextView
+                    android:id="@+id/mukhya_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textSize="@dimen/_12sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
-                    android:text="DHEERAJ SINGH"
+                    android:text=""
                     android:textColor="@color/md_grey_900"
                     android:textStyle="bold"
                     android:textAllCaps="true"/>
@@ -67,12 +68,13 @@
                     android:textStyle="bold"/>
 
                 <TextView
+                    android:id="@+id/beneficiary_id"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textSize="@dimen/_12sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
-                    android:text="3124142501519"
+
                     android:textColor="@color/md_grey_900"
                     android:textStyle="bold"
                     android:textAllCaps="true"/>
@@ -106,6 +108,7 @@
 
                     <android.support.v7.widget.AppCompatSpinner
                         android:id="@+id/spinner"
+
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_35sdp"
                         android:entries="@array/sample_children"
@@ -149,11 +152,11 @@
                             android:textStyle="bold"/>
 
                         <TextView
+                            android:id="@+id/child_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/_11sdp"
                             android:layout_marginLeft="@dimen/_10sdp"
-                            android:text="Lorem Ipsum"
                             android:textColor="@color/appThemeColorDark"
                             android:textStyle="bold"
                             android:textAllCaps="true"/>
@@ -178,11 +181,11 @@
                             android:textStyle="bold"/>
 
                         <TextView
+                            android:id="@+id/child_dob"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/_11sdp"
                             android:layout_marginLeft="@dimen/_10sdp"
-                            android:text="01 / Jan / 2014"
                             android:textColor="@color/appThemeColorDark"
                             android:textStyle="bold"
                             android:textAllCaps="true"/>
@@ -236,16 +239,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_160sdp"/>
 
-            <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btn_update"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="@dimen/_5sdp"
-                android:textSize="@dimen/_12sdp"
-                android:layout_margin="@dimen/_10sdp"
-                android:text="Update"
-                android:theme="@style/CustomButtonStyle"/>
 
 
 

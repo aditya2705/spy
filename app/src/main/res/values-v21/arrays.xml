@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+
+
+
     <string-array name="sample_towns">
         <item>BAKSHI-KA-TALAB</item>
         <item>KAKORI</item>
@@ -43,18 +46,25 @@
     </string-array>
     <string-array name="janpad">
         <item>LUCKNOW</item>
-        <!--<item>Region 2</item>-->
-        <!--<item>Region 3</item>-->
-        <!--<item>Region 4</item>-->
-        <!--<item>Region 5</item>-->
-        <!--<item>Region 6</item>-->
+        <item>BIJNOR</item>
+        <item>MORADABAD</item>
+        <item>RAMPUR</item>
+        <item>SAHARANPUR</item>
+        <item>MUZAFFARNAGAR</item>
+        <item>MEERUT</item>
+        <item>GHAZIABAD</item>
+        <item>BULANDSHAHR</item>
+        <item>ALIGARH</item>
+        <item>MATHURA</item>
+        <item>AGRA</item>
+
     </string-array>
 
     <string-array name="relations">
-        <item>पिता</item>
-        <item>पुत्र</item>
+        <item>पुत्री</item>
+        <item>माता</item>
         <item>बहु</item>
-        <item>भाई</item>
+        <item>पत्नी</item>
     </string-array>
 
     <string-array name="ward">
@@ -62,8 +72,14 @@
         <item>BHADWANA</item>
         <item>KASMANDI KHURD</item>
         <item>M.N. RAHMAT NAGAR</item>
-        <item>WARD NO-5</item>
-        <item>WARD NO-6</item>
+        <item>MAWAI KALA</item>
+        <item>NAI BASIT DHANEWA</item>
+        <item>SHERPUR BHAUSA</item>
+        <item>SURGAULA</item>
+        <item>TIASWA</item>
+        <item>ANTGATHI SAURA</item>
+        <item>AUMAAU</item>
+        <item>DEWARI GAJJA</item>
 
     </string-array>
 
@@ -78,35 +94,57 @@
     </string-array>
 
     <string-array name="Panchayats">
-        <item>Panchayat 1</item>
-        <item>Panchayat 2</item>
-        <item>Panchayat 3</item>
-        <item>Panchayat 4</item>
-        <item>Panchayat 5</item>
+        <item>BARI GARHI</item>
+        <item>BHADWANA</item>
+        <item>KASMANDI KHURD</item>
+        <item>M.N. RAHMAT NAGAR</item>
+        <item>MAWAI KALA</item>
+        <item>NAI BASIT DHANEWA</item>
+        <item>SHERPUR BHAUSA</item>
+        <item>SURGAULA</item>
+        <item>TIASWA</item>
+        <item>ANTGATHI SAURA</item>
+        <item>AUMAAU</item>
+        <item>DEWARI GAJJA</item>
     </string-array>
 
     <string-array name="choice">
         <item>नहीं</item>
         <item>हाँ</item>
 
+</string-array>
+
+    <string-array name="prasav_sanstha">
+        <item>सरकारी</item>
+        <item>निजी</item>
+
+    </string-array>
+
+    <string-array name="prasav_niji">
+        <item>मान्यता प्राप्त</item>
+        <item>गैर मान्यता प्राप्त </item>
+
     </string-array>
 
     <string-array name="prasav_sthan">
         <item>घरेलु</item>
         <item>संस्थागत</item>
+
     </string-array>
     <string-array name="relation_type">
         <item>माता</item>
         <item>पुत्र्</item>
-        <item>मुखिया</item>
+        <item> पिता</item>
+        <!--<item>मुखिया</item>-->
         <item>पुत्री</item>
         <item>पति</item>
         <item>पत्नी</item>
         <item>बहु</item>
-        <item>पौत्र</item>
-        <item>पौत्रीर</item>
-        <item>भाई</item>
-        <item>बहन</item>
+
+        <!--<item>पौत्र</item>-->
+        <!--<item>पौत्रीर</item>-->
+        <!--<item>भाई</item>-->
+        <!--<item>बहन</item>-->
     </string-array>
 
     <string-array name="gender_type">
@@ -121,7 +159,7 @@
 
     <string-array name="saikshik_type">
         <item>साक्षर है</item>
-        <item>साक्षर नहीं है्री</item>
+        <item>साक्षर नहीं है्</item>
     </string-array>
     <string-array name="sample_females">
         <item>Suman</item>

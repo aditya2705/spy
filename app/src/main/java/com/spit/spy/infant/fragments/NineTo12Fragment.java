@@ -4,28 +4,20 @@ package com.spit.spy.infant.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatTextView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.ogaclejapan.smarttablayout.utils.v4.Bundler;
-import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
-import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import com.rey.material.app.DatePickerDialog;
 import com.rey.material.app.DialogFragment;
-import com.rey.material.widget.DatePicker;
 import com.spit.spy.Database;
 import com.spit.spy.R;
 import com.spit.spy.infant.activities.StepsActivity;
-import com.spit.spy.objects.InfantObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -39,61 +31,67 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BirthVaccinationFragment extends Fragment {
+public class NineTo12Fragment extends Fragment {
 
     @Bind(R.id.toggleButton1)
     ToggleButton toggleButton1;
-    @Bind(R.id.toggleButton2)
-    ToggleButton toggleButton2;
-    @Bind(R.id.toggleButton3)
-    ToggleButton toggleButton3;
-    @Bind(R.id.OPV)
-    TextView OPV;
-    @Bind(R.id.HB)
-    TextView HB;
-    @Bind(R.id.BCG)
-    TextView BCG;
+
+    @Bind(R.id.khasra)
+    TextView khasra;
     @Bind(R.id.btn_update)
     AppCompatButton update;
     Context context;
     Database.DataReceiver receiver;
-    String date1, date_opv, date2, date3;
+    String date1, date_khasra;
     int check_button;
     private View rootView;
     int mm, dd, yy;
     StepsActivity obj;
     String child_name_spinner;
 int position_tab;
-    public BirthVaccinationFragment() {
+    public NineTo12Fragment() {
         // Required empty public constructor
     }
 
+    public Date date_format(String date1) {
+        Date parsedDate = null;
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
+            parsedDate = sdf.parse(date1);
+            SimpleDateFormat print = new SimpleDateFormat("yyyy-MM-dd");
+            System.out.println("date is " + print.format(parsedDate));
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return parsedDate;
+    }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        rootView = inflater.inflate(R.layout.fragment_birth_vaccination_infant, container, false);
+        rootView = inflater.inflate(R.layout.nineto12_fragment, container, false);
         obj = (StepsActivity) getActivity();
         ButterKnife.bind(this, rootView);
         final int position = obj.Position_frag();
         child_name_spinner = obj.Child_name();
-        ViewPager vp=(ViewPager) getActivity().findViewById(R.id.viewpager);
-        vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            public void onPageScrollStateChanged(int state) {
-            }
-
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-
-            public void onPageSelected(int position) {
-
-                position_tab = position;
-                Log.i("pos in class birth :", "" + position_tab);
-
-            }
-        });
+//        ViewPager vp=(ViewPager) getActivity().findViewById(R.id.viewpager);
+//        vp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            public void onPageScrollStateChanged(int state) {
+//            }
+//
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//            }
+//
+//            public void onPageSelected(int position) {
+//
+//                position_tab = position;
+//                Log.i("position in 912 :", "" + position_tab);
+//
+//            }
+//        });
 
         final DatePickerDialog.Builder datePickerDialogBuilder = new DatePickerDialog.Builder(R.style.Material_App_Dialog_DatePicker_Light) {
 
@@ -112,31 +110,14 @@ int position_tab;
                 if (check_button == 1) {
 
 
-                    OPV.setText(date1);
+                    khasra.setText(date1);
                     Date parsedDate = null;
 
                     parsedDate = new Date(this.getYear() - 1900, this.getMonth(), this.getDay());
                     SimpleDateFormat print1 = new SimpleDateFormat("yyyy-MM-dd");
-                    date_opv = print1.format(parsedDate);
+                    date_khasra = print1.format(parsedDate);
 
-                    Log.i("date1", date_opv);
-
-                } else if (check_button == 2) {
-                    HB.setText(date1);
-                    Date parsedDate = null;
-
-                    parsedDate = new Date(this.getYear() - 1900, this.getMonth(), this.getDay());
-                    SimpleDateFormat print1 = new SimpleDateFormat("yyyy-MM-dd");
-                    date2 = print1.format(parsedDate);
-
-
-                } else {
-                    BCG.setText(date1);
-                    Date parsedDate = null;
-                    parsedDate = new Date(this.getYear() - 1900, this.getMonth(), this.getDay());
-                    SimpleDateFormat print1 = new SimpleDateFormat("yyyy-MM-dd");
-                    date3 = print1.format(parsedDate);
-
+                    Log.i("date1", date_khasra);
 
                 }
                 super.onPositiveActionClicked(fragment);
@@ -145,7 +126,6 @@ int position_tab;
             @Override
             public void onNegativeActionClicked(DialogFragment fragment) {
                 super.onNegativeActionClicked(fragment);
-
             }
         };
 
@@ -167,36 +147,13 @@ int position_tab;
             }
         });
 
-        toggleButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                child_name_spinner = obj.Child_name();
-                if (toggleButton2.isChecked()) {
-                    check_button = 2;
-                    DialogFragment fragment = DialogFragment.newInstance(datePickerDialogBuilder);
-                    fragment.show(getFragmentManager(), null);
-                }
-            }
-        });
 
-        toggleButton3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                child_name_spinner = obj.Child_name();
-                if (toggleButton3.isChecked()) {
-                    check_button = 3;
-                    DialogFragment fragment = DialogFragment.newInstance(datePickerDialogBuilder);
-                    fragment.show(getFragmentManager(), null);
-                }
-            }
-        });
 
 
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 child_name_spinner = obj.Child_name();
-                Log.i("position value is","1");
 
                 try {
 //                    Log.i("childddd", child_name_spinner);
@@ -204,8 +161,7 @@ int position_tab;
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
-
-                new Database.StoreDate().execute(0,date_opv, date2, date3, child_name_spinner);
+                    new Database.StoreDate_NineTo12().execute(date_khasra, child_name_spinner);
 
 
             }

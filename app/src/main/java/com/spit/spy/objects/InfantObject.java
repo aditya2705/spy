@@ -30,13 +30,15 @@ public class InfantObject implements ResultSetConvertible<InfantObject> {
 
     private int id;
     String labharti_id;
-    private String labharti_name, father_name, gender;
+    private String labharti_name, father_name;
     private int age;
     private String category;
     private String applicant_name;
     private String rural;
     private String block_town_code;
     private String district_code;
+    private String child_name;
+    private String gender;
     private Date birth_opv_date;
     private Date birth_hepatitis_date;
     private Date first_hepatitis_date;
@@ -112,14 +114,19 @@ public class InfantObject implements ResultSetConvertible<InfantObject> {
 //
 ////TODO: check parameters needed
 
-        public InfantObject(int id, String labharti_id, String labharti_name,
-                       String applicant_name, String rural,
+    public InfantObject(int id, String labharti_id, String labharti_name, String category,
+                        String applicant_name, String rural, String child_name, int age, String gender,
                         String block_town_code, String district_code, Date DateOfBirth, Date birth_opv_date, Date birth_hepatitis_date,
                         Date birth_bcg_date, Date first_opv_date, Date first_hepatitis_date, Date first_dpt_date, Date second_opv_date,
                         Date second_hepatitis_date, Date second_dpt_date, Date third_opv_date, Date third_hepatitis_date,
                         Date third_dpt_date, Date nineTo12_khasra_date, Date booster_opv_date, Date booster_dpt_date,
                         Date booster_khasra_date) {
+        this.category = category;
+        this.child_name = child_name;
+        this.age = age;
+        this.gender = gender;
         this.id = id;
+        this.father_name = applicant_name;
         this.labharti_id = labharti_id;
         this.labharti_name = labharti_name;
         this.applicant_name = applicant_name;
@@ -385,6 +392,12 @@ public class InfantObject implements ResultSetConvertible<InfantObject> {
         this.booster_khasra_date = booster_khasra_date;
     }
 
+    public String getChild_name() { return child_name; }
+
+    public void setChild_name(String child_name) {
+        this.child_name = child_name;
+    }
+
     private static String makeLabarthiID (String districtCode, int rural, int srNo) {
         String lbID = "";
 
@@ -398,64 +411,136 @@ public class InfantObject implements ResultSetConvertible<InfantObject> {
         return lbID;
     }
 
-    public static List<InfantObject> getAll (Context context) {
-        int currentId = 1;
-        ArrayList<InfantObject> infants = new ArrayList();
+    public static void storeDates(final Context context,final Database.DataReceiver receiver,String date1,String date2,String date3,String child_name )
+    {
+        currentID=0;
+
 
         if (!Database.isConnected())
             Database.connect(context);
-
-        infants = Database.execQueryWithDialog(
+        Database.execQueryWithDialog(
                 context,
+                receiver,
                 new InfantObject(),
-                "select Applicant_ID, Applicant_Name, R_U, Block_Town_Code, District_Code, DateOfBirth, birth_opv_date,birth_hepatitis_date,birth_bcg_date,first_opv_date, first_hepatitis_date, first_dpt_date, second_opv_date,second_hepatitis_date, second_dpt_date,third_opv_date, third_hepatitis_date, third_dpt_date,nineTo12_khasra_date, booster_opv_date,booster_dpt_date,booster_khasra_date from " + TABLE_NAME
+                "update "+ TABLE_NAME+ "set birth_opv_date='"+date1+"',birth_hepatitis_date='"+date2+"',birth_bcg_date='"+date3+"' where " + TABLE_NAME +
+                        ".child5_name='"+child_name+"'"
         );
 
-//        try {
-//            if (resultSet == null)
-//                return null;
-//            while (resultSet.next()) {
-//                InfantObject infant = new InfantObject(
-//                        currentId++,
-//                        resultSet.getString("Applicant_ID"),
-//                        resultSet.getString("Applicant_Name"),
-//                        resultSet.getString("Applicant_Name"),
-//                        resultSet.getString("R_U"),
-//                        resultSet.getString("Block_Town_Code"),
-//                        resultSet.getString("District_Code"),
-//                        resultSet.getDate("DateOfBirth"),
-//                        resultSet.getDate("birth_opv_date"),
-//                        resultSet.getDate("birth_hepatitis_date"),
-//                        resultSet.getDate("birth_bcg_date"),
-//                        resultSet.getDate("first_opv_date"),
-//                        resultSet.getDate("first_hepatitis_date"),
-//                        resultSet.getDate("first_dpt_date"),
-//                        resultSet.getDate("second_opv_date"),
-//                        resultSet.getDate("second_hepatitis_date"),
-//                        resultSet.getDate("second_dpt_date"),
-//                        resultSet.getDate("third_opv_date"),
-//                        resultSet.getDate("third_hepatitis_date"),
-//                        resultSet.getDate("third_dpt_date"),
-//                        resultSet.getDate("nineTo12_khasra_date"),
-//                        resultSet.getDate("booster_opv_date"),
-//                        resultSet.getDate("booster_dpt_date"),
-//                        resultSet.getDate("booster_khasra_date")
-//                );
-//                infants.add(infant);
-//            }
-//        } catch (SQLException sqle) {
-//            sqle.printStackTrace();
-//        }
-        return infants;
+
 
     }
 
-    public static void update (Context context, String id, InfantObject infant) {
+
+    public static void getAll (final Context context, final Database.DataReceiver receiver) {
+        currentID=0;
+
+
         if (!Database.isConnected())
             Database.connect(context);
 
         Database.execQueryWithDialog(
                 context,
+                receiver,
+                new InfantObject(),
+                "select distinct " + TABLE_NAME + ".Applicant_ID, " + TABLE_NAME + ".Applicant_Name, " + TABLE_NAME + ".R_U, child5_name, " + TABLE_NAME + ".Block_Town_Code, " + TABLE_NAME + ".District_Code, " +
+                        "DateOfBirth, birth_opv_date,birth_hepatitis_date,birth_bcg_date,first_opv_date, category_name, first_hepatitis_date, first_dpt_date, second_opv_date,second_hepatitis_date, " +
+                        "second_dpt_date,third_opv_date, third_hepatitis_date, member_age, member_gen, " +
+                        "third_dpt_date,nineTo12_khasra_date, booster_opv_date,booster_dpt_date,booster_khasra_date " +
+                        "from " + TABLE_NAME + ", member_detail_m_3132005_27052016, samajwadi_paid_lucknow " +
+                        "where " + TABLE_NAME + ".Applicant_ID = member_detail_m_3132005_27052016.Applicant_ID and " + TABLE_NAME + ".child5_name = member_detail_m_3132005_27052016.member_name " +
+                        "and samajwadi_paid_lucknow.ID_FORIDCARD = " + TABLE_NAME + ".Applicant_ID"
+        );
+
+
+
+    }
+
+    public static void get_infantDetail (final Context context, final Database.DataReceiver receiver,String id,String name) {
+
+        currentID=0;
+        String query=  "select distinct District_Code,Block_Town_Code,Gram_Ward_Code,R_U,Applicant_Name,Applicant_ID,Ischild5,child5_name,Ishealth_card,health_crd_no"+
+                ",health_card_type,child5_auto_no,DateOfBirth,birth_opv,birth_opv_date,birth_hepatitis,birth_hepatitis_date,birth_bcg,"+
+                "birth_bcg_date,first_opv,first_opv_date,first_hepatitis,first_hepatitis_date,first_dpt,first_dpt_date,second_opv,second_opv_date,"+
+                "second_hepatitis,second_hepatitis_date,second_dpt,second_dpt_date,third_opv,third_opv_date,third_hepatitis,third_hepatitis_date,"+
+                "third_dpt,third_dpt_date,nineTo12_khasra,nineTo12_khasra_date,booster_opv,booster_opv_date,booster_dpt,booster_dpt_date,"+
+                "booster_khasra,booster_khasra_date " +
+                "from " + TABLE_NAME + " where Applicant_ID ='"+id+"' and Applicant_Name='"+name+"'";
+        Log.i("infant query",query);
+        if (!Database.isConnected())
+            Database.connect(context);
+
+        Database.execQueryWithDialog(
+                context,
+                receiver,
+                new InfantObject(),
+                "select distinct District_Code,Block_Town_Code,Gram_Ward_Code,R_U,Applicant_Name,Applicant_ID,Ischild5,child5_name,Ishealth_card,health_crd_no"+
+                        ",health_card_type,child5_auto_no,DateOfBirth,birth_opv,birth_opv_date,birth_hepatitis,birth_hepatitis_date,birth_bcg,"+
+                "birth_bcg_date,first_opv,first_opv_date,first_hepatitis,first_hepatitis_date,first_dpt,first_dpt_date,second_opv,second_opv_date,"+
+                        "second_hepatitis,second_hepatitis_date,second_dpt,second_dpt_date,third_opv,third_opv_date,third_hepatitis,third_hepatitis_date,"+
+                        "third_dpt,third_dpt_date,nineTo12_khasra,nineTo12_khasra_date,booster_opv,booster_opv_date,booster_dpt,booster_dpt_date,"+
+                        "booster_khasra,booster_khasra_date " +
+                "from " + TABLE_NAME + " where Applicant_ID ='"+id+"' and Applicant_Name='"+name+"'"
+        );
+
+
+
+    }
+
+
+
+    public static void getLabharti_Child (final Context context, final Database.DataReceiver receiver,String id) {
+
+        currentID=0;
+        System.out.println("iddd  " + id);
+
+        if (!Database.isConnected())
+            Database.connect(context);
+
+        Database.execQueryWithDialog(
+                context,
+                receiver,
+                new InfantObject(),
+                "select distinct " + TABLE_NAME + ".Applicant_ID, " + TABLE_NAME + ".Applicant_Name, " + TABLE_NAME + ".R_U, child5_name, " + TABLE_NAME + ".Block_Town_Code, " + TABLE_NAME + ".District_Code, " +
+                        "DateOfBirth, birth_opv_date,birth_hepatitis_date,birth_bcg_date,first_opv_date, category_name, first_hepatitis_date, first_dpt_date, second_opv_date,second_hepatitis_date, " +
+                        "second_dpt_date,third_opv_date, third_hepatitis_date, member_age, member_gen, " +
+                        "third_dpt_date,nineTo12_khasra_date, booster_opv_date,booster_dpt_date,booster_khasra_date " +
+                        "from " + TABLE_NAME + ", member_detail_m_3132005_27052016, samajwadi_paid_lucknow " +
+                        "where " + TABLE_NAME + ".Applicant_ID = member_detail_m_3132005_27052016.Applicant_ID and " + TABLE_NAME + ".child5_name = member_detail_m_3132005_27052016.member_name " +
+                        "and samajwadi_paid_lucknow.ID_FORIDCARD = " + TABLE_NAME + ".Applicant_ID and "+TABLE_NAME+".Applicant_ID='"+id+"'"
+
+        );
+
+    }
+    public static void getChild_Info (final Context context, final Database.DataReceiver receiver,String child_name) {
+        currentID=0;
+        if (!Database.isConnected())
+            Database.connect(context);
+        String query="select distinct " + TABLE_NAME + ".Applicant_ID, " + TABLE_NAME + ".Applicant_Name, " + TABLE_NAME + ".R_U, child5_name, " + TABLE_NAME + ".Block_Town_Code, " + TABLE_NAME + ".District_Code, " +
+                "DateOfBirth, birth_opv_date,birth_hepatitis_date,birth_bcg_date,first_opv_date, category_name, first_hepatitis_date, first_dpt_date, second_opv_date,second_hepatitis_date, " +
+                "second_dpt_date,third_opv_date, third_hepatitis_date, member_age, member_gen, " +
+                "third_dpt_date,nineTo12_khasra_date, booster_opv_date,booster_dpt_date,booster_khasra_date " +
+                "from " + TABLE_NAME + ", member_detail_m_3132005_27052016, samajwadi_paid_lucknow " +
+                "where " + TABLE_NAME + ".Applicant_ID = member_detail_m_3132005_27052016.Applicant_ID and " + TABLE_NAME + ".child5_name = member_detail_m_3132005_27052016.member_name " +
+                "and samajwadi_paid_lucknow.ID_FORIDCARD = " + TABLE_NAME + ".Applicant_ID and "+TABLE_NAME+".child5_name='"+child_name+"'";
+        Log.i("Query is",query);
+        Database.execQueryWithDialog(
+                context,
+                receiver,
+                new InfantObject(),
+                query
+
+        );
+
+    }
+
+
+    public static void update (Context context, Database.DataReceiver receiver, String id, InfantObject infant) {
+        if (!Database.isConnected())
+            Database.connect(context);
+
+        Database.execQueryWithDialog(
+                context,
+                receiver,
                 new InfantObject(),
                 "update " + TABLE_NAME + " set District_Code = " + infant.getDistrict_code() + "," +
                         " R_U = " + infant.getRural() + "," +
@@ -489,8 +574,12 @@ public class InfantObject implements ResultSetConvertible<InfantObject> {
                     InfantObject.currentID++,
                     resultSet.getString("Applicant_ID"),
                     resultSet.getString("Applicant_Name"),
+                    resultSet.getString("category_name"),
                     resultSet.getString("Applicant_Name"),
                     resultSet.getString("R_U"),
+                    resultSet.getString("child5_name"),
+                    resultSet.getInt("member_age"),
+                    resultSet.getString("member_gen"),
                     resultSet.getString("Block_Town_Code"),
                     resultSet.getString("District_Code"),
                     resultSet.getDate("DateOfBirth"),
@@ -511,6 +600,7 @@ public class InfantObject implements ResultSetConvertible<InfantObject> {
                     resultSet.getDate("booster_dpt_date"),
                     resultSet.getDate("booster_khasra_date")
             );
+
         } catch (SQLException sqle) {
             sqle.printStackTrace();
         }

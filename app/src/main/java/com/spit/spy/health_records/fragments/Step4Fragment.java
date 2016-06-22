@@ -1,7 +1,9 @@
 package com.spit.spy.health_records.fragments;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
@@ -12,10 +14,15 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.spit.spy.Database;
 import com.spit.spy.R;
 import com.spit.spy.Validation;
 import com.spit.spy.health_records.activities.MembersListStep4Activity;
+import com.spit.spy.health_records.activities.Steps_Rural;
+import com.spit.spy.health_records.activities.Steps_Urban;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -25,14 +32,29 @@ import butterknife.ButterKnife;
  */
 public class Step4Fragment extends Fragment {
 
-    @Bind(R.id.btn_view_list) AppCompatButton viewListButton;
+    @Bind(R.id.btn_view_list)
+    AppCompatButton viewListButton;
     @Bind(R.id.step4)
     LinearLayout step4_linear;
     @Bind(R.id.choice_spinner)
     AppCompatSpinner step4_spinner;
-    @Bind(R.id.child_count)EditText child_count;
     @Bind(R.id.save_button)
     AppCompatButton save;
+
+    @Bind(R.id.labharti_name)
+    TextView labharti_name;
+    @Bind(R.id.labharti_id)
+    TextView labharti_id;
+    @Bind(R.id.adhaar_no)
+    TextView adhaar_no;
+    Database.DataReceiver rec;
+    @Bind(R.id.mobile_no)
+    TextView mobile_no;
+    public int Ischild;
+    Steps_Rural obj;
+    Steps_Urban obj1;
+    public String id, app_name;
+
 
     private View rootView;
 
@@ -47,7 +69,33 @@ public class Step4Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_step4_hr, container, false);
-        ButterKnife.bind(this,rootView);
+        ButterKnife.bind(this, rootView);
+
+
+        SharedPreferences sp = getActivity().getSharedPreferences("Login", Context.MODE_PRIVATE);
+        int flag = sp.getInt("record", 0);
+
+        if (flag == 0) {
+            obj = (Steps_Rural) getActivity();
+            id = obj.id;
+            app_name = obj.name;
+            labharti_id.setText(id);
+            labharti_name.setText(app_name);
+            adhaar_no.setText(obj.aadhar);
+            mobile_no.setText(obj.mob);
+
+
+        } else{
+            obj1 = (Steps_Urban) getActivity();
+            id = obj1.id;
+            app_name = obj1.name;
+            labharti_id.setText(id);
+            labharti_name.setText(app_name);
+            adhaar_no.setText(obj1.aadhar);
+            mobile_no.setText(obj1.mob);
+        }
+
+
 
 
         step4_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -57,8 +105,10 @@ public class Step4Fragment extends Fragment {
 
                 if (step4_spinner.getSelectedItem().toString().equals("नहीं")) {
                     step4_linear.setVisibility(View.GONE);
+                    Ischild = 0;
                 } else {
                     step4_linear.setVisibility(View.VISIBLE);
+                    Ischild = 1;
                 }
 
 
@@ -69,8 +119,6 @@ public class Step4Fragment extends Fragment {
 
             }
         });
-
-
 
 
         viewListButton.setOnClickListener(new View.OnClickListener() {
@@ -84,11 +132,9 @@ public class Step4Fragment extends Fragment {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkValidation()) {
 
-                    // intent of save button
-                }
-
+                new Database.SaveStep4().execute(id, Ischild);
+                Toast.makeText(getActivity(), "SAVED", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -96,18 +142,4 @@ public class Step4Fragment extends Fragment {
 
         return rootView;
     }
-    private boolean checkValidation() {
-        boolean ret = true;
-
-        if(!Validation.isNo_of_Child(child_count))
-        {
-            ret = false;
-            child_count.requestFocus();
-
-        }
-
-
-        return ret;
-    }
-
 }

@@ -18,7 +18,10 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
 import com.inqbarna.tablefixheaders.TableFixHeaders;
 import com.inqbarna.tablefixheaders.adapters.BaseTableAdapter;
+import com.spit.spy.Database;
 import com.spit.spy.R;
+import com.spit.spy.objects.HealthRecordsObject;
+import com.spit.spy.objects.MemberDetailObject;
 import com.spit.spy.objects.PensionerObject;
 import com.spit.spy.pregnant_women.activities.Add_women;
 
@@ -27,13 +30,21 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MembersListStep1Activity extends AppCompatActivity {
+public class MembersListStep1Activity extends AppCompatActivity
+        implements Database.DataReceiver <ArrayList<MemberDetailObject>>
+        {
 Intent intent;
+           String name,id;
     @Bind(R.id.table) TableFixHeaders tableFixHeaders;
     @Bind(R.id.close_list_view) ImageView closeViewIcon;
     @Bind(R.id.btn_add_member) Button btn_add_member;
 
     private MaterialDialog updateDialog;
+            ContentTableAdapter mContentTableAdapter1;
+
+            ArrayList<MemberDetailObject> members;
+            MemberDetailObject p;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,18 +54,25 @@ Intent intent;
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         ButterKnife.bind(this);
+        Intent intent1=getIntent();
+        id= intent1.getStringExtra("id");
 
-        ArrayList<PensionerObject> pensionerObjectArrayList = new ArrayList<>();
-        for(int i = 1; i < 4 ; i++)
-            pensionerObjectArrayList.add(new PensionerObject(i,"152336"+i,"MEMBER"+i, "MEMBER"+i,"F",25,"OBC"));
+        members = new ArrayList<>();
+        MemberDetailObject.getAll(this, this, id);
 
-        tableFixHeaders.setAdapter(new ContentTableAdapter(MembersListStep1Activity.this, pensionerObjectArrayList));
+
+        mContentTableAdapter1 = new ContentTableAdapter(MembersListStep1Activity.this, members);
+        tableFixHeaders.setAdapter(mContentTableAdapter1);
+
         btn_add_member.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                intent = new Intent(MembersListStep1Activity.this , AddMember1.class);
-                startActivityForResult(intent,1);
+                finish();
+                intent = new Intent(MembersListStep1Activity.this, AddMember1.class);
+                intent.putExtra("name", name);
+                intent.putExtra("id", id);
+                intent.putExtra("upOrAdd", "add");
+                startActivityForResult(intent, 1);
             }
         });
         closeViewIcon.setOnClickListener(new View.OnClickListener() {
@@ -76,25 +94,49 @@ Intent intent;
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        dialog.dismiss();
+                        finish();
+                        Intent i=new Intent(MembersListStep1Activity.this,AddMember1.class);
+                        i.putExtra("name", name);
+                        i.putExtra("id", id);
+                        i.putExtra("upOrAdd", "up");
+                        startActivity(i);
+
+
                     }
                 })
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+
+
+                        new Database.Delete_Step1().execute(id, name);
+                        finish();
+                        Intent i=new Intent(getApplicationContext(),MembersListStep1Activity.class);
+                        i.putExtra("id", id);
+                        startActivity(i);
                         dialog.dismiss();
+
                     }
                 })
+
                 .canceledOnTouchOutside(false)
                 .build();
 
 
+
     }
 
-    public class ContentTableAdapter extends BaseTableAdapter {
+            @Override
+            public void onDataReceived(ArrayList<MemberDetailObject> data) {
+                members = data;
+                mContentTableAdapter1 = new ContentTableAdapter(this,members);
+                tableFixHeaders.setAdapter(mContentTableAdapter1);
+            }
+
+            public class ContentTableAdapter extends BaseTableAdapter {
 
         private Activity context;
-        private ArrayList<PensionerObject> pensionerObjectArrayList;
+        private ArrayList<MemberDetailObject> memberList;
 
         private final String[] headers = new String[]{"क्रम संख्या", "परिवार के सदस्य का नाम","मुखिया से सम्भन्ध","आयु","लिंग","शैक्षिक स्तर"
                 ,"व्ययिवहिक स्थिति"};
@@ -103,10 +145,10 @@ Intent intent;
 
         private final int height;
 
-        public ContentTableAdapter(Activity context, ArrayList<PensionerObject> pensionerObjectArrayList) {
+        public ContentTableAdapter(Activity context, ArrayList<MemberDetailObject> data) {
 
             this.context = context;
-            this.pensionerObjectArrayList = pensionerObjectArrayList;
+            this.memberList = data;
 
             height = context.getResources().getDimensionPixelSize(R.dimen._50sdp);
 
@@ -124,7 +166,7 @@ Intent intent;
 
         @Override
         public int getRowCount() {
-            return pensionerObjectArrayList.size();
+            return memberList.size();
         }
 
         @Override
@@ -161,7 +203,11 @@ Intent intent;
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        p =memberList.get(row);
+                        name=p.getMember_name();
                         updateDialog.show();
+
+
                     }
                 });
             }
@@ -186,7 +232,7 @@ Intent intent;
             textView.setTypeface(Typeface.DEFAULT);
             textView.setTextColor(context.getResources().getColor(R.color.md_grey_700));
             String s = "";
-            PensionerObject p = pensionerObjectArrayList.get(row);
+            MemberDetailObject p = memberList.get(row);
             switch (column){
                 case -1:
                     s = p.getId()+"";
@@ -194,22 +240,44 @@ Intent intent;
                 case 0:
                     textView.setTypeface(Typeface.DEFAULT_BOLD);
                     textView.setTextColor(context.getResources().getColor(R.color.appThemeColorDark));
-                    s= p.getLabharti_id();
+                    s= p.getMember_name();
                     break;
                 case 1:
-                    s = p.getLabharti_name();
+                    String rel=p.getMember_relation();
+                    if(rel.equals("h"))
+                        s="पति";
+                    else if(rel.equals("w"))
+                        s="पत्नी";
+                    else if(rel.equals("m"))
+                        s="माता";
+                    else if(rel.equals("f"))
+                        s="पिता";
+                    else if(rel.equals("d"))
+                        s="पुत्री";
+                    else if(rel.equals("s"))
+                        s="पुत्र्";
+                    else if(rel.equals("b"))
+                        s="बहु";
                     break;
                 case 2:
-                    s=p.getFather_name();
+                    s=p.getMember_age();
                     break;
                 case 3:
-                    s=p.getGender();
+                    s=p.getMember_gen();
                     break;
                 case 4:
-                    s=p.getAge()+"";
+                    s=p.getIseducated();
+                    if(s.equals("1"))
+                        s="Educated";
+                     else if(s.equals("0"))
+                        s="Uneducated";
                     break;
                 case 5:
-                    s=p.getCategory();
+                    s=p.getIsmarried();
+                    if(s.equals("1"))
+                        s="Married";
+                    else if(s.equals("0"))
+                        s="Single";
                     break;
             }
 
@@ -226,6 +294,7 @@ Intent intent;
             } else {
                 return 1;
             }
+
         }
 
         @Override

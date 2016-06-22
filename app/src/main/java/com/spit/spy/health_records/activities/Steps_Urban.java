@@ -1,5 +1,6 @@
 package com.spit.spy.health_records.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -19,11 +20,20 @@ import com.spit.spy.health_records.fragments.Step7Fragment;
 import com.spit.spy.health_records.fragments.UrbanStep7Fragment;
 
 public class Steps_Urban extends AppCompatActivity {
-
+    public String id,name,aadhar,mob;
+    int records_type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_steps__urban);
+
+        Intent intent=getIntent();
+        id=intent.getStringExtra("id");
+        name=intent.getStringExtra("name");
+        aadhar=intent.getStringExtra("aadhar");
+        mob=intent.getStringExtra("mob");
+        records_type = intent.getIntExtra("records_type", 0);
+
         ViewPager viewpager = (ViewPager)findViewById(R.id.viewpager);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Step 1"));
@@ -79,6 +89,17 @@ public class Steps_Urban extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
+
+
+            Bundle bundle = new Bundle();
+
+            bundle.putString("id",id);
+            bundle.putString("name",name);
+            bundle.putString("aadhar",aadhar);
+            bundle.putString("mob",mob);
+            bundle.putInt("records_type",records_type);
+
+
 
             switch (position) {
                 case 0:

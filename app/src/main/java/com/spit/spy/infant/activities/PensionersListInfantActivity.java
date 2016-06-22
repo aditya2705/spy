@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,23 +19,27 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
 import com.inqbarna.tablefixheaders.TableFixHeaders;
 import com.inqbarna.tablefixheaders.adapters.BaseTableAdapter;
+import com.spit.spy.Database;
 import com.spit.spy.R;
 import com.spit.spy.objects.Infant;
 import com.spit.spy.objects.InfantObject;
 import com.spit.spy.objects.PensionObject;
 import com.spit.spy.objects.Pensioner;
+import com.spit.spy.pregnant_women.activities.Add_women;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class PensionersListInfantActivity extends AppCompatActivity {
+public class PensionersListInfantActivity extends AppCompatActivity
+	implements Database.DataReceiver <ArrayList<InfantObject>> {
 
 	@Bind(R.id.table) TableFixHeaders tableFixHeaders;
+	ContentTableAdapter mContentTableAdapter;
 
 	ArrayList<InfantObject> infants;
-
+	InfantObject p;
 
 	private MaterialDialog searchDialog;
 
@@ -76,7 +81,15 @@ public class PensionersListInfantActivity extends AppCompatActivity {
 
 		//searchDialog.show();
 
-		infants = (ArrayList) InfantObject.getAll(this);
+	//	Add_women conn_obj = new Add_women();
+	//	conn_obj.ConnectToDatabase();
+
+
+
+
+		infants = new ArrayList<>();
+		InfantObject.getAll(this, this);
+
 
 
 
@@ -99,7 +112,21 @@ public class PensionersListInfantActivity extends AppCompatActivity {
 		//for (int i = 0; i<listSize; i++){
 	//		Log.i("Member name: ", String.valueOf(pensionerObjectArrayList.get(i)));
 		//}
-		tableFixHeaders.setAdapter(new ContentTableAdapter(PensionersListInfantActivity.this, infants));
+		mContentTableAdapter = new ContentTableAdapter(PensionersListInfantActivity.this, infants);
+		tableFixHeaders.setAdapter(mContentTableAdapter);
+
+
+
+
+
+
+
+
+
+
+
+
+
 	}
 
 	@Override
@@ -202,7 +229,16 @@ public class PensionersListInfantActivity extends AppCompatActivity {
 					@Override
 					public void onClick(View v) {
 						Intent intent = new Intent(context, StepsActivity.class);
+						p = infantArrayList.get(row);
+						String id=p.getLabharti_id();
+
+						String name=p.getApplicant_name();
+						System.out.println("id"+id);
+						intent.putExtra("id",id);
+                        intent.putExtra("mukhya_name",name);
+						intent.putExtra("date_of_birth", p.getDateOfBirth());
 						startActivity(intent);
+
 					}
 				});
 			}
@@ -221,13 +257,17 @@ public class PensionersListInfantActivity extends AppCompatActivity {
 		private View getBody(int row, int column, View convertView, ViewGroup parent) {
 			if (convertView == null) {
 				convertView = getLayoutInflater().inflate(R.layout.item_table, parent, false);
+
 			}
 			convertView.setBackgroundResource(row % 2 == 0 ? R.color.md_grey_50 : R.color.md_grey_200);
+
+
 			TextView textView = ((TextView) convertView.findViewById(android.R.id.text1));
 			textView.setTypeface(Typeface.DEFAULT);
 			textView.setTextColor(context.getResources().getColor(R.color.md_grey_700));
 			String s = "";
-			InfantObject p = infantArrayList.get(row);
+			 p = infantArrayList.get(row);
+
 			switch (column){
 				case -1:
 					s = p.getId()+"";
@@ -238,7 +278,7 @@ public class PensionersListInfantActivity extends AppCompatActivity {
 					s= p.getLabharti_id();
 					break;
 				case 1:
-					s = p.getApplicant_name();
+					s = p.getChild_name();
 					break;
 				case 2:
 					s=p.getFather_name();
@@ -274,4 +314,23 @@ public class PensionersListInfantActivity extends AppCompatActivity {
 			return 2;
 		}
 	}
+
+	public void onDataReceived (ArrayList<InfantObject> objects) {
+		infants = objects;
+		mContentTableAdapter = new ContentTableAdapter(this, infants);
+		tableFixHeaders.setAdapter(mContentTableAdapter);
+
+
+
+
+
+
+
+	}
+
+
+	private int getInfantPos(ArrayList<InfantObject> objects) {
+		return infants.indexOf(objects);
+	}
+
 }

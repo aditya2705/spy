@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+<LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:background="@color/md_grey_50"
@@ -72,7 +77,7 @@
                     android:layout_weight="1"
                     android:textSize="@dimen/_12sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
-                    android:text="ANITA"
+                    android:id="@+id/labharti_name"
                     android:textColor="@color/md_grey_900"
                     android:textStyle="bold"
                     android:textAllCaps="true"/>
@@ -99,7 +104,7 @@
                     android:layout_weight="1"
                     android:textSize="@dimen/_12sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
-                    android:text="31241425015 S"
+                    android:id="@+id/labharti_id"
                     android:textColor="@color/md_grey_900"
                     android:textStyle="bold"
                     android:textAllCaps="true"/>
@@ -128,7 +133,7 @@
                     android:layout_weight="1"
                     android:textSize="@dimen/_12sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
-                    android:text="1900 490 124"
+                    android:id="@+id/adhaar_no"
                     android:textColor="@color/md_grey_900"
                     android:textStyle="bold"
                     android:textAllCaps="true"/>
@@ -156,7 +161,7 @@
                     android:layout_weight="1"
                     android:textSize="@dimen/_12sdp"
                     android:layout_marginLeft="@dimen/_10sdp"
-                    android:text="9876543210"
+                    android:id="@+id/mobile_no"
                     android:textColor="@color/md_grey_900"
                     android:textStyle="bold"
                     android:textAllCaps="true"/>
@@ -306,3 +311,4 @@
         android:text="SAVE"/>
 
 </LinearLayout>
+</ScrollView>

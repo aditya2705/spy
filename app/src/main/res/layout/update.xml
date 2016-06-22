@@ -24,10 +24,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:text="à¤¨à¤¾à¤®  :"
+                android:text="नाम : "
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold"/>
-            <EditText
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/person_name"
@@ -40,81 +40,81 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
 
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/_10sdp"
-            android:weightSum="4"
-            >
+            <!--android:gravity="center_vertical"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:paddingTop="@dimen/_10sdp"-->
+            <!--android:weightSum="4"-->
+            <!-->-->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:text="à¤ªà¤¤à¤¾ :"
-                android:textSize="@dimen/_12sdp"
-                android:textStyle="bold"
-                />
-            <EditText
-                android:id="@+id/address"
-                android:inputType="textMultiLine"
-                android:lines="5"
-                android:minLines="4"
-                android:gravity="top|left"
-                android:maxLines="6"
-                android:hint="Type your address"
-                android:layout_weight="1"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:textColor="@color/md_grey_900"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:scrollbars="vertical"
-                />
-
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/_10sdp"
-            android:weightSum="5"
-            >
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/_12sdp"
-                android:text="à¤œà¤¨à¤® à¤¤à¤°à¥€à¤•:"
-                android:layout_weight="2"
-                />
-            <EditText
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" "
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:textColor="@color/md_grey_900"
-
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:layout_weight="2"/>
-            <Button
-                android:id="@+id/button_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_alignLeft="@+id/textView3"
-                android:onClick="setDate"
-                android:text="SET DATE" />
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="3"-->
+                <!--android:text="à¤ªà¤¤à¤¾ :"-->
+                <!--android:textSize="@dimen/_12sdp"-->
+                <!--android:textStyle="bold"-->
+                <!--/>-->
+            <!--<EditText-->
+                <!--android:id="@+id/address"-->
+                <!--android:inputType="textMultiLine"-->
+                <!--android:lines="5"-->
+                <!--android:minLines="4"-->
+                <!--android:gravity="top|left"-->
+                <!--android:maxLines="6"-->
+                <!--android:hint="Type your address"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_marginLeft="@dimen/_10sdp"-->
+                <!--android:textColor="@color/md_grey_900"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:scrollbars="vertical"-->
+                <!--/>-->
 
 
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:paddingTop="@dimen/_10sdp"-->
+            <!--android:weightSum="5"-->
+            <!-->-->
+            <!--<TextView-->
+                <!--android:id="@+id/textView1"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textSize="@dimen/_12sdp"-->
+                <!--android:text="à¤œà¤¨à¤® à¤¤à¤°à¥€à¤•:"-->
+                <!--android:layout_weight="2"-->
+                <!--/>-->
+            <!--<EditText-->
+                <!--android:id="@+id/textView3"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text=" "-->
+                <!--android:layout_marginLeft="@dimen/_10sdp"-->
+                <!--android:textColor="@color/md_grey_900"-->
+
+                <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                <!--android:layout_weight="2"/>-->
+            <!--<Button-->
+                <!--android:id="@+id/button_date"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_alignLeft="@+id/textView3"-->
+                <!--android:onClick="setDate"-->
+                <!--android:text="SET DATE" />-->
+
+
+
+        <!--</LinearLayout>-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -128,14 +128,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:text="à¤®à¥‹à¤¬à¤¾à¤‡à¤² à¤¨à¤‚à¤¬à¤°:"
+                android:text="मोबाइल नंबर : "
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold"
                 />
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/mobile"
+                android:id="@+id/mobile_no"
                 android:inputType="number"
                 android:layout_weight="1"
                 android:layout_marginLeft="@dimen/_10sdp"
@@ -158,14 +158,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:text="à¤†à¤§à¤¾à¤° à¤•à¤¾à¤°à¥à¤¡ à¤¨à¤‚à¤¬à¤°:"
+                android:text="आधार कार्ड नंबर :"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold"
                 />
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/person_sankhya"
+                android:id="@+id/aadhaar_no"
                 android:inputType="number"
                 android:layout_weight="1"
                 android:layout_marginLeft="@dimen/_10sdp"

@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class PensionerObject implements ResultSetConvertible {
 
-    public static final String TABLE_NAME = "samajwadi_paid_lucknow";
+    public static final String TABLE_NAME = "family_detail_m_lucknow";
     public static final String PRIMARY_KEY = "id";
     private static int currentID = 0;
 
@@ -154,15 +154,16 @@ public class PensionerObject implements ResultSetConvertible {
         return lbID;
     }
 
-    public static List<PensionerObject> getAll (Context context) {
-        int currentId = 1;
+    public static void getAll (Context context, Database.DataReceiver receiver) {
+        currentID=0;
         ArrayList<PensionerObject> pensioners = new ArrayList();
 
         if (!Database.isConnected())
             Database.connect(context);
 
-        pensioners = Database.execQueryWithDialog(
+        Database.execQueryWithDialog(
                 context,
+                receiver,
                 new PensionerObject(),
                 "select category_name, Form_Sr, Block_Town_Code, District_Code, R_U, Gender, Age, Applicant_Fname, Applicant_Name from " + TABLE_NAME
         );
@@ -189,10 +190,9 @@ public class PensionerObject implements ResultSetConvertible {
 //        } catch (SQLException sqle) {
 //            sqle.printStackTrace();
 //        }
-        return pensioners;
     }
 
-    public static void add (Context context, PensionerObject pensioner) {
+    public static void add (Context context, Database.DataReceiver receiver, PensionerObject pensioner) {
         String valueString =
                 String.valueOf(pensioner.getId()) + ", " +
                 String.valueOf(pensioner.getLabharti_id()) + ", " +
@@ -203,6 +203,7 @@ public class PensionerObject implements ResultSetConvertible {
 
         Database.execQueryWithDialog(
                 context,
+                receiver,
                 new PensionerObject(),
                 "insert into " + TABLE_NAME + "(category_name, District_Code, R_U, Gender, Age, Applicant_Fname, Applicant_Name)" +
                         " values(" + pensioner.getCategory() + "," + pensioner.getDistrict_code() + "," + pensioner.getRural() + "," +
@@ -212,12 +213,13 @@ public class PensionerObject implements ResultSetConvertible {
         );
     }
 
-    public static void update (Context context, String id, PensionerObject pensioner) {
+    public static void update (Context context, Database.DataReceiver receiver, String id, PensionerObject pensioner) {
         if (!Database.isConnected())
             Database.connect(context);
 
         Database.execQueryWithDialog(
                 context,
+                receiver,
                 new PensionerObject(),
                 "update " + TABLE_NAME + " set category_name = " + pensioner.getCategory() + "," +
                         " District_Code = " + pensioner.getDistrict_code() + "," +

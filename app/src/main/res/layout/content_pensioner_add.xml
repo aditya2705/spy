@@ -30,7 +30,7 @@
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/head_name"
+                android:id="@+id/labharti_id"
                 android:layout_weight="2"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:textColor="@color/md_grey_900"
@@ -57,8 +57,8 @@
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/head_name"
-                android:inputType="number"
+                android:id="@+id/labharti_name"
+
                 android:layout_weight="2"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:textColor="@color/md_grey_900"/>
@@ -85,8 +85,8 @@
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/head_age"
-                android:inputType="number"
+                android:id="@+id/father_name"
+
                 android:layout_weight="2"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:textColor="@color/md_grey_900"/>

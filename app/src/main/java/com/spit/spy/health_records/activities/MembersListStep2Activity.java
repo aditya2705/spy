@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -18,48 +19,71 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
 import com.inqbarna.tablefixheaders.TableFixHeaders;
 import com.inqbarna.tablefixheaders.adapters.BaseTableAdapter;
+import com.spit.spy.Database;
 import com.spit.spy.R;
+import com.spit.spy.objects.MemberDetailObject;
 import com.spit.spy.objects.PensionerObject;
+import com.spit.spy.objects.PregnentWomenObject;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MembersListStep2Activity extends AppCompatActivity {
+public class MembersListStep2Activity extends AppCompatActivity
+        implements Database.DataReceiver <ArrayList<PregnentWomenObject>>{
 Intent intent;
+    String name,app_name;
     @Bind(R.id.table) TableFixHeaders tableFixHeaders;
     @Bind(R.id.close_list_view) ImageView closeViewIcon;
     @Bind(R.id.btn_add_member)
-    Button AddMember;
+    Button btn_add_member;
+    Database.DataReceiver rec;
+    ArrayList<PregnentWomenObject> members;
+    PregnentWomenObject p;
 
+
+    ContentTableAdapter mContentTableAdapter1;
     private MaterialDialog updateDialog;
-
+String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_members_list_dialog);
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
+        rec= (Database.DataReceiver) this;
         ButterKnife.bind(this);
+        Intent intent1=getIntent();
+        id= intent1.getStringExtra("id");
+        app_name=intent1.getStringExtra("app_name");
 
-        ArrayList<PensionerObject> pensionerObjectArrayList = new ArrayList<>();
-        for(int i = 1; i < 4 ; i++)
-            pensionerObjectArrayList.add(new PensionerObject(i,"152336"+i,"MEMBER"+i, "MEMBER"+i,"F",25,"OBC"));
 
-        tableFixHeaders.setAdapter(new ContentTableAdapter(MembersListStep2Activity.this, pensionerObjectArrayList));
-        AddMember.setOnClickListener(new View.OnClickListener() {
+        members = new ArrayList<>();
+        PregnentWomenObject.getAll(this, rec, id);
+
+
+        mContentTableAdapter1 = new ContentTableAdapter(MembersListStep2Activity.this, members);
+        tableFixHeaders.setAdapter(mContentTableAdapter1);
+
+
+        btn_add_member.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(MembersListStep2Activity.this,AddMember2.class);
-                startActivityForResult(intent,1);
+                finish();
+                intent = new Intent(MembersListStep2Activity.this, AddMember2.class);
+                intent.putExtra("name", name);
+                intent.putExtra("id", id);
+                intent.putExtra("app_name",app_name);
+                intent.putExtra("upOrAdd", "add");
+                startActivityForResult(intent, 1);
             }
         });
         closeViewIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MembersListStep2Activity.this.finish();
+
             }
         });
 
@@ -75,12 +99,33 @@ Intent intent;
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+
+                        finish();
+                        Intent i=new Intent(MembersListStep2Activity.this,AddMember2.class);
+                        i.putExtra("name", name);
+                        i.putExtra("app_name",app_name);
+                        i.putExtra("id", id);
+                        i.putExtra("upOrAdd", "up");
+                        startActivity(i);
+
+
+
+
                         dialog.dismiss();
                     }
                 })
                 .onNegative(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+
+                        new Database.Delete_Step2().execute(id, name);
+                        finish();
+                        Intent i=new Intent(getApplicationContext(),MembersListStep2Activity.class);
+                        i.putExtra("id", id);
+                        startActivity(i);
+
+
+
                         dialog.dismiss();
                     }
                 })
@@ -90,10 +135,18 @@ Intent intent;
 
     }
 
+    @Override
+    public void onDataReceived(ArrayList<PregnentWomenObject> data) {
+        members = data;
+        mContentTableAdapter1 = new ContentTableAdapter(this,members);
+        tableFixHeaders.setAdapter(mContentTableAdapter1);
+    }
+
+
     public class ContentTableAdapter extends BaseTableAdapter {
 
         private Activity context;
-        private ArrayList<PensionerObject> pensionerObjectArrayList;
+        private ArrayList<PregnentWomenObject> memberList;
 
         private final String[] headers = new String[]{"क्रम संख्या", "गर्भवती महिला का नाम","गर्भवती महिला की उम्र"};
 
@@ -101,24 +154,28 @@ Intent intent;
 
         private final int height;
 
-        public ContentTableAdapter(Activity context, ArrayList<PensionerObject> pensionerObjectArrayList) {
+        public ContentTableAdapter(Activity context, ArrayList<PregnentWomenObject> data) {
 
             this.context = context;
-            this.pensionerObjectArrayList = pensionerObjectArrayList;
+            this.memberList = data;
 
             height = context.getResources().getDimensionPixelSize(R.dimen._50sdp);
 
             widths  = new int[]{
                     context.getResources().getDimensionPixelSize(R.dimen._55sdp),
-                    context.getResources().getDimensionPixelSize(R.dimen._100sdp),
-                    context.getResources().getDimensionPixelSize(R.dimen._110sdp)
+                    context.getResources().getDimensionPixelSize(R.dimen._110sdp),
+                    context.getResources().getDimensionPixelSize(R.dimen._90sdp),
+                    context.getResources().getDimensionPixelSize(R.dimen._60sdp),
+                    context.getResources().getDimensionPixelSize(R.dimen._70sdp),
+                    context.getResources().getDimensionPixelSize(R.dimen._85sdp),
+                    context.getResources().getDimensionPixelSize(R.dimen._90sdp)
             };
 
         }
 
         @Override
         public int getRowCount() {
-            return pensionerObjectArrayList.size();
+            return memberList.size();
         }
 
         @Override
@@ -155,7 +212,11 @@ Intent intent;
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        p =memberList.get(row);
+                        name=p.getPregnentwomen_name();
                         updateDialog.show();
+
+
                     }
                 });
             }
@@ -180,7 +241,7 @@ Intent intent;
             textView.setTypeface(Typeface.DEFAULT);
             textView.setTextColor(context.getResources().getColor(R.color.md_grey_700));
             String s = "";
-            PensionerObject p = pensionerObjectArrayList.get(row);
+            PregnentWomenObject p = memberList.get(row);
             switch (column){
                 case -1:
                     s = p.getId()+"";
@@ -188,23 +249,12 @@ Intent intent;
                 case 0:
                     textView.setTypeface(Typeface.DEFAULT_BOLD);
                     textView.setTextColor(context.getResources().getColor(R.color.appThemeColorDark));
-                    s= p.getLabharti_id();
+                    s= p.getPregnentwomen_name();
                     break;
                 case 1:
-                    s = p.getLabharti_name();
+                    s = p.getPregnentwomen_age();
                     break;
-                case 2:
-                    s=p.getFather_name();
-                    break;
-                case 3:
-                    s=p.getGender();
-                    break;
-                case 4:
-                    s=p.getAge()+"";
-                    break;
-                case 5:
-                    s=p.getCategory();
-                    break;
+
             }
 
             textView.setText(s);

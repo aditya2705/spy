@@ -1,9 +1,10 @@
 package com.spit.spy.health_records.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -18,34 +19,37 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.inqbarna.tablefixheaders.TableFixHeaders;
 import com.inqbarna.tablefixheaders.adapters.BaseTableAdapter;
+import com.spit.spy.Database;
 import com.spit.spy.R;
+import com.spit.spy.objects.HealthRecordsObject;
+import com.spit.spy.objects.InfantObject;
 import com.spit.spy.objects.PensionerObject;
+import com.spit.spy.objects.PregnentWomenObject;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class HealthRecordsListActivity extends AppCompatActivity {
+public class HealthRecordsListActivity extends AppCompatActivity
+		implements Database.DataReceiver <ArrayList<HealthRecordsObject>>
+{
 	private ListView listview;
 
 
 	Adapter myAdapter;
-	@Bind(R.id.table)
-	TableFixHeaders tableFixHeaders;
+	@Bind(R.id.table) TableFixHeaders tableFixHeaders;
+	ContentTableAdapter mContentTableAdapter1;
 
-	private MaterialDialog searchDialog, deleteDialog;
+	ArrayList<HealthRecordsObject> pensioners;
+	HealthRecordsObject p;
+
+
+	private MaterialDialog searchDialog;
 	int records_type;
-	/**
-	 * ATTENTION: This was auto-generated to implement the App Indexing API.
-	 * See https://g.co/AppIndexing/AndroidStudio for more information.
-	 */
-	private GoogleApiClient client;
+	SharedPreferences sharedpreferences;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,12 +59,17 @@ public class HealthRecordsListActivity extends AppCompatActivity {
 
 		records_type = getIntent().getIntExtra("records_type", 0);
 
+
+
+		SharedPreferences.Editor editor = getSharedPreferences("Login", MODE_PRIVATE).edit();
+		editor.putInt("record", records_type);
+		editor.commit();
 		getSupportActionBar().setTitle("Health Records - " + ((records_type == 0) ? "Rural" : "Urban"));
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		searchDialog = new MaterialDialog.Builder(this)
 				.theme(Theme.LIGHT)
-				.customView(R.layout.health_records_list_dialog, true)
+				.customView(R.layout.health_records_list_dialog,true)
 				.title("Samajwadi Pensioner's List")
 				.positiveText("SEARCH")
 				.negativeText("CANCEL")
@@ -81,43 +90,25 @@ public class HealthRecordsListActivity extends AppCompatActivity {
 				})
 				.canceledOnTouchOutside(false)
 				.build();
-		deleteDialog = new MaterialDialog.Builder(this)
-				.theme(Theme.LIGHT)
-				.title("Health Record")
-				.positiveText("Update")
-				.negativeText("Delete")
-				.negativeColor(getResources().getColor(R.color.appThemeColorDark))
-				.positiveColor(getResources().getColor(R.color.appThemeColorDark))
-				.titleColor(getResources().getColor(R.color.appThemeColorDark))
-				.onPositive(new MaterialDialog.SingleButtonCallback() {
-					@Override
-					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-						dialog.dismiss();
-					}
-				})
-				.onNegative(new MaterialDialog.SingleButtonCallback() {
-					@Override
-					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-						dialog.dismiss();
-					}
-				})
-				.canceledOnTouchOutside(false)
-				.build();
-		//searchDialog.show();
-		ArrayList<PensionerObject> pensionerObjectArrayList;
 
-		pensionerObjectArrayList = new ArrayList<>();
-		for (int i = 1; i < 20; i++)
-			pensionerObjectArrayList.add(new PensionerObject(i, "343427" + i, "MEMBER" + i, "MEMBER" + i, "M", 28, "GENERAL"));
-		tableFixHeaders.setAdapter(new ContentTableAdapter(HealthRecordsListActivity.this, pensionerObjectArrayList));
+//		searchDialog.show();
 
-		// ATTENTION: This was auto-generated to implement the App Indexing API.
-		// See https://g.co/AppIndexing/AndroidStudio for more information.
-		client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+		pensioners = new ArrayList<>();
+		HealthRecordsObject.getAllPensioners(this,this);
+
+		mContentTableAdapter1 = new ContentTableAdapter(HealthRecordsListActivity.this, pensioners);
+		tableFixHeaders.setAdapter(mContentTableAdapter1);
+
+//		ArrayList<PensionerObject> pensionerObjectArrayList;
+//
+//		 pensionerObjectArrayList = new ArrayList<>();
+//
+//		tableFixHeaders.setAdapter(new ContentTableAdapter(HealthRecordsListActivity.this, pensionerObjectArrayList));
+
 	}
-
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		MenuItem register = menu.findItem(R.id.action_add);
+	public boolean onPrepareOptionsMenu(Menu menu)
+	{
+		MenuItem register=menu.findItem(R.id.action_add);
 		register.setVisible(true);
 		return true;
 	}
@@ -136,7 +127,7 @@ public class HealthRecordsListActivity extends AppCompatActivity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 
-		switch (id) {
+		switch (id){
 			case R.id.action_search:
 				searchDialog.show();
 				break;
@@ -152,23 +143,25 @@ public class HealthRecordsListActivity extends AppCompatActivity {
 	}
 
 
+
+
 	public class ContentTableAdapter extends BaseTableAdapter {
 
 		private Activity context;
-		private ArrayList<PensionerObject> pensionerObjectArrayList;
-		private final String[] headers = new String[]{"क्रम संख्या", "लाभार्थी आईडी", "लाभार्थी का नाम", "पिता का नाम", "लिंग", "आयु", "वर्ग"};
+private ArrayList<HealthRecordsObject> pensionerObjectArrayList;
+		private final String[] headers = new String[]{"क्रम संख्या", "लाभार्थी आईडी","लाभार्थी का नाम","परिवार के सदस्य के नाम", "लिंग","आयु","वर्ग"};
 
 		private int[] widths;
 
 		private final int height;
 
-		public ContentTableAdapter(Activity context, ArrayList<PensionerObject> pensionerObjectArrayList) {
+		public ContentTableAdapter(Activity context, ArrayList<HealthRecordsObject> pensionerObjectArrayList) {
 			this.context = context;
 			this.pensionerObjectArrayList = pensionerObjectArrayList;
 
 			height = context.getResources().getDimensionPixelSize(R.dimen._50sdp);
 
-			widths = new int[]{
+			widths  = new int[]{
 					context.getResources().getDimensionPixelSize(R.dimen._55sdp),
 					context.getResources().getDimensionPixelSize(R.dimen._100sdp),
 					context.getResources().getDimensionPixelSize(R.dimen._110sdp),
@@ -187,12 +180,12 @@ public class HealthRecordsListActivity extends AppCompatActivity {
 
 		@Override
 		public int getColumnCount() {
-			return headers.length - 1;
+			return headers.length-1;
 		}
 
 		@Override
 		public int getWidth(int column) {
-			return widths[column + 1];
+			return widths[column+1];
 		}
 
 		@Override
@@ -214,20 +207,34 @@ public class HealthRecordsListActivity extends AppCompatActivity {
 					throw new RuntimeException("View fetching exception");
 			}
 
-			if (getItemViewType(row, column) != 0) {
+			if(getItemViewType(row,column)!=0) {
 				view.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Intent intent;
-						if (records_type == 0) {
-							intent = new Intent(context, Steps_Rural.class);
-						} else
-							intent = new Intent(context, Steps_Urban.class);
+						@Override
+						public void onClick(View v) {
+							Intent intent;
 
-						startActivity(intent);
-					}
-				});
+							p =pensionerObjectArrayList.get(row);
+							String id=p.getApplicant_ID();
+							String name=p.getApplicant_name();
+							String aadhar=p.getApplicant_adhar();
+							String mob=p.getApplicant_mob();
 
+
+
+							if(records_type == 0) {
+								intent = new Intent(context,Steps_Rural.class);
+							}
+							else
+								intent = new Intent(context,Steps_Urban.class);
+							intent.putExtra("id",id);
+							intent.putExtra("name",name);
+							intent.putExtra("aadhar",aadhar);
+							intent.putExtra("mob",mob);
+							intent.putExtra("records_type",records_type);
+
+							startActivity(intent);
+						}
+					});
 			}
 			view.setLongClickable(true);
 
@@ -251,41 +258,35 @@ public class HealthRecordsListActivity extends AppCompatActivity {
 			textView.setTypeface(Typeface.DEFAULT);
 			textView.setTextColor(context.getResources().getColor(R.color.md_grey_700));
 			String s = "";
-			PensionerObject p = pensionerObjectArrayList.get(row);
-			switch (column) {
+			HealthRecordsObject p = pensionerObjectArrayList.get(row);
+			switch (column){
 				case -1:
-					s = p.getId() + "";
+              					s = p.getId()+"";
 					break;
 				case 0:
 					textView.setTypeface(Typeface.DEFAULT_BOLD);
 					textView.setTextColor(context.getResources().getColor(R.color.appThemeColorDark));
-					s = p.getLabharti_id();
+					s= p.getApplicant_ID();
 					break;
 				case 1:
-					s = p.getLabharti_name();
+					s = p.getApplicant_name();
 					break;
 				case 2:
-					s = p.getFather_name();
+					s=p.getMember_name();
 					break;
 				case 3:
-					s = p.getGender();
+					s=p.getGender();
 					break;
 				case 4:
-					s = p.getAge() + "";
+					s=p.getAge()+"";
 					break;
 				case 5:
-					s = p.getCategory();
+					s="OBC";
 					break;
 			}
 
 			textView.setText(s);
-			convertView.setOnLongClickListener(new View.OnLongClickListener() {
-				@Override
-				public boolean onLongClick(View v) {
-					deleteDialog.show();
-					return false;
-				}
-			});
+
 			return convertView;
 		}
 
@@ -304,4 +305,11 @@ public class HealthRecordsListActivity extends AppCompatActivity {
 			return 2;
 		}
 	}
-}
+	@Override
+	public void onDataReceived(ArrayList<HealthRecordsObject> data)
+	{
+		pensioners = data;
+		mContentTableAdapter1 = new ContentTableAdapter(this,pensioners);
+		tableFixHeaders.setAdapter(mContentTableAdapter1);
+	}
+	}

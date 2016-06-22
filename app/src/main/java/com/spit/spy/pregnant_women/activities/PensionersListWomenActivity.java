@@ -6,11 +6,13 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -18,21 +20,29 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.Theme;
 import com.inqbarna.tablefixheaders.TableFixHeaders;
 import com.inqbarna.tablefixheaders.adapters.BaseTableAdapter;
+import com.spit.spy.Database;
 import com.spit.spy.R;
+import com.spit.spy.objects.InfantObject;
+import com.spit.spy.objects.MemberListObject;
 import com.spit.spy.objects.PensionObject;
 import com.spit.spy.objects.Pensioner;
 import com.spit.spy.objects.PensionerObject;
+import com.spit.spy.objects.PregnentWomenObject;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class PensionersListWomenActivity extends AppCompatActivity {
+public class PensionersListWomenActivity extends AppCompatActivity
+		implements Database.DataReceiver<ArrayList<MemberListObject>>
+{
 
 	@Bind(R.id.table) TableFixHeaders tableFixHeaders;
-	ArrayList<Pensioner> pensioners;
+	ArrayList<MemberListObject> women;
 	private MaterialDialog searchDialog;
+	private ContentTableAdapter m1ContentTableAdapter;
+	MemberListObject pr;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,36 +53,39 @@ public class PensionersListWomenActivity extends AppCompatActivity {
 		getSupportActionBar().setTitle("Pregnant Women Records");
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+//From here search dialog starts.............
 
-		searchDialog = new MaterialDialog.Builder(this)
-				.theme(Theme.LIGHT)
-				.customView(R.layout.panchayat_dialog,true)
-				.title("Samajwadi Pensioner's List")
-				.positiveText("CANCEL")
-				.negativeText("SEARCH")
-				.negativeColor(getResources().getColor(R.color.appThemeColorDark))
-				.positiveColor(getResources().getColor(R.color.appThemeColorDark))
-				.titleColor(getResources().getColor(R.color.appThemeColorDark))
-				.onPositive(new MaterialDialog.SingleButtonCallback() {
-					@Override
-					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+//		searchDialog = new MaterialDialog.Builder(this)
+//				.theme(Theme.LIGHT)
+//				.customView(R.layout.search_dialog,true)
+//				.title("Samajwadi Pensioner's List")
+//				.positiveText("SEARCH")
+//				.negativeText("CANCEL")
+//				.negativeColor(getResources().getColor(R.color.appThemeColorDark))
+//				.positiveColor(getResources().getColor(R.color.appThemeColorDark))
+//				.titleColor(getResources().getColor(R.color.appThemeColorDark))
+//				.onPositive(new MaterialDialog.SingleButtonCallback() {
+//					@Override
+//					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+//						EditText et = (EditText)searchDialog.findViewById(R.id.select);
+//						String sel=et.getText().toString();
+//						filter(sel);
+//					}
+//				})
+//
+//
+//				.onNegative(new MaterialDialog.SingleButtonCallback() {
+//					@Override
+//					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+//						dialog.dismiss();
+//					}
+//				})
+//				.canceledOnTouchOutside(false)
+//				.build();
+//
 
-						dialog.dismiss();
-					}
-				})
+		// Till here................
 
-
-				.onNegative(new MaterialDialog.SingleButtonCallback() {
-					@Override
-					public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-						dialog.dismiss();
-					}
-				})
-				.canceledOnTouchOutside(false)
-				.build();
-
-		PensionObject po = new PensionObject();	//infant object
-		pensioners = po.getPensionersDetails();
 		//searchDialog.show();
 
 		/*add_member.setOnClickListener(new View.OnClickListener() {
@@ -82,17 +95,26 @@ public class PensionersListWomenActivity extends AppCompatActivity {
 				startActivity(intent);
 			}
 		});*/
-		ArrayList<PensionerObject> pensionerObjectArrayList = new ArrayList<>();
-		for(int i = 1; i < 12 ; i++)
-			pensionerObjectArrayList.add(new PensionerObject(i,"152336"+i,"MEMBER"+i, "MEMBER"+i,"F",25,"OBC"));
 
-		tableFixHeaders.setAdapter(new ContentTableAdapter(PensionersListWomenActivity.this, pensioners));
+
+
+		women = new ArrayList<>();
+		MemberListObject.getAll(this,this);
+
+		m1ContentTableAdapter = new ContentTableAdapter(PensionersListWomenActivity.this,women);
+		tableFixHeaders.setAdapter(m1ContentTableAdapter);
 	}
 	public boolean onPrepareOptionsMenu(Menu menu)
 	{
 		MenuItem register = menu.findItem(R.id.action_add);
 		register.setVisible(false);
 		return true;
+	}
+	public void filter(String sel)
+	{
+		MemberListObject.getDetails(PensionersListWomenActivity.this,this,sel);
+		searchDialog.dismiss();
+
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -122,18 +144,18 @@ public class PensionersListWomenActivity extends AppCompatActivity {
 	public class ContentTableAdapter extends BaseTableAdapter {
 
 		private Activity context;
-		private ArrayList<Pensioner> pensionerObjectArrayList;
+		private ArrayList<MemberListObject> pregnantWomenArrayList;
 
-		private final String[] headers = new String[]{"क्रम संख्या", "लाभार्थी आईडी","लाभार्थी का नाम","पिता का नाम", "लिंग","आयु","वर्ग"};
+		private final String[] headers = new String[]{"क्रम संख्या", "लाभार्थी आईडी","लाभार्थी का नाम", "लिंग","आयु","वर्ग"};
 
 		private int[] widths;
 
 		private final int height;
 
-		public ContentTableAdapter(Activity context, ArrayList<Pensioner> pensionerObjectArrayList) {
+		public ContentTableAdapter(Activity context, ArrayList<MemberListObject> pregnantWomenArrayList) {
 
 			this.context = context;
-			this.pensionerObjectArrayList = pensionerObjectArrayList;
+			this.pregnantWomenArrayList = pregnantWomenArrayList;
 
 			height = context.getResources().getDimensionPixelSize(R.dimen._50sdp);
 
@@ -151,12 +173,12 @@ public class PensionersListWomenActivity extends AppCompatActivity {
 
 		@Override
 		public int getRowCount() {
-			return pensionerObjectArrayList.size();
+			return pregnantWomenArrayList.size();
 		}
 
 		@Override
 		public int getColumnCount() {
-			return 6;
+			return 5;
 		}
 
 		@Override
@@ -189,6 +211,14 @@ public class PensionersListWomenActivity extends AppCompatActivity {
 					@Override
 					public void onClick(View v) {
 						Intent intent = new Intent(context, WomanDetailsUpdateActivity.class);
+						pr = pregnantWomenArrayList.get(row);
+						String id=pr.getID_FORIDCARD();
+						String name=pr.getApplicant_Name();
+						String age=pr.getAge();
+						intent.putExtra("id",id);
+						intent.putExtra("name",name);
+						intent.putExtra("age",age);
+						Log.d("id in List",id);
 						startActivity(intent);
 					}
 				});
@@ -214,7 +244,7 @@ public class PensionersListWomenActivity extends AppCompatActivity {
 			textView.setTypeface(Typeface.DEFAULT);
 			textView.setTextColor(context.getResources().getColor(R.color.md_grey_700));
 			String s = "";
-			Pensioner p = pensionerObjectArrayList.get(row);
+			MemberListObject p = pregnantWomenArrayList.get(row);
 			switch (column){
 				case -1:
 					s = p.getId()+"";
@@ -222,22 +252,22 @@ public class PensionersListWomenActivity extends AppCompatActivity {
 				case 0:
 					textView.setTypeface(Typeface.DEFAULT_BOLD);
 					textView.setTextColor(context.getResources().getColor(R.color.appThemeColorDark));
-					s= p.getLabhartiId();
+					s= p.getID_FORIDCARD();
 					break;
 				case 1:
-					s = p.getApplicantName();
+					s = p.getApplicant_Name();
 					break;
+
 				case 2:
-					s=p.getFatherName();
-					break;
-				case 3:
 					s=p.getGender();
 					break;
-				case 4:
-					s=p.getDateOfBirth()+"";
+				case 3:
+					s=p.getAge();
 					break;
-				case 5:
-					s=p.getCaste();
+				case 4:
+					s=p.getCategory_name();
+					break;
+				default:
 					break;
 			}
 
@@ -262,4 +292,14 @@ public class PensionersListWomenActivity extends AppCompatActivity {
 			return 2;
 		}
 	}
+
+
+
+	public void onDataReceived(ArrayList<MemberListObject> data)
+	{
+
+		m1ContentTableAdapter = new ContentTableAdapter(this, data);
+		tableFixHeaders.setAdapter(m1ContentTableAdapter);
+	}
+
 }

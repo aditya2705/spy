@@ -53,6 +53,7 @@ public class MembersListStep4Activity extends AppCompatActivity {
         AddMember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
                 intent = new Intent(MembersListStep4Activity.this,AddMember4.class);
                 startActivityForResult(intent,1);
             }

@@ -758,6 +758,10 @@ public class TableFixHeaders extends ViewGroup {
 		}
 	}
 
+	public void setOnClickListener() {
+
+	}
+
 	private class TableAdapterDataSetObserver extends DataSetObserver {
 
 		@Override

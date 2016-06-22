@@ -39,7 +39,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BirthVaccinationFragment extends Fragment {
+public class BoosterFragment extends Fragment {
 
     @Bind(R.id.toggleButton1)
     ToggleButton toggleButton1;
@@ -49,24 +49,25 @@ public class BirthVaccinationFragment extends Fragment {
     ToggleButton toggleButton3;
     @Bind(R.id.OPV)
     TextView OPV;
-    @Bind(R.id.HB)
-    TextView HB;
-    @Bind(R.id.BCG)
-    TextView BCG;
+    @Bind(R.id.DPT)
+    TextView DPT;
+    @Bind(R.id.khasra)
+    TextView khasra;
     @Bind(R.id.btn_update)
     AppCompatButton update;
     Context context;
     Database.DataReceiver receiver;
-    String date1, date_opv, date2, date3;
+    String date1, date_dpt, date2, date3;
     int check_button;
     private View rootView;
     int mm, dd, yy;
     StepsActivity obj;
     String child_name_spinner;
 int position_tab;
-    public BirthVaccinationFragment() {
+    public BoosterFragment() {
         // Required empty public constructor
     }
+
 
 
 
@@ -74,7 +75,7 @@ int position_tab;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        rootView = inflater.inflate(R.layout.fragment_birth_vaccination_infant, container, false);
+        rootView = inflater.inflate(R.layout.booster_fragment, container, false);
         obj = (StepsActivity) getActivity();
         ButterKnife.bind(this, rootView);
         final int position = obj.Position_frag();
@@ -90,10 +91,11 @@ int position_tab;
             public void onPageSelected(int position) {
 
                 position_tab = position;
-                Log.i("pos in class birth :", "" + position_tab);
+                Log.i("position in booster :", "" + position_tab);
 
             }
         });
+
 
         final DatePickerDialog.Builder datePickerDialogBuilder = new DatePickerDialog.Builder(R.style.Material_App_Dialog_DatePicker_Light) {
 
@@ -112,17 +114,17 @@ int position_tab;
                 if (check_button == 1) {
 
 
-                    OPV.setText(date1);
+                    DPT.setText(date1);
                     Date parsedDate = null;
 
                     parsedDate = new Date(this.getYear() - 1900, this.getMonth(), this.getDay());
                     SimpleDateFormat print1 = new SimpleDateFormat("yyyy-MM-dd");
-                    date_opv = print1.format(parsedDate);
+                    date_dpt = print1.format(parsedDate);
 
-                    Log.i("date1", date_opv);
+                    Log.i("date1", date_dpt);
 
                 } else if (check_button == 2) {
-                    HB.setText(date1);
+                    OPV.setText(date1);
                     Date parsedDate = null;
 
                     parsedDate = new Date(this.getYear() - 1900, this.getMonth(), this.getDay());
@@ -131,7 +133,7 @@ int position_tab;
 
 
                 } else {
-                    BCG.setText(date1);
+                    khasra.setText(date1);
                     Date parsedDate = null;
                     parsedDate = new Date(this.getYear() - 1900, this.getMonth(), this.getDay());
                     SimpleDateFormat print1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -145,7 +147,6 @@ int position_tab;
             @Override
             public void onNegativeActionClicked(DialogFragment fragment) {
                 super.onNegativeActionClicked(fragment);
-
             }
         };
 
@@ -196,16 +197,15 @@ int position_tab;
             @Override
             public void onClick(View v) {
                 child_name_spinner = obj.Child_name();
-                Log.i("position value is","1");
 
                 try {
-//                    Log.i("childddd", child_name_spinner);
+//
                     Log.d("CHILD-BIRTH", child_name_spinner);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
 
-                new Database.StoreDate().execute(0,date_opv, date2, date3, child_name_spinner);
+                new Database.StoreDate().execute(5,date_dpt, date2, date3, child_name_spinner);
 
 
             }
