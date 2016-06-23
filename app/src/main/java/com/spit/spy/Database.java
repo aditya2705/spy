@@ -118,23 +118,23 @@ public class Database {
             Log.w("Connection", "open");
             try {
                 stmt = DbConn.createStatement();
-                if(params[0]==0) {
+                if((int)params[0]==0) {
                      query = "update childrenlessthan5_rural set birth_opv_date='" + params[1] + "',birth_hepatitis_date='" + params[2] + "',birth_bcg_date='" + params[3] +
                             "' where child5_name='" + params[4] + "'";
                 }
-                if(params[0]==1){
+                if((int)params[0]==1){
                     query = "update childrenlessthan5_rural set first_dpt_date='" + params[1] + "',first_opv_date='" + params[2] + "',first_hepatitis_date='" + params[3] +
                             "' where child5_name='" + params[4] + "'";
                 }
-                if(params[0]==2){
+                if((int)params[0]==2){
                     query = "update childrenlessthan5_rural set second_dpt_date='" + params[1] + "',second_opv_date='" + params[2] + "',second_hepatitis_date='" + params[3] +
                             "' where child5_name='" + params[4] + "'";
                 }
-                if(params[0]==3){
+                if((int)params[0]==3){
                     query = "update childrenlessthan5_rural set third_dpt_date='" + params[1] + "',third_opv_date='" + params[2] + "',third_hepatitis_date='" + params[3] +
                             "' where child5_name='" + params[4] + "'";
                 }
-                if(params[0]==5){
+                if((int)params[0]==5){
                     query = "update childrenlessthan5_rural set booster_dpt_date='" + params[1] + "',booster_opv_date='" + params[2] + "',booster_khasra_date='" + params[3] +
                             "' where child5_name='" + params[4] + "'";
                 }
